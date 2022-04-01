@@ -1,4 +1,4 @@
-namespace Bank
+namespace BankView
 {
     internal static class Program
     {
