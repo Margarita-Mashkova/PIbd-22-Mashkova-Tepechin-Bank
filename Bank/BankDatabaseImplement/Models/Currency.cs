@@ -13,6 +13,7 @@ namespace BankDatabaseImplement.Models
         public string CurrencyName { get; set; }
         [Required]
         public decimal RubExchangeRate { get; set; }
-        public virtual List<LoanProgramCurrencies> LoanProgramCurrencies { get; set; }
+        [ForeignKey("CurrencyId")]
+        public virtual List<LoanProgramCurrency> LoanProgramCurrencies { get; set; }
     }
 }
