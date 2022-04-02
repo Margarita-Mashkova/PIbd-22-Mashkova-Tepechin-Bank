@@ -20,8 +20,9 @@ namespace BankDatabaseImplement.Models
 
         [ForeignKey("LoanProgramId")]
         public virtual List<ClientLoanProgram> ClientLoanPrograms { get; set; }
+
         [ForeignKey("LoanProgramId")]
-        public virtual List<LoanProgramCurrencies> LoanProgramCurrencies { get; set; }
+        public virtual List<LoanProgramCurrency> LoanProgramCurrencies { get; set; }
 
     }
 }
