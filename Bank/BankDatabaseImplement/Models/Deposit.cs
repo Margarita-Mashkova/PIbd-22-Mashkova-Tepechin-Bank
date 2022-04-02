@@ -22,6 +22,9 @@ namespace BankDatabaseImplement.Models
         public virtual List<ClientDeposit> ClientDeposits { get; set; }
 
         [ForeignKey("DepositId")]
+        public virtual List<DepositCurrency> DepositCurrencies { get; set; }
+
+        [ForeignKey("DepositId")]
         public virtual List<Replenishment> Replenishments { get; set; }
         public int ClerkId { get; set; }
         public virtual Clerk Clerk { get; set; }
