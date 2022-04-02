@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankBusinessLogic.BusinessLogics
 {
-    internal class Classs1
+    public class ClerkLogic
     {
     }
 }
