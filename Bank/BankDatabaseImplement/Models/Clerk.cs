@@ -8,22 +8,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BankDatabaseImplement.Models
 {
-    public class Deposit
+    public class Clerk
     {
         public int Id { get; set; }
-        
-        [Required]
-        public string DepositName { get; set; }
 
         [Required]
-        public decimal DepositInterest { get; set; }
+        public string ClerkFIO { get; set; }
 
-        [ForeignKey("DepositId")]
-        public virtual List<ClientDeposit> ClientDeposits { get; set; }
+        [Required]
+        public string Email { get; set; }
 
-        [ForeignKey("DepositId")]
+        [Required]
+        public string Password { get; set; }
+
+        [ForeignKey("ClerkId")]
         public virtual List<Replenishment> Replenishments { get; set; }
-        public int ClerkId { get; set; }
-        public virtual Clerk Clerk { get; set; }
+
+        [ForeignKey("ClerkId")]
+        public virtual List<Deposit> Deposits { get; set; }
+
+        [ForeignKey("ClerkId")]
+        public virtual List<Client> Clients { get; set; }
     }
 }
