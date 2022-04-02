@@ -17,5 +17,8 @@ namespace BankDatabaseImplement.Models
         public decimal InterestRate { get; set; }
         [ForeignKey("LoanProgramId")]
         public virtual List<ClientLoanProgram> ClientLoanPrograms { get; set; }
+        [ForeignKey("LoanProgramId")]
+        public virtual List<LoanProgramCurrencies> LoanProgramCurrencies { get; set; }
+
     }
 }

@@ -11,5 +11,6 @@ namespace BankContracts.BindingModels
         public int? Id { get; set; }
         public string LoanProgramName { get; set; }
         public decimal InterestRate { get; set; }
+        public Dictionary<int, string> LoanProgramCurrencies { get; set; }
     }
 }
