@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BankView
 {
-    public partial class FormMain : Form
+    public partial class FormMainClerk : Form
     {
-        public FormMain()
+        public FormMainClerk()
         {
             InitializeComponent();
         }
