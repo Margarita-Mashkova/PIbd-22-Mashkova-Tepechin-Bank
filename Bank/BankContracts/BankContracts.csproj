@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BindingModels\" />
     <Folder Include="BusinessLogicsContracts\" />
     <Folder Include="StoragesContracts\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Enums\" />
   </ItemGroup>
 
