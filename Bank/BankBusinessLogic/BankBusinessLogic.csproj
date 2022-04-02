@@ -8,4 +8,8 @@
 	  <ProjectReference Include="..\BankContracts\BankContracts.csproj" />
 	</ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BankContracts\BankContracts.csproj" />
+  </ItemGroup>
+
 </Project>
