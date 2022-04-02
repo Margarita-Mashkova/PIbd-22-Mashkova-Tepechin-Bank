@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankContracts.ViewModels
 {
-    public class DepositBindingModel
+    public class DepositViewModel
     {
         public int Id { get; set; }
 

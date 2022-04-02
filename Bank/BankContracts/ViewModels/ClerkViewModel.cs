@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace BankContracts.ViewModels
 {
-    public class ClerkBindingModel
+    public class ClerkViewModel
     {
         public int Id { get; set; }
 
