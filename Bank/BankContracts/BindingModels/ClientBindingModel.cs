@@ -12,5 +12,6 @@ namespace BankContracts.BindingModels
         public string ClientFIO { get; set; }
         public string PassportData {get; set;}
         public string TelephoneNumber { get; set;}
+        public Dictionary<int, (string, int)> ClientLoanPrograms { get; set; }
     }
 }
