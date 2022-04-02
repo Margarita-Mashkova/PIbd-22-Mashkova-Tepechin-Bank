@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace BankDatabaseImplement.Models
 {
-    public class ClientLoanProgram
+    public class ClientDeposit
     {
         public int Id { get; set; }
         public int ClientId { get; set; }
-        public int LoanProgramId { get; set; }
-
-        [Required]
-        public int Count { get; set; }
+        public int DepositId { get; set; }
         public virtual Client Client { get; set; }
-        public virtual LoanProgram LoanProgram { get; set; }
+        public virtual Deposit Deposit { get; set; }
+
     }
 }
