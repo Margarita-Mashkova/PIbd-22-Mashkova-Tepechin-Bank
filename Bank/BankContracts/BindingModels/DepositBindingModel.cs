@@ -13,6 +13,6 @@ namespace BankContracts.BindingModels
         public string DepositName { get; set; }
         public decimal DepositInterest { get; set; }
         public Dictionary<int, string> DepositCurrencies { get; set; }
-
+        public int? ClerkId { get; set; }
     }
 }

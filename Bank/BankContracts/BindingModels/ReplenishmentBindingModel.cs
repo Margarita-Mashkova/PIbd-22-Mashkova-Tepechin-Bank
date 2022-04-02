@@ -10,6 +10,7 @@ namespace BankContracts.BindingModels
     {
         public int? Id { get; set; }
         public int Amount { get; set; }
+        public int? ClerkId { get; set; }
         public DateTime DateReplenishment { get; set; }
     }
 }
