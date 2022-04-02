@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankContracts.StoragesContracts
 {
-    internal interface ILoanProgramStorage
+    public interface ILoanProgramStorage
     {
         List<LoanProgramViewModel> GetFullList();
 
