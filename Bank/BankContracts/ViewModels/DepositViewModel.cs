@@ -16,5 +16,6 @@ namespace BankContracts.ViewModels
 
         [DisplayName("Процентная ставка")]
         public decimal DepositInterest { get; set; }
+        public Dictionary<int, string> DepositCurrencies { get; set; }
     }
 }

@@ -11,10 +11,13 @@ namespace BankDatabaseImplement.Models
     public class LoanProgram
     {
         public int Id { get; set; }
+
         [Required]
         public string LoanProgramName { get; set; }
+
         [Required]
         public decimal InterestRate { get; set; }
+
         [ForeignKey("LoanProgramId")]
         public virtual List<ClientLoanProgram> ClientLoanPrograms { get; set; }
     }
