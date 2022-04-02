@@ -12,7 +12,7 @@ namespace BankContracts.ViewModels
         public int Id { get; set; }
 
         [DisplayName("ФИО")]
-        public string CLerkFIO { get; set; }
+        public string ClerkFIO { get; set; }
 
         [DisplayName("Логин")]
         public string Email { get; set; }
