@@ -9,6 +9,8 @@ namespace BankContracts.BindingModels
     public class TermBindingModel
     {
         public int? Id { get; set; }
+        public int? LoanProgramId { get; set; }
+        public int? ManagerId { get; set; }
         public DateTime StartTerm { get; set; }
         public DateTime EndTerm { get; set; }
     }
