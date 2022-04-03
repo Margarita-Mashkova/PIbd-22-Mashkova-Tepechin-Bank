@@ -9,6 +9,7 @@ namespace BankDatabaseImplement.Models
 {
     public class ClientDeposit
     {
+        //TODO: count?
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int DepositId { get; set; }
