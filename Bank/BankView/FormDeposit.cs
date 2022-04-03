@@ -17,7 +17,7 @@ namespace BankView
         public int Id { set { id = value; } }
         private int? id;
         private readonly IDepositLogic _logic;
-        private Dictionary<int, string> depositCurrencies;
+        private Dictionary<int, string> clientDeposits;
         public FormDeposit(IDepositLogic logic)
         {
             InitializeComponent();
@@ -34,8 +34,6 @@ namespace BankView
                     {
                         textBoxDepositName.Text = view.DepositName;
                         textBoxDepositInterest.Text = view.DepositInterest.ToString();
-                        depositCurrencies = view.DepositCurrencies;
-                        LoadData();
                     }
                 }
                 catch (Exception ex)
@@ -45,27 +43,9 @@ namespace BankView
             }
             else
             {
-                depositCurrencies = new Dictionary<int, string>();
+                clientDeposits = new Dictionary<int, string>();
             }
-        }
-        private void LoadData()
-        {
-            try
-            {
-                if (depositCurrencies != null)
-                {
-                    dataGridView.Rows.Clear();
-                    foreach (var clp in clientLoanPrograms)
-                    {
-                        dataGridView.Rows.Add(new object[] { clp.Key, clp.Value.Item1, clp.Value.Item2 });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        }        
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxDepositName.Text))
@@ -84,7 +64,9 @@ namespace BankView
                 {
                     Id = id,
                     DepositName = textBoxDepositName.Text,
+                    //ClerkId = 1,
                     DepositInterest = Convert.ToDecimal(textBoxDepositInterest.Text),
+                    ClientDeposits = clientDeposits
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

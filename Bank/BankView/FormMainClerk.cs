@@ -27,5 +27,11 @@ namespace BankView
             var form = Program.Container.Resolve<FormDeposits>();
             form.ShowDialog();
         }
+
+        private void привязкаКлиентовИВкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClientDeposit>();
+            form.ShowDialog();
+        }
     }
 }

@@ -77,7 +77,7 @@
             this.labelPassport.Name = "labelPassport";
             this.labelPassport.Size = new System.Drawing.Size(115, 15);
             this.labelPassport.TabIndex = 10;
-            this.labelPassport.Text = "Проецнт по вкладу:";
+            this.labelPassport.Text = "Процент по вкладу:";
             // 
             // labelDepositName
             // 
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 150);
+            this.ClientSize = new System.Drawing.Size(436, 148);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxDepositInterest);

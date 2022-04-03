@@ -13,15 +13,15 @@ using Unity;
 
 namespace BankView
 {
-    public partial class FormDeposits : Form
+    public partial class FormReplenishments : Form
     {
-        public IDepositLogic _logic;
-        public FormDeposits(IDepositLogic logic)
+        public IReplenishmentLogic _logic;
+        public FormReplenishments(IReplenishmentLogic logic)
         {
             InitializeComponent();
             _logic = logic;
         }
-        private void FormDeposits_Load(object sender, EventArgs e)
+        private void FormReplenishments_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -35,7 +35,9 @@ namespace BankView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;                  
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[4].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -45,7 +47,7 @@ namespace BankView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormDeposit>();
+            var form = Program.Container.Resolve<FormReplenishment>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -55,7 +57,7 @@ namespace BankView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Program.Container.Resolve<FormDeposit>();
+                var form = Program.Container.Resolve<FormReplenishment>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -72,7 +74,7 @@ namespace BankView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        _logic.Delete(new DepositBindingModel { Id = id });
+                        _logic.Delete(new ReplenishmentBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

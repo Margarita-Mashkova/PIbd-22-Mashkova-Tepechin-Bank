@@ -34,6 +34,7 @@
             this.пополненияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.получениеСпискаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчётToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.привязкаКлиентовИВкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,6 +44,7 @@
             this.клиентыToolStripMenuItem,
             this.вкладыToolStripMenuItem,
             this.пополненияToolStripMenuItem,
+            this.привязкаКлиентовИВкладовToolStripMenuItem,
             this.получениеСпискаToolStripMenuItem,
             this.отчётToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -83,6 +85,13 @@
             this.отчётToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.отчётToolStripMenuItem.Text = "Отчёт";
             // 
+            // привязкаКлиентовИВкладовToolStripMenuItem
+            // 
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Name = "привязкаКлиентовИВкладовToolStripMenuItem";
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Size = new System.Drawing.Size(182, 20);
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Text = "Привязка клиентов и вкладов";
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Click += new System.EventHandler(this.привязкаКлиентовИВкладовToolStripMenuItem_Click);
+            // 
             // FormMainClerk
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -111,5 +120,6 @@
         private ToolStripMenuItem пополненияToolStripMenuItem;
         private ToolStripMenuItem получениеСпискаToolStripMenuItem;
         private ToolStripMenuItem отчётToolStripMenuItem;
+        private ToolStripMenuItem привязкаКлиентовИВкладовToolStripMenuItem;
     }
 }
