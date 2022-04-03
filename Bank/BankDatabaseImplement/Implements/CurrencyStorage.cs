@@ -16,8 +16,7 @@ namespace BankDatabaseImplement.Implements
         public void Delete(CurrencyBindingModel model)
         {
             using var context = new BankDatabase();
-            Currency element = context.Currencies.FirstOrDefault(rec => rec.Id ==
-           model.Id);
+            Currency element = context.Currencies.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
                 context.Currencies.Remove(element);
@@ -42,8 +41,7 @@ namespace BankDatabaseImplement.Implements
             .Include(rec => rec.DepositCurrencies)
             .ThenInclude(rec => rec.Deposit)
             .Include(rec => rec.Manager)
-            .FirstOrDefault(rec => rec.CurrencyName == model.CurrencyName ||
-            rec.Id == model.Id);
+            .FirstOrDefault(rec => rec.CurrencyName == model.CurrencyName || rec.Id == model.Id);
             return currency != null ? CreateModel(currency) : null;
         }
 

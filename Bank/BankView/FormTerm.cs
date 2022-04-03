@@ -20,6 +20,7 @@ namespace BankView
         public int Id { set { id = value; } }
         private int? id;
 
+        private int? id;
         public FormTerm(ITermLogic logicT, ILoanProgramLogic logicLP)
         {
             InitializeComponent();

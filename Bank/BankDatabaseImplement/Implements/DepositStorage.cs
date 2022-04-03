@@ -17,8 +17,8 @@ namespace BankDatabaseImplement.Implements
         {
             using var context = new BankDatabase();
             return context.Deposits
-            .Include(rec => rec.DepositCurrencies)
-            .ThenInclude(rec => rec.Currency)
+            .Include(rec => rec.ClientDeposits)
+            .ThenInclude(rec => rec.Client)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -31,8 +31,8 @@ namespace BankDatabaseImplement.Implements
             }
             using var context = new BankDatabase();
             return context.Deposits
-            .Include(rec => rec.DepositCurrencies)
-            .ThenInclude(rec => rec.Currency)
+            .Include(rec => rec.ClientDeposits)
+            .ThenInclude(rec => rec.Client)
             .Where(rec => rec.DepositName.Contains(model.DepositName))
             .ToList()
             .Select(CreateModel)
@@ -46,8 +46,8 @@ namespace BankDatabaseImplement.Implements
             }
             using var context = new BankDatabase();
             var deposit = context.Deposits
-            .Include(rec => rec.DepositCurrencies)
-            .ThenInclude(rec => rec.Currency)
+            .Include(rec => rec.ClientDeposits)
+            .ThenInclude(rec => rec.Client)
             .FirstOrDefault(rec => rec.DepositName == model.DepositName || rec.Id == model.Id);
             return deposit != null ? CreateModel(deposit) : null;
         }
@@ -117,18 +117,18 @@ namespace BankDatabaseImplement.Implements
             deposit.ClerkId = (int)model.ClerkId; //TODO: nado?
             if (model.Id.HasValue)
             {
-                var depositCurrencies = context.DepositCurrencies.Where(rec => rec.DepositId == model.Id.Value).ToList();
+                var clientDeposits = context.ClientDeposits.Where(rec => rec.DepositId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.DepositCurrencies.RemoveRange(depositCurrencies.Where(rec => !model.DepositCurrencies.ContainsKey(rec.CurrencyId)).ToList());
+                context.ClientDeposits.RemoveRange(clientDeposits.Where(rec => !model.ClientDeposits.ContainsKey(rec.ClientId)).ToList());
                 context.SaveChanges();
             }
             // добавили новые
-            foreach (var dc in model.DepositCurrencies)
+            foreach (var cd in model.ClientDeposits)
             {
-                context.DepositCurrencies.Add(new DepositCurrency
+                context.ClientDeposits.Add(new ClientDeposit
                 {
                     DepositId = deposit.Id,
-                    CurrencyId = dc.Key,
+                    ClientId = cd.Key,
                 });
                 context.SaveChanges();
             }
@@ -141,8 +141,10 @@ namespace BankDatabaseImplement.Implements
                 Id = deposit.Id,
                 DepositName = deposit.DepositName,
                 DepositInterest = deposit.DepositInterest,
-                DepositCurrencies = deposit.DepositCurrencies
-                .ToDictionary(recDC => recDC.CurrencyId, recDC => recDC.Currency?.CurrencyName)
+                ClientDeposits = deposit.ClientDeposits
+                .ToDictionary(recDC => recDC.ClientId, recDC => recDC.Client?.ClientFIO)
+                //DepositCurrencies = deposit.DepositCurrencies
+                //.ToDictionary(recDC => recDC.CurrencyId, recDC => recDC.Currency?.CurrencyName)
             };
         }
     }

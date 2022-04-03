@@ -32,6 +32,7 @@
             this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вкладыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пополненияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.привязкаКлиентовИВкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.получениеСпискаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчётToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -43,6 +44,7 @@
             this.клиентыToolStripMenuItem,
             this.вкладыToolStripMenuItem,
             this.пополненияToolStripMenuItem,
+            this.привязкаКлиентовИВкладовToolStripMenuItem,
             this.получениеСпискаToolStripMenuItem,
             this.отчётToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -63,12 +65,21 @@
             this.вкладыToolStripMenuItem.Name = "вкладыToolStripMenuItem";
             this.вкладыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.вкладыToolStripMenuItem.Text = "Вклады";
+            this.вкладыToolStripMenuItem.Click += new System.EventHandler(this.вкладыToolStripMenuItem_Click);
             // 
             // пополненияToolStripMenuItem
             // 
             this.пополненияToolStripMenuItem.Name = "пополненияToolStripMenuItem";
             this.пополненияToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.пополненияToolStripMenuItem.Text = "Пополнения";
+            this.пополненияToolStripMenuItem.Click += new System.EventHandler(this.пополненияToolStripMenuItem_Click);
+            // 
+            // привязкаКлиентовИВкладовToolStripMenuItem
+            // 
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Name = "привязкаКлиентовИВкладовToolStripMenuItem";
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Size = new System.Drawing.Size(182, 20);
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Text = "Привязка клиентов и вкладов";
+            this.привязкаКлиентовИВкладовToolStripMenuItem.Click += new System.EventHandler(this.привязкаКлиентовИВкладовToolStripMenuItem_Click);
             // 
             // получениеСпискаToolStripMenuItem
             // 
@@ -110,5 +121,6 @@
         private ToolStripMenuItem пополненияToolStripMenuItem;
         private ToolStripMenuItem получениеСпискаToolStripMenuItem;
         private ToolStripMenuItem отчётToolStripMenuItem;
+        private ToolStripMenuItem привязкаКлиентовИВкладовToolStripMenuItem;
     }
 }

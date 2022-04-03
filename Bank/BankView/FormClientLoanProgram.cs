@@ -21,7 +21,6 @@ namespace BankView
             if (list != null)
             {
                 comboBoxLoanProgram.DisplayMember = "LoanProgramName";
-                comboBoxLoanProgram.DisplayMember = "InterestRate";
                 comboBoxLoanProgram.ValueMember = "Id";
                 comboBoxLoanProgram.DataSource = list;
                 comboBoxLoanProgram.SelectedItem = null;
