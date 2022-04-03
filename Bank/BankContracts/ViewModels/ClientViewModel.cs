@@ -20,6 +20,5 @@ namespace BankContracts.ViewModels
         [DisplayName("Контактный телефон")]
         public string TelephoneNumber { get; set; }
         public Dictionary<int, (string, int)> ClientLoanPrograms { get; set; }
-
     }
 }

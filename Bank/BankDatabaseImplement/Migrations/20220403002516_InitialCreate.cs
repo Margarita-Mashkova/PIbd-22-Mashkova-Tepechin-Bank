@@ -147,7 +147,7 @@ namespace BankDatabaseImplement.Migrations
                         column: x => x.DepositId,
                         principalTable: "Deposits",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,7 +175,7 @@ namespace BankDatabaseImplement.Migrations
                         column: x => x.DepositId,
                         principalTable: "Deposits",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -254,7 +254,7 @@ namespace BankDatabaseImplement.Migrations
                         column: x => x.LoanProgramId,
                         principalTable: "LoanPrograms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -282,7 +282,7 @@ namespace BankDatabaseImplement.Migrations
                         column: x => x.ManagerId,
                         principalTable: "Managers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

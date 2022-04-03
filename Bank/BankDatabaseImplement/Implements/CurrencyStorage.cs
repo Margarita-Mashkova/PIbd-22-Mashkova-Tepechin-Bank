@@ -94,7 +94,7 @@ namespace BankDatabaseImplement.Implements
                 };
                 context.Currencies.Add(currency);
                 context.SaveChanges();
-                CreateModel(model, currency, context);
+                CreateModel(model, currency);
                 transaction.Commit();
             }
             catch
@@ -131,7 +131,7 @@ namespace BankDatabaseImplement.Implements
             currency.CurrencyName = model.CurrencyName;
             currency.RubExchangeRate = model.RubExchangeRate;
             currency.Id = (int)model.Id;
-            currency.ManagerId = (int)model.ManagerID;
+            currency.ManagerId = (int)model.ManagerId;
             return currency;
         }
         private static CurrencyViewModel CreateModel(Currency currency)

@@ -21,7 +21,6 @@ namespace BankDatabaseImplement.Implements
             .ThenInclude(rec => rec.Deposit)
             .Include(rec => rec.ClientLoanPrograms)
             .ThenInclude(rec => rec.LoanProgram)
-            .ToList()
             .Select(CreateModel)
             .ToList();
         }
