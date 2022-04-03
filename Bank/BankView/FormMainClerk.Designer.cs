@@ -63,6 +63,7 @@
             this.вкладыToolStripMenuItem.Name = "вкладыToolStripMenuItem";
             this.вкладыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.вкладыToolStripMenuItem.Text = "Вклады";
+            this.вкладыToolStripMenuItem.Click += new System.EventHandler(this.вкладыToolStripMenuItem_Click);
             // 
             // пополненияToolStripMenuItem
             // 

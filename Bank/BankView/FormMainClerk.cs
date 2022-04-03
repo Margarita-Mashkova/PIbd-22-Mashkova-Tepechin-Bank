@@ -17,10 +17,14 @@ namespace BankView
         {
             InitializeComponent();
         }
-
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
+        private void вкладыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormDeposits>();
             form.ShowDialog();
         }
     }
