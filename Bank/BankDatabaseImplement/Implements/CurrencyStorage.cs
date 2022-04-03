@@ -94,7 +94,7 @@ namespace BankDatabaseImplement.Implements
                 };
                 context.Currencies.Add(currency);
                 context.SaveChanges();
-                CreateModel(model, currency, context);
+                CreateModel(model, currency);
                 transaction.Commit();
             }
             catch
