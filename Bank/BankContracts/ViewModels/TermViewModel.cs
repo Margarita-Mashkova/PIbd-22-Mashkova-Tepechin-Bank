@@ -17,7 +17,8 @@ namespace BankContracts.ViewModels
 
         [DisplayName("Окончание срока")]
         public DateTime EndTerm { get; set; }
-        //TODO: ?????
-        //[DisplayName("Кредитная программа")]
+        [DisplayName("Кредитная программа")]
+        public string LoanProgramName { get; set; }
+
     }
 }
