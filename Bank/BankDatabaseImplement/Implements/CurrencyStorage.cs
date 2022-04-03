@@ -87,14 +87,8 @@ namespace BankDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                Currency currency = new Currency()
-                {
-                    CurrencyName = model.CurrencyName,
-                    RubExchangeRate = model.RubExchangeRate,
-                };
-                context.Currencies.Add(currency);
+                context.Currencies.Add(CreateModel(model, new Currency()));
                 context.SaveChanges();
-                CreateModel(model, currency);
                 transaction.Commit();
             }
             catch
@@ -130,7 +124,6 @@ namespace BankDatabaseImplement.Implements
         {
             currency.CurrencyName = model.CurrencyName;
             currency.RubExchangeRate = model.RubExchangeRate;
-            currency.Id = (int)model.Id;
             currency.ManagerId = (int)model.ManagerId;
             return currency;
         }

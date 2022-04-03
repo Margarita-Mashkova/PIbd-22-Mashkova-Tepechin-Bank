@@ -84,15 +84,15 @@ namespace BankDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                LoanProgram iceCream = new LoanProgram()
+                LoanProgram loanProgram = new LoanProgram()
                 {
                     LoanProgramName = model.LoanProgramName,
-                    InterestRate = model.InterestRate
-
+                    InterestRate = model.InterestRate,
+                    ManagerId = (int)model.ManagerId
                 };
-                context.LoanPrograms.Add(iceCream);
+                context.LoanPrograms.Add(loanProgram);
                 context.SaveChanges();
-                CreateModel(model, iceCream, context);
+                CreateModel(model, loanProgram, context);
                 transaction.Commit();
             }
             catch
@@ -130,34 +130,41 @@ namespace BankDatabaseImplement.Implements
             loanProgram.InterestRate = model.InterestRate;
             if (model.Id.HasValue)
             {
-                var loanProgramCurrencies = context.LoanProgramCurrencies.Where(rec =>
-               rec.LoanProgramId == model.Id.Value).ToList();
+                var lpCurreuncies = context.LoanProgramCurrencies.Where(rec =>
+                rec.LoanProgramId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.LoanProgramCurrencies.RemoveRange(loanProgramCurrencies.Where(rec =>
-               !model.LoanProgramCurrencies.ContainsKey(rec.CurrencyId)).ToList());
+                context.LoanProgramCurrencies.RemoveRange(lpCurreuncies.Where(rec =>
+                !model.LoanProgramCurrencies.ContainsKey(rec.CurrencyId)).ToList());
+                context.SaveChanges();
+                // обновили количество у существующих записей
+                foreach (var updateIngredient in lpCurreuncies)
+                {
+                    model.LoanProgramCurrencies.Remove(updateIngredient.CurrencyId);
+                }
                 context.SaveChanges();
             }
-            foreach (var lpc in model.LoanProgramCurrencies)
+            foreach (var wi in model.LoanProgramCurrencies)
             {
                 context.LoanProgramCurrencies.Add(new LoanProgramCurrency
                 {
                     LoanProgramId = loanProgram.Id,
-                    CurrencyId = lpc.Key,
+                    CurrencyId = wi.Key,
                 });
                 context.SaveChanges();
             }
             return loanProgram;
         }
-        private static LoanProgramViewModel CreateModel(LoanProgram iceCream)
+    
+        private static LoanProgramViewModel CreateModel(LoanProgram loanProgram)
         {
             return new LoanProgramViewModel
             {
-                Id = iceCream.Id,
-                LoanProgramName = iceCream.LoanProgramName,
-                InterestRate = iceCream.InterestRate,
-                LoanProgramCurrencies = iceCream.LoanProgramCurrencies
+                Id = loanProgram.Id,
+                LoanProgramName = loanProgram.LoanProgramName,
+                InterestRate = loanProgram.InterestRate,
+                LoanProgramCurrencies = loanProgram.LoanProgramCurrencies
             .ToDictionary(recII => recII.CurrencyId,
-            recII => (recII.Currency?.CurrencyName))
+            recII => (recII.Currency?.CurrencyName, recII.Currency.RubExchangeRate))
             };
         }
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace BankView
 {
@@ -37,20 +38,20 @@ namespace BankView
 
         private void получениеСпискаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormDepositList>();
-            form.ShowDialog();
+            //var form = Program.Container.Resolve<FormDepositList>();
+            //form.ShowDialog();
         }
 
         private void отчетToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormReport>();
-            form.ShowDialog();
+            //var form = Program.Container.Resolve<FormReport>();
+            //form.ShowDialog();
         }
 
         private void привязатьВалютуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormLinkCurrency>();
-            form.ShowDialog();
+            //var form = Program.Container.Resolve<FormLinkCurrency>();
+            //form.ShowDialog();
         }
     }
 }

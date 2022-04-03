@@ -39,7 +39,6 @@ namespace BankDatabaseImplement.Implements
             var manager = context.Managers.Include(x => x.Terms).Include(x => x.LoanPrograms).Include(x => x.Currencies)
             .FirstOrDefault(rec => rec.Email == model.Email ||
             rec.Id == model.Id);
-            //TODO: WTF?
             return manager != null ?
             new ManagerViewModel
             {
@@ -60,7 +59,7 @@ namespace BankDatabaseImplement.Implements
             using var context = new BankDatabase();
 
             return context.Managers.Include(x => x.Terms).Include(x => x.LoanPrograms).Include(x => x.Currencies)
-            .Where(rec => rec.Email == model.Email && rec.Password == rec.Password)
+            .Where(rec => rec.Email == model.Email && rec.Password == model.Password)
             .Select(rec => new ManagerViewModel
             {
                 Id = rec.Id,

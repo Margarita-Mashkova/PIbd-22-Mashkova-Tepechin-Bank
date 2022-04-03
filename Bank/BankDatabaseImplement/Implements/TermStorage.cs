@@ -110,7 +110,6 @@ namespace BankDatabaseImplement.Implements
         }
         private static Term CreateModel(TermBindingModel model, Term term)
         {
-            term.Id = (int)model.Id;
             term.LoanProgramId = (int)model.LoanProgramId;
             term.ManagerId = (int)model.ManagerId;
             term.StartTerm = model.StartTerm;
@@ -123,6 +122,7 @@ namespace BankDatabaseImplement.Implements
             {
                 Id = term.Id,
                 LoanProgramId = term.LoanProgramId,
+                LoanProgramName = term.LoanProgram.LoanProgramName,
                 StartTerm = term.StartTerm,
                 EndTerm = term.EndTerm
             };

@@ -13,35 +13,34 @@ using Unity;
 
 namespace BankView
 {
-    public partial class FormTerms : Form
+    public partial class FormCurrencies : Form
     {
-        private readonly ITermLogic _logic;
-       
-        public FormTerms(ITermLogic logic)
+        private readonly ICurrencyLogic _logic;
+        public FormCurrencies(ICurrencyLogic logic)
         {
-            _logic = logic;
             InitializeComponent();
-        }
-
-        private void FormTerms_Load(object sender, EventArgs e)
-        {
-            LoadData();
+            _logic = logic;
         }
 
         private void butttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormTerm>();
+            var form = Program.Container.Resolve<FormCurrency>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
             }
         }
 
+        private void FormCurrencies_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
         private void buttonChange_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Program.Container.Resolve<FormTerm>();
+                var form = Program.Container.Resolve<FormCurrency>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -54,14 +53,14 @@ namespace BankView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удаление ", "Удалить срок?", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        _logic.Delete(new TermBindingModel { Id = id });
+                        _logic.Delete(new CurrencyBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -86,7 +85,8 @@ namespace BankView
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[1].AutoSizeMode =
+                    DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -94,6 +94,7 @@ namespace BankView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
+
         }
     }
 }

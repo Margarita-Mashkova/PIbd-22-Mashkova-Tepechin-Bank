@@ -10,7 +10,6 @@ namespace BankContracts.BindingModels
     {
         public int? Id { get; set; }
         public int? LoanProgramId { get; set; }
-        public string LoanProgramName { get; set; }
         public int? ManagerId { get; set; }
         public DateTime StartTerm { get; set; }
         public DateTime EndTerm { get; set; }

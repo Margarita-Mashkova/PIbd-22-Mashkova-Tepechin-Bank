@@ -13,24 +13,25 @@ using Unity;
 
 namespace BankView
 {
-    public partial class FormTerms : Form
+    public partial class FormLoanPrograms : Form
     {
-        private readonly ITermLogic _logic;
-       
-        public FormTerms(ITermLogic logic)
+        private readonly ILoanProgramLogic _logic;
+
+        public FormLoanPrograms(ILoanProgramLogic logic)
         {
-            _logic = logic;
             InitializeComponent();
+            _logic = logic;
+
         }
 
-        private void FormTerms_Load(object sender, EventArgs e)
+        private void FormLoanPrograms_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
         private void butttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormTerm>();
+            var form = Program.Container.Resolve<FormLoanProgram>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -41,7 +42,7 @@ namespace BankView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Program.Container.Resolve<FormTerm>();
+                var form = Program.Container.Resolve<FormLoanProgram>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -54,14 +55,14 @@ namespace BankView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удаление ", "Удалить срок?", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("Удалить?", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        _logic.Delete(new TermBindingModel { Id = id });
+                        _logic.Delete(new LoanProgramBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -84,9 +85,16 @@ namespace BankView
                 var list = _logic.Read(null);
                 if (list != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
+                    dataGridView.Rows.Clear();
+                    foreach (var lp in list)
+                    {
+                        string stringCurrencies = string.Empty;
+                        foreach (var currency in lp.LoanProgramCurrencies)
+                        {
+                            stringCurrencies += currency.Key + ") " + currency.Value + ", ";
+                        }
+                        dataGridView.Rows.Add(new object[] { lp.Id, lp.LoanProgramName, lp.InterestRate, stringCurrencies[0..^2] });
+                    }
                 }
             }
             catch (Exception ex)

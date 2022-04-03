@@ -17,6 +17,8 @@ namespace BankView
     {
         private readonly ITermLogic _logicT;
         private readonly ILoanProgramLogic _logicLP;
+        public int Id { set { id = value; } }
+        private int? id;
 
         public FormTerm(ITermLogic logicT, ILoanProgramLogic logicLP)
         {
@@ -71,7 +73,8 @@ namespace BankView
                 {
                     StartTerm = dateTimePickerStart.Value,
                     EndTerm = dateTimePickerEnd.Value,
-                    LoanProgramName = comboBoxLoanPrograms.Text,
+                    LoanProgramId = ((LoanProgramViewModel)comboBoxLoanPrograms.SelectedItem).Id,
+                    ManagerId = Program.Manager.Id
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
