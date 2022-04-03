@@ -64,7 +64,7 @@ namespace BankView
                 {
                     Id = id,
                     DepositName = textBoxDepositName.Text,
-                    //ClerkId = 1,
+                    ClerkId = Program.Clerk.Id,
                     DepositInterest = Convert.ToDecimal(textBoxDepositInterest.Text),
                     ClientDeposits = clientDeposits
                 });

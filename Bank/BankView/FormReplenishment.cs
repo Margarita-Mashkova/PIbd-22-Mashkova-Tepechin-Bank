@@ -9,27 +9,39 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BankContracts.ViewModels;
 using BankContracts.BusinessLogicsContracts;
+using BankContracts.BindingModels;
 
 namespace BankView
 {
     public partial class FormReplenishment : Form
     {
-        public FormReplenishment(IDepositLogic logic)
+        private readonly IReplenishmentLogic _logicR;
+        private readonly IDepositLogic _logicD;
+        private int? id;
+        public int Id { set { id = value; } }
+        public FormReplenishment(IDepositLogic logicD, IReplenishmentLogic logicR)
         {
             InitializeComponent();
-            List<DepositViewModel> list = logic.Read(null);
-            if (list != null)
-            {
-                comboBoxDeposit.DisplayMember = "DepositName";
-                comboBoxDeposit.ValueMember = "Id";
-                comboBoxDeposit.DataSource = list;
-                comboBoxDeposit.SelectedItem = null;
-            }
+            _logicR = logicR;
+            _logicD = logicD;            
         }
-        public int Id
+        private void FormReplenishment_Load(object sender, EventArgs e)
         {
-            get { return Convert.ToInt32(comboBoxDeposit.SelectedValue); }
-            set { comboBoxDeposit.SelectedValue = value; }
+            try 
+            {
+                List<DepositViewModel> list = _logicD.Read(null);
+                if (list != null)
+                {
+                    comboBoxDeposit.DisplayMember = "DepositName";
+                    comboBoxDeposit.ValueMember = "Id";
+                    comboBoxDeposit.DataSource = list;
+                    comboBoxDeposit.SelectedItem = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void buttonSave_Click(object sender, EventArgs e)
         {
@@ -43,13 +55,28 @@ namespace BankView
                 MessageBox.Show("Выберите вклад", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DialogResult = DialogResult.OK;
-            Close();
+            try
+            {
+                _logicR.CreateOrUpdate(new ReplenishmentBindingModel
+                {
+                    Amount = Convert.ToInt32(textBoxAmount.Text),
+                    DateReplenishment = DateTime.Now,
+                    ClerkId = Program.Clerk.Id,
+                    DepositId = ((DepositViewModel)comboBoxDeposit.SelectedItem).Id
+                });
+                MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }       
+        }
     }
 }

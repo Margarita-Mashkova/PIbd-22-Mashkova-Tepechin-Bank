@@ -102,6 +102,7 @@
             this.Controls.Add(this.labelAmount);
             this.Name = "FormReplenishment";
             this.Text = "Пополнение";
+            this.Load += new System.EventHandler(this.FormReplenishment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using BankBusinessLogic.BusinessLogics;
 using BankContracts.BusinessLogicsContracts;
 using BankContracts.StoragesContracts;
+using BankContracts.ViewModels;
 using BankDatabaseImplement.Implements;
 using Unity;
 using Unity.Lifetime;
@@ -15,6 +16,7 @@ namespace BankView
     static class Program
     {
         private static IUnityContainer container = null;
+        public static ClerkViewModel Clerk;
         public static IUnityContainer Container
         {
             get
@@ -35,7 +37,7 @@ namespace BankView
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(Container.Resolve<FormMainClerk>());
+            Application.Run(Container.Resolve<FormAuthorizationClerk>());
         }
         private static IUnityContainer BuildUnityContainer()
         {
