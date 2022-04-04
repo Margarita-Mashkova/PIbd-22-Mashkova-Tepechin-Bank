@@ -152,6 +152,7 @@ namespace BankView
                     ClientFIO = textBoxFIO.Text,
                     PassportData = textBoxPassportData.Text,
                     TelephoneNumber = textBoxTelephone.Text,
+                    ClerkId = Program.Clerk.Id,
                     ClientLoanPrograms = clientLoanPrograms
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);

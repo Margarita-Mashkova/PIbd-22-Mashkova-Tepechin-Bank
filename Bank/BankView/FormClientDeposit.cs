@@ -86,7 +86,7 @@ namespace BankView
                 //var deposit = _depositStorage.GetElement(new DepositBindingModel { DepositName = comboBoxDeposit.Text });
                 var clientModel = _clientStorage.GetElement(new ClientBindingModel
                 {
-                    Id = ((ClientBindingModel)comboBoxClient.SelectedValue).Id
+                    Id = ((ClientViewModel)comboBoxClient.SelectedItem).Id
                 });
                 //deposit.ClientDeposits.Add(clientModel.Id, comboBoxClient.Text);
                 dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber});
