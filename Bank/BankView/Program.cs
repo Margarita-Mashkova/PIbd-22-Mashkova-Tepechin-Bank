@@ -17,6 +17,7 @@ namespace BankView
     {
         private static IUnityContainer container = null;
         public static ManagerViewModel Manager;
+        public static ClerkViewModel Clerk;
         public static IUnityContainer Container
         {
             get

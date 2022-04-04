@@ -20,7 +20,6 @@ namespace BankView
         public int Id { set { id = value; } }
         private int? id;
 
-        private int? id;
         public FormTerm(ITermLogic logicT, ILoanProgramLogic logicLP)
         {
             InitializeComponent();
@@ -43,7 +42,7 @@ namespace BankView
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK,
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
         }
