@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankContracts.ViewModels
 {
+    //Модель для получения списка валют по выбранным клиентам (роль Работник)
     public class ReportClientCurrencyViewModel
     {
         public string ClientFIO { get; set; }

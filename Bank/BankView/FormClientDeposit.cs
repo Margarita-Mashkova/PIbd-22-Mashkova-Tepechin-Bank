@@ -64,7 +64,7 @@ namespace BankView
                         foreach (var client in deposit.DepositClients)
                         {
                             var clientModel = _clientStorage.GetElement(new ClientBindingModel { Id = client.Key });
-                            dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber });
+                            dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber, clientModel.DateVisit });
                         }                       
                     }
                 }
@@ -89,7 +89,7 @@ namespace BankView
                     Id = ((ClientViewModel)comboBoxClient.SelectedItem).Id
                 });
                 //deposit.ClientDeposits.Add(clientModel.Id, comboBoxClient.Text);
-                dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber});
+                dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber, clientModel.DateVisit});
             }
             LoadData();
         }

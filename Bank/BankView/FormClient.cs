@@ -152,6 +152,7 @@ namespace BankView
                     ClientFIO = textBoxFIO.Text,
                     PassportData = textBoxPassportData.Text,
                     TelephoneNumber = textBoxTelephone.Text,
+                    DateVisit = DateTime.Now,
                     ClerkId = Program.Clerk.Id,
                     ClientLoanPrograms = clientLoanPrograms
                 });

@@ -11,8 +11,9 @@ namespace FlowerShopBusinessLogic.OfficePackage.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
+
         //TODO: черновик!
-        public List<ClientViewModel> Clients { get; set; }
+        public List<CurrencyViewModel> Currencies { get; set; }
         public List<LoanProgramViewModel> LoanPrograms { get; set; }
     }
 }

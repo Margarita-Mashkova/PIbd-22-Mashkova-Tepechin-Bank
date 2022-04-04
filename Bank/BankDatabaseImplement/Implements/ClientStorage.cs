@@ -36,7 +36,9 @@ namespace BankDatabaseImplement.Implements
             .ThenInclude(rec => rec.Deposit)
             .Include(rec => rec.ClientLoanPrograms)
             .ThenInclude(rec => rec.LoanProgram)
-            .Where(rec => rec.PassportData.Contains(model.PassportData))
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateVisit.Date == model.DateVisit.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateVisit.Date >= model.DateFrom.Value.Date && rec.DateVisit.Date <= model.DateTo.Value.Date) ||
+            (model.ClerkId.HasValue && rec.ClerkId == model.ClerkId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -67,6 +69,7 @@ namespace BankDatabaseImplement.Implements
                     ClientFIO = model.ClientFIO,
                     PassportData = model.PassportData,
                     TelephoneNumber = model.TelephoneNumber,
+                    DateVisit = model.DateVisit,
                     ClerkId = (int)model.ClerkId
                 };
                 context.Clients.Add(client);
@@ -121,6 +124,7 @@ namespace BankDatabaseImplement.Implements
             client.ClerkId = (int)model.ClerkId; //TODO: надо?
             client.PassportData = model.PassportData;
             client.TelephoneNumber = model.TelephoneNumber;
+            client.DateVisit = model.DateVisit;
             if (model.Id.HasValue)
             {
                 var clientLoanPrograms = context.ClientLoanPrograms.Where(rec => rec.ClientId == model.Id.Value).ToList();
@@ -156,6 +160,7 @@ namespace BankDatabaseImplement.Implements
                 ClientFIO = client.ClientFIO,
                 PassportData = client.PassportData,
                 TelephoneNumber = client.TelephoneNumber,
+                DateVisit = client.DateVisit,
                 ClientLoanPrograms = client.ClientLoanPrograms
                 .ToDictionary(recCLP => recCLP.LoanProgramId, recCLP => (recCLP.LoanProgram?.LoanProgramName, recCLP.Count))
             };

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankContracts.ViewModels;
 
 namespace BankContracts.BindingModels
 {
@@ -11,5 +12,8 @@ namespace BankContracts.BindingModels
         public string FileName { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
+        //TODO: черновик
+        public List<ClientViewModel> Clients { get; set; }
+        public List<LoanProgramViewModel> LoanPrograms { get; set; }
     }
 }

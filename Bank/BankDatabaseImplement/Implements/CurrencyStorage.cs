@@ -59,7 +59,9 @@ namespace BankDatabaseImplement.Implements
             .Include(rec => rec.DepositCurrencies)
             .ThenInclude(rec => rec.Deposit)
             .Include(rec => rec.Manager)
-            .Where(rec => rec.CurrencyName.Contains(model.CurrencyName))
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateAdding.Date == model.DateAdding.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateAdding.Date >= model.DateFrom.Value.Date && rec.DateAdding.Date <= model.DateTo.Value.Date) ||
+            (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -123,6 +125,7 @@ namespace BankDatabaseImplement.Implements
             currency.CurrencyName = model.CurrencyName;
             currency.RubExchangeRate = model.RubExchangeRate;
             currency.ManagerId = (int)model.ManagerId;
+            currency.DateAdding = model.DateAdding;
             //TODO: прописать словарь (DepositStorage)
             return currency;
         }
@@ -133,6 +136,7 @@ namespace BankDatabaseImplement.Implements
                 Id = currency.Id,
                 CurrencyName = currency.CurrencyName,
                 RubExchangeRate = currency.RubExchangeRate,
+                DateAdding = currency.DateAdding
                 //TODO: прописать словарь (DepositStorage)
             };
         }
