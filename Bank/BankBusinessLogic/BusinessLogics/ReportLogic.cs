@@ -65,10 +65,10 @@ namespace BankBusinessLogic.BusinessLogics
                 foreach (var lc in loanProgram.LoanProgramCurrencies)
                 {
                     var model = _currencyStorage.GetElement(new CurrencyBindingModel { Id = lc.Key });
-                    foreach (var currency in model.)
+                    foreach (var deposit in model.CurrencyDeposits)
                     {
-                        record.Currencies.Add(new Tuple<string>(currency.Value.Item1));
-                        record.LoanProgramName = model.LoanProgramName;
+                        record.Deposits.Add(new Tuple<string>(deposit.Value));
+                        record.CurrencyName = model.CurrencyName;
                     }
                 }
                 list.Add(record);

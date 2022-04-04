@@ -123,6 +123,7 @@ namespace BankDatabaseImplement.Implements
             currency.CurrencyName = model.CurrencyName;
             currency.RubExchangeRate = model.RubExchangeRate;
             currency.ManagerId = (int)model.ManagerId;
+            //TODO: прописать словарь (DepositStorage)
             return currency;
         }
         private static CurrencyViewModel CreateModel(Currency currency)
@@ -132,6 +133,7 @@ namespace BankDatabaseImplement.Implements
                 Id = currency.Id,
                 CurrencyName = currency.CurrencyName,
                 RubExchangeRate = currency.RubExchangeRate,
+                //TODO: прописать словарь (DepositStorage)
             };
         }
     }

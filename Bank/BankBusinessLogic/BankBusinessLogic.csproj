@@ -10,9 +10,4 @@
     <ProjectReference Include="..\BankContracts\BankContracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="OfficePackage\HelperModels\" />
-    <Folder Include="OfficePackage\HelperEnums\" />
-  </ItemGroup>
-
 </Project>

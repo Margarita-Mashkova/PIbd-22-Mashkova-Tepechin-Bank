@@ -11,6 +11,7 @@ namespace BankContracts.BindingModels
         public int? Id { get; set; }
         public string CurrencyName { get; set; }
         public decimal RubExchangeRate { get; set; }
+        public Dictionary<int, string> CurrencyDeposits { get; set; }
         public int? ManagerId { get; set; }
     }
 }
