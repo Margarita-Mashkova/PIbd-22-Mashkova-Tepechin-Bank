@@ -16,6 +16,7 @@ namespace BankView
     static class Program
     {
         private static IUnityContainer container = null;
+        public static ClerkViewModel Clerk;
         public static ManagerViewModel Manager;
         public static IUnityContainer Container
         {
@@ -37,7 +38,7 @@ namespace BankView
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(Container.Resolve<FormManagerAuthorization>());
+            Application.Run(Container.Resolve<FormAuthorizationClerk>());
         }
         private static IUnityContainer BuildUnityContainer()
         {

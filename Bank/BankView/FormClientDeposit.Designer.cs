@@ -33,11 +33,15 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.labelDeposit = new System.Windows.Forms.Label();
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
+            this.labelClient = new System.Windows.Forms.Label();
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.comboBoxClient = new System.Windows.Forms.ComboBox();
-            this.labelClient = new System.Windows.Forms.Label();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPassportData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTelephoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -93,6 +97,23 @@
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Клиенты";
             // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(576, 100);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(241, 23);
+            this.comboBoxClient.TabIndex = 12;
+            // 
+            // labelClient
+            // 
+            this.labelClient.AutoSize = true;
+            this.labelClient.Location = new System.Drawing.Point(523, 103);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(49, 15);
+            this.labelClient.TabIndex = 11;
+            this.labelClient.Text = "Клиент:";
+            // 
             // buttonDel
             // 
             this.buttonDel.Location = new System.Drawing.Point(702, 142);
@@ -117,28 +138,40 @@
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
+            this.ColumnFIO,
+            this.ColumnPassportData,
+            this.ColumnTelephoneNumber});
             this.dataGridView.Location = new System.Drawing.Point(6, 22);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(511, 239);
             this.dataGridView.TabIndex = 0;
             // 
-            // comboBoxClient
+            // ColumnId
             // 
-            this.comboBoxClient.FormattingEnabled = true;
-            this.comboBoxClient.Location = new System.Drawing.Point(576, 100);
-            this.comboBoxClient.Name = "comboBoxClient";
-            this.comboBoxClient.Size = new System.Drawing.Size(241, 23);
-            this.comboBoxClient.TabIndex = 12;
+            this.ColumnId.HeaderText = "Id клиента";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Visible = false;
             // 
-            // labelClient
+            // ColumnFIO
             // 
-            this.labelClient.AutoSize = true;
-            this.labelClient.Location = new System.Drawing.Point(523, 103);
-            this.labelClient.Name = "labelClient";
-            this.labelClient.Size = new System.Drawing.Size(49, 15);
-            this.labelClient.TabIndex = 11;
-            this.labelClient.Text = "Клиент:";
+            this.ColumnFIO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnFIO.HeaderText = "ФИО";
+            this.ColumnFIO.Name = "ColumnFIO";
+            // 
+            // ColumnPassportData
+            // 
+            this.ColumnPassportData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnPassportData.HeaderText = "Паспортные данные";
+            this.ColumnPassportData.Name = "ColumnPassportData";
+            // 
+            // ColumnTelephoneNumber
+            // 
+            this.ColumnTelephoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnTelephoneNumber.HeaderText = "Контактный телефон";
+            this.ColumnTelephoneNumber.Name = "ColumnTelephoneNumber";
             // 
             // FormClientDeposit
             // 
@@ -173,5 +206,9 @@
         private Button buttonDel;
         private Button buttonAdd;
         private DataGridView dataGridView;
+        private DataGridViewTextBoxColumn ColumnId;
+        private DataGridViewTextBoxColumn ColumnFIO;
+        private DataGridViewTextBoxColumn ColumnPassportData;
+        private DataGridViewTextBoxColumn ColumnTelephoneNumber;
     }
 }

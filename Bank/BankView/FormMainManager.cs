@@ -20,14 +20,14 @@ namespace BankView
 
         private void валютыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*var form = Program.Container.Resolve<FormCurrencies>();
-            form.ShowDialog();*/
+            var form = Program.Container.Resolve<FormCurrencies>();
+            form.ShowDialog();
         }
 
         private void кредитныеПрограммыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*var form = Program.Container.Resolve<FormLoanPrograms>();
-            form.ShowDialog();*/
+            var form = Program.Container.Resolve<FormLoanPrograms>();
+            form.ShowDialog();
         }
 
         private void срокиToolStripMenuItem_Click(object sender, EventArgs e)

@@ -66,7 +66,8 @@ namespace BankDatabaseImplement.Implements
                 {
                     ClientFIO = model.ClientFIO,
                     PassportData = model.PassportData,
-                    TelephoneNumber = model.TelephoneNumber
+                    TelephoneNumber = model.TelephoneNumber,
+                    ClerkId = (int)model.ClerkId
                 };
                 context.Clients.Add(client);
                 context.SaveChanges();
