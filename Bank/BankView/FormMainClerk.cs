@@ -41,5 +41,11 @@ namespace BankView
             var form = Program.Container.Resolve<FormReplenishments>();
             form.ShowDialog();
         }
+
+        private void получениеСпискаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportClientCurrency>();
+            form.ShowDialog();
+        }
     }
 }
