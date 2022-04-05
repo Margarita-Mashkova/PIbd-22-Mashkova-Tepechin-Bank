@@ -11,6 +11,6 @@ namespace BankContracts.ViewModels
     {
         public string LoanProgramName { get; set; }
         public string CurrencyName{ get; set; }
-        public List<Tuple<string>> Deposits { get; set; }
+        public List<Tuple<string, decimal>> Deposits { get; set; }
     }
 }

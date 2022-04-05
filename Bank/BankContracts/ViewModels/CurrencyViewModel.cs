@@ -19,6 +19,7 @@ namespace BankContracts.ViewModels
 
         [DisplayName("Дата добавления")]
         public DateTime DateAdding { get; set; }
-        public Dictionary<int, string> CurrencyDeposits { get; set; }
+        [DisplayName("Вклады")]
+        public Dictionary<int, (string, decimal)> CurrencyDeposits { get; set; }
     }
 }

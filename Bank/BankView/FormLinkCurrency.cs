@@ -17,6 +17,7 @@ namespace BankView
     {
         private readonly IDepositLogic _logicD;
         private readonly ICurrencyLogic _logicC;
+        private Dictionary<int, (string, decimal)> currencyDeposits;
         public FormLinkCurrency(IDepositLogic logicD, ICurrencyLogic logicC)
         {
             InitializeComponent();
@@ -26,14 +27,20 @@ namespace BankView
 
         private void buttonLink_Click(object sender, EventArgs e)
         {
-            /* TODO: Сделать привязку
+            /*TODO: Сделать привязку
+            CurrencyViewModel view = _logicC.Read(new CurrencyBindingModel { Id = ((CurrencyBindingModel)comboBoxCurrency.SelectedItem).Id })?[0];
+            currencyDeposits = view.CurrencyDeposits;
+            checkedListBoxDeposits.CheckedItems
+            currencyDeposits.Add();
+            
             _logicC.CreateOrUpdate(new CurrencyBindingModel
             {
+                Id = view.Id,
+                CurrencyName = view.CurrencyName,
+                DateAdding = view.DateAdding,
+
+                CurrencyDeposits = checkedListBoxDeposits.CheckedItems.Cast()
                 
-                Id = id,
-                CurrencyName = textBoxName.Text,
-                RubExchangeRate = Convert.ToDecimal(textBoxExchange.Text),
-                ManagerId = Program.Manager.Id
             });
             */
             if (comboBoxCurrency.SelectedValue == null)

@@ -116,7 +116,7 @@ namespace BankBusinessLogic.BusinessLogics
                 var record = new ReportLoanProgramDepositViewModel
                 {
                     LoanProgramName = loanProgram.LoanProgramName,
-                    Deposits = new List<Tuple<string>>(),
+                    Deposits = new List<Tuple<string, decimal>>(),
                     CurrencyName = string.Empty
                 };
                 foreach (var currencyKVP in loanProgram.LoanProgramCurrencies)
@@ -124,7 +124,7 @@ namespace BankBusinessLogic.BusinessLogics
                     var currency = _currencyStorage.GetElement(new CurrencyBindingModel { Id = currencyKVP.Key });
                     foreach (var deposit in currency.CurrencyDeposits)
                     {
-                        record.Deposits.Add(new Tuple<string>(deposit.Value));
+                        record.Deposits.Add(new Tuple<string, decimal>(deposit.Value.Item1, deposit.Value.Item2));
                         record.CurrencyName = currency.CurrencyName;
                     }
                 }

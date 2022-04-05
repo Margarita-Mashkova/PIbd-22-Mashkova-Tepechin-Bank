@@ -18,7 +18,7 @@ namespace BankView
         private static IUnityContainer container = null;
         public static ClerkViewModel Clerk;
         public static ManagerViewModel Manager;
-        public static ClerkViewModel Clerk;
+        
         public static IUnityContainer Container
         {
             get
@@ -39,7 +39,7 @@ namespace BankView
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(Container.Resolve<FormAuthorizationClerk>());
+            Application.Run(Container.Resolve<FormManagerAuthorization>());
         }
         private static IUnityContainer BuildUnityContainer()
         {
@@ -60,6 +60,7 @@ namespace BankView
             currentContainer.RegisterType<IManagerLogic, ManagerLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReplenishmentLogic, ReplenishmentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ITermLogic, TermLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
             //currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
             //currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
             //currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());

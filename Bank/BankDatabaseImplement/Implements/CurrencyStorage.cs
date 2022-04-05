@@ -87,7 +87,7 @@ namespace BankDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                context.Currencies.Add(CreateModel(model, new Currency()));
+                context.Currencies.Add(CreateModel(model, new Currency(), context));
                 context.SaveChanges();
                 transaction.Commit();
             }
@@ -110,7 +110,7 @@ namespace BankDatabaseImplement.Implements
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, element);
+                CreateModel(model, element, context);
                 context.SaveChanges();
                 transaction.Commit();
             }
@@ -120,13 +120,29 @@ namespace BankDatabaseImplement.Implements
                 throw;
             }
         }
-        private static Currency CreateModel(CurrencyBindingModel model, Currency currency)
+        private static Currency CreateModel(CurrencyBindingModel model, Currency currency, BankDatabase context)
         {
             currency.CurrencyName = model.CurrencyName;
             currency.RubExchangeRate = model.RubExchangeRate;
             currency.ManagerId = (int)model.ManagerId;
             currency.DateAdding = model.DateAdding;
-            //TODO: прописать словарь (DepositStorage)
+            if (model.Id.HasValue)
+            {
+                var currencyDeposit = context.DepositCurrencies.Where(rec => rec.DepositId == model.Id.Value).ToList();
+                // удалили те, которых нет в модели
+                context.DepositCurrencies.RemoveRange(currencyDeposit.Where(rec => !model.CurrencyDeposits.ContainsKey(rec.DepositId)).ToList());
+                context.SaveChanges();
+            }
+            // добавили новые
+            foreach (var cd in model.CurrencyDeposits)
+            {
+                context.DepositCurrencies.Add(new DepositCurrency
+                {
+                    DepositId = cd.Key,
+                    CurrencyId = currency.Id,
+                });
+                context.SaveChanges();
+            }
             return currency;
         }
         private static CurrencyViewModel CreateModel(Currency currency)
@@ -136,8 +152,10 @@ namespace BankDatabaseImplement.Implements
                 Id = currency.Id,
                 CurrencyName = currency.CurrencyName,
                 RubExchangeRate = currency.RubExchangeRate,
-                DateAdding = currency.DateAdding
-                //TODO: прописать словарь (DepositStorage)
+                DateAdding = currency.DateAdding,
+                CurrencyDeposits= currency.DepositCurrencies
+            .ToDictionary(recII => recII.DepositId,
+            recII => (recII.Deposit?.DepositName, recII.Deposit.DepositInterest))
             };
         }
     }

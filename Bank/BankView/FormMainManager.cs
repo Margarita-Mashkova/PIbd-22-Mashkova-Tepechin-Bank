@@ -38,8 +38,8 @@ namespace BankView
 
         private void получениеСпискаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //var form = Program.Container.Resolve<FormDepositList>();
-            //form.ShowDialog();
+            var form = Program.Container.Resolve<FormDepositList>();
+            form.ShowDialog();
         }
 
         private void отчетToolStripMenuItem_Click(object sender, EventArgs e)
