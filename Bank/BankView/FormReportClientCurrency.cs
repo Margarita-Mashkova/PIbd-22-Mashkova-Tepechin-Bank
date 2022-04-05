@@ -57,7 +57,11 @@ namespace BankView
 
         private void buttonExcel_Click(object sender, EventArgs e)
         {
-
+            var list2 = _logicR.GetClients(new ReportBindingModel
+            {
+                DateFrom = DateTime.MinValue,
+                DateTo = DateTime.MaxValue
+            });
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
