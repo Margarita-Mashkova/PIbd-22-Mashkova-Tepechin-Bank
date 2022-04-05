@@ -44,6 +44,7 @@ namespace BankView
                     Id = id,
                     CurrencyName = textBoxName.Text,
                     RubExchangeRate = Convert.ToDecimal(textBoxExchange.Text),
+                    DateAdding = DateTime.Now,
                     ManagerId = Program.Manager.Id
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",

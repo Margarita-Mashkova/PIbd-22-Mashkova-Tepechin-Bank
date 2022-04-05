@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankContracts.ViewModels
 {
+    //Модель для получения списка вкладов по выбранным кредитным программам (роль Кладовщик)
     public class ReportLoanProgramDepositViewModel
     {
         public string LoanProgramName { get; set; }

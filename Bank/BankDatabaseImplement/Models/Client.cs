@@ -21,6 +21,9 @@ namespace BankDatabaseImplement.Models
         [Required]
         public string TelephoneNumber { get; set; }
 
+        [Required]
+        public DateTime DateVisit { get; set; }
+
         [ForeignKey("ClientId")]
         public virtual List<ClientLoanProgram> ClientLoanPrograms { get; set; }
 

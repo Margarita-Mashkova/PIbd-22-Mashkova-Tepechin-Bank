@@ -12,7 +12,10 @@ namespace BankContracts.BindingModels
         public string ClientFIO { get; set; }
         public string PassportData {get; set;}
         public string TelephoneNumber { get; set;}
+        public DateTime DateVisit { get; set; }
         public Dictionary<int, (string, int)> ClientLoanPrograms { get; set; }
         public int? ClerkId { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace BankDatabaseImplement.Models
         public decimal DepositInterest { get; set; }
 
         [ForeignKey("DepositId")]
-        public virtual List<ClientDeposit> ClientDeposits { get; set; }
+        public virtual List<ClientDeposit> DepositClients { get; set; }
 
         [ForeignKey("DepositId")]
         public virtual List<DepositCurrency> DepositCurrencies { get; set; }

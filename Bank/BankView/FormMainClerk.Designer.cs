@@ -86,6 +86,7 @@
             this.получениеСпискаToolStripMenuItem.Name = "получениеСпискаToolStripMenuItem";
             this.получениеСпискаToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
             this.получениеСпискаToolStripMenuItem.Text = "Получение списка";
+            this.получениеСпискаToolStripMenuItem.Click += new System.EventHandler(this.получениеСпискаToolStripMenuItem_Click);
             // 
             // отчётToolStripMenuItem
             // 

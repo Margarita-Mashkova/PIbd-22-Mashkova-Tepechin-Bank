@@ -16,5 +16,9 @@ namespace BankContracts.ViewModels
 
         [DisplayName("Курс в рублях")]
         public decimal RubExchangeRate { get; set; }
+
+        [DisplayName("Дата добавления")]
+        public DateTime DateAdding { get; set; }
+        public Dictionary<int, string> CurrencyDeposits { get; set; }
     }
 }

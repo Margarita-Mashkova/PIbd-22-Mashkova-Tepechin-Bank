@@ -17,7 +17,7 @@ namespace BankDatabaseImplement.Implements
         {
             using var context = new BankDatabase();
             return context.Deposits
-            .Include(rec => rec.ClientDeposits)
+            .Include(rec => rec.DepositClients)
             .ThenInclude(rec => rec.Client)
             .ToList()
             .Select(CreateModel)
@@ -31,7 +31,7 @@ namespace BankDatabaseImplement.Implements
             }
             using var context = new BankDatabase();
             return context.Deposits
-            .Include(rec => rec.ClientDeposits)
+            .Include(rec => rec.DepositClients)
             .ThenInclude(rec => rec.Client)
             .Where(rec => rec.DepositName.Contains(model.DepositName))
             .ToList()
@@ -46,7 +46,7 @@ namespace BankDatabaseImplement.Implements
             }
             using var context = new BankDatabase();
             var deposit = context.Deposits
-            .Include(rec => rec.ClientDeposits)
+            .Include(rec => rec.DepositClients)
             .ThenInclude(rec => rec.Client)
             .FirstOrDefault(rec => rec.DepositName == model.DepositName || rec.Id == model.Id);
             return deposit != null ? CreateModel(deposit) : null;
@@ -141,7 +141,7 @@ namespace BankDatabaseImplement.Implements
                 Id = deposit.Id,
                 DepositName = deposit.DepositName,
                 DepositInterest = deposit.DepositInterest,
-                ClientDeposits = deposit.ClientDeposits
+                DepositClients = deposit.DepositClients
                 .ToDictionary(recDC => recDC.ClientId, recDC => recDC.Client?.ClientFIO)
                 //DepositCurrencies = deposit.DepositCurrencies
                 //.ToDictionary(recDC => recDC.CurrencyId, recDC => recDC.Currency?.CurrencyName)

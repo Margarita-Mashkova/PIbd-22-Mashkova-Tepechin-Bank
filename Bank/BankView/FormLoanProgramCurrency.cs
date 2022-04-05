@@ -22,6 +22,9 @@ namespace BankView
         }
         public string CurrencyName { get { return comboBoxCurrency.Text; } }
         public decimal RubExchangeRate { get { return ((CurrencyViewModel)comboBoxCurrency.SelectedItem).RubExchangeRate; } }
+
+        //TODO: починить
+        public DateTime DateAdding { get { return DateTime.Now; } }
         public FormLoanProgramCurrency(ICurrencyLogic logic)
         {
             InitializeComponent();

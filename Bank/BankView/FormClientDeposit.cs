@@ -61,10 +61,10 @@ namespace BankView
                     if (comboBoxDeposit.SelectedValue != null)
                     {
                         var deposit = _depositStorage.GetElement(new DepositBindingModel { DepositName = comboBoxDeposit.Text});
-                        foreach (var client in deposit.ClientDeposits)
+                        foreach (var client in deposit.DepositClients)
                         {
                             var clientModel = _clientStorage.GetElement(new ClientBindingModel { Id = client.Key });
-                            dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber });
+                            dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber, clientModel.DateVisit });
                         }                       
                     }
                 }
@@ -89,7 +89,7 @@ namespace BankView
                     Id = ((ClientViewModel)comboBoxClient.SelectedItem).Id
                 });
                 //deposit.ClientDeposits.Add(clientModel.Id, comboBoxClient.Text);
-                dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber});
+                dataGridView.Rows.Add(new object[] { clientModel.Id, clientModel.ClientFIO, clientModel.PassportData, clientModel.TelephoneNumber, clientModel.DateVisit});
             }
             LoadData();
         }
@@ -115,7 +115,7 @@ namespace BankView
         private void buttonSave_Click(object sender, EventArgs e)
         {
             var deposit = _depositStorage.GetElement(new DepositBindingModel { DepositName = comboBoxDeposit.Text });
-            if (deposit.ClientDeposits == null || deposit.ClientDeposits.Count == 0)
+            if (deposit.DepositClients == null || deposit.DepositClients.Count == 0)
             {
                 MessageBox.Show("Добавьте хотя бы одного клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -128,7 +128,7 @@ namespace BankView
                     {
                         //Id = dataGridView.Rows[0].Cells[0].Value
                     });
-                    deposit.ClientDeposits.Add(clientModel.Id, comboBoxClient.Text);
+                    deposit.DepositClients.Add(clientModel.Id, comboBoxClient.Text);
                 //}
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

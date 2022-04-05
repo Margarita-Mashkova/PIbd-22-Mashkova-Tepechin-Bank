@@ -13,23 +13,29 @@ namespace BankContracts.BusinessLogicsContracts
             //Clerk
 
         // Получение списка валют по выбранным клиентам
-        List<ReportClientCurrencyViewModel> GetClientCurrency();
+        List<ReportClientCurrencyViewModel> GetClientCurrency(ReportBindingModel model);
 
-        // Сохранение вкладов по кредитным программам в файл-Word
+        // Сохранение валют по выбранным клиентам в файл-Word
         void SaveClientCurrencyToWordFile(ReportBindingModel model);
 
-        // Сохранение вкладов по кредитным программам в файл-Excel
+        // Сохранение валют по выбранным клиентам в файл-Excel
         void SaveClientCurrencyToExcelFile(ReportBindingModel model);
+
+        // Получение списка клиентов за период
+        List<ReportClientsViewModel> GetClients(ReportBindingModel model);
 
             //Manager
 
         // Получение списка вкладов по выбранным кредитным программам
-        List<ReportLoanProgramDepositViewModel> GetLoanProgramDeposit();
+        List<ReportLoanProgramDepositViewModel> GetLoanProgramDeposit(ReportBindingModel model);
 
-        // Сохранение вкладов по кредитным программам в файл-Word
+        // Сохранение вкладов по выбранным кредитным программам в файл-Word
         void SaveLoanProgramDepositToWordFile(ReportBindingModel model);
 
-        // Сохранение вкладов по кредитным программам в файл-Excel
+        // Сохранение вкладов по выбранным кредитным программам в файл-Excel
         void SaveLoanProgramDepositToExcelFile(ReportBindingModel model);
+
+        // Получение списка валют за период
+        List<ReportCurrenciesViewModel> GetCurrencies(ReportBindingModel model);
     }
 }
