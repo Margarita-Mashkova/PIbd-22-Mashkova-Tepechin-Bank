@@ -59,6 +59,7 @@ namespace BankView
             currentContainer.RegisterType<IManagerLogic, ManagerLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReplenishmentLogic, ReplenishmentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ITermLogic, TermLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
             //currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
             //currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
             //currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());

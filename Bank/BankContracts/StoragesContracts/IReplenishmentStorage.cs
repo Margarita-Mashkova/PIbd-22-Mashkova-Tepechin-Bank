@@ -10,7 +10,6 @@ namespace BankContracts.StoragesContracts
 {
     public interface IReplenishmentStorage
     {
-        //TODO: во всех интерфейсах сторэдж проверить методы
         List<ReplenishmentViewModel> GetFullList();
 
         List<ReplenishmentViewModel> GetFilteredList(ReplenishmentBindingModel model);

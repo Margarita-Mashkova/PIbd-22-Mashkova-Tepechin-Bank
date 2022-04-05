@@ -78,7 +78,7 @@ namespace BankDatabaseImplement.Implements
         {
             replenishment.DateReplenishment = model.DateReplenishment;
             replenishment.Amount = model.Amount;
-            replenishment.ClerkId = (int)model.ClerkId; //TODO: nado?
+            replenishment.ClerkId = (int)model.ClerkId;
             replenishment.DepositId = model.DepositId;
             return replenishment;
         }

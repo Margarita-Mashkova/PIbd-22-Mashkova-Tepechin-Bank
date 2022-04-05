@@ -61,7 +61,7 @@ namespace BankDatabaseImplement.Implements
                 {
                     DepositName = model.DepositName,
                     DepositInterest = model.DepositInterest,
-                    ClerkId = (int)model.ClerkId, //TODO: nado?
+                    ClerkId = (int)model.ClerkId
                 };
                 context.Deposits.Add(deposit);
                 context.SaveChanges();
@@ -109,12 +109,11 @@ namespace BankDatabaseImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
-        //TODO: доделать
         private static Deposit CreateModel(DepositBindingModel model, Deposit deposit, BankDatabase context)
         {
             deposit.DepositName = model.DepositName;
             deposit.DepositInterest = model.DepositInterest;
-            deposit.ClerkId = (int)model.ClerkId; //TODO: nado?
+            deposit.ClerkId = (int)model.ClerkId;
             if (model.Id.HasValue)
             {
                 var clientDeposits = context.ClientDeposits.Where(rec => rec.DepositId == model.Id.Value).ToList();
@@ -143,8 +142,6 @@ namespace BankDatabaseImplement.Implements
                 DepositInterest = deposit.DepositInterest,
                 DepositClients = deposit.DepositClients
                 .ToDictionary(recDC => recDC.ClientId, recDC => recDC.Client?.ClientFIO)
-                //DepositCurrencies = deposit.DepositCurrencies
-                //.ToDictionary(recDC => recDC.CurrencyId, recDC => recDC.Currency?.CurrencyName)
             };
         }
     }

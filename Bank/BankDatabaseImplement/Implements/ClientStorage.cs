@@ -121,7 +121,7 @@ namespace BankDatabaseImplement.Implements
         private static Client CreateModel(ClientBindingModel model, Client client, BankDatabase context)
         {
             client.ClientFIO = model.ClientFIO;
-            client.ClerkId = (int)model.ClerkId; //TODO: надо?
+            client.ClerkId = (int)model.ClerkId;
             client.PassportData = model.PassportData;
             client.TelephoneNumber = model.TelephoneNumber;
             client.DateVisit = model.DateVisit;
