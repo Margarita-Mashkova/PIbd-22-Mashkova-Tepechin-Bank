@@ -12,7 +12,6 @@ namespace BankContracts.BindingModels
         public string FileName { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
-        //TODO: черновик
         public List<ClientViewModel> Clients { get; set; }
         public List<LoanProgramViewModel> LoanPrograms { get; set; }
     }

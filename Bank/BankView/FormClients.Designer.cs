@@ -33,6 +33,12 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnClientFIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPassportData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTelephoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDataVisit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLoanPrograms = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,11 +86,60 @@
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
+            this.ColumnClientFIO,
+            this.ColumnPassportData,
+            this.ColumnTelephoneNumber,
+            this.ColumnDataVisit,
+            this.ColumnLoanPrograms});
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(809, 426);
             this.dataGridView.TabIndex = 4;
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "Id клиента";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Visible = false;
+            // 
+            // ColumnClientFIO
+            // 
+            this.ColumnClientFIO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnClientFIO.FillWeight = 413.7056F;
+            this.ColumnClientFIO.HeaderText = "ФИО";
+            this.ColumnClientFIO.Name = "ColumnClientFIO";
+            this.ColumnClientFIO.Width = 200;
+            // 
+            // ColumnPassportData
+            // 
+            this.ColumnPassportData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnPassportData.FillWeight = 21.57358F;
+            this.ColumnPassportData.HeaderText = "Паспортные данные";
+            this.ColumnPassportData.Name = "ColumnPassportData";
+            // 
+            // ColumnTelephoneNumber
+            // 
+            this.ColumnTelephoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnTelephoneNumber.FillWeight = 21.57358F;
+            this.ColumnTelephoneNumber.HeaderText = "Контактный телефон";
+            this.ColumnTelephoneNumber.Name = "ColumnTelephoneNumber";
+            // 
+            // ColumnDataVisit
+            // 
+            this.ColumnDataVisit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnDataVisit.FillWeight = 21.57358F;
+            this.ColumnDataVisit.HeaderText = "Дата обращения";
+            this.ColumnDataVisit.Name = "ColumnDataVisit";
+            // 
+            // ColumnLoanPrograms
+            // 
+            this.ColumnLoanPrograms.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnLoanPrograms.FillWeight = 21.57358F;
+            this.ColumnLoanPrograms.HeaderText = "Кредитные программы";
+            this.ColumnLoanPrograms.Name = "ColumnLoanPrograms";
             // 
             // FormClients
             // 
@@ -111,5 +166,11 @@
         private Button buttonDel;
         private Button buttonRef;
         private DataGridView dataGridView;
+        private DataGridViewTextBoxColumn ColumnId;
+        private DataGridViewTextBoxColumn ColumnClientFIO;
+        private DataGridViewTextBoxColumn ColumnPassportData;
+        private DataGridViewTextBoxColumn ColumnTelephoneNumber;
+        private DataGridViewTextBoxColumn ColumnDataVisit;
+        private DataGridViewTextBoxColumn ColumnLoanPrograms;
     }
 }

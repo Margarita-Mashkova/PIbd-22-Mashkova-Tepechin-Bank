@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BankContracts.BindingModels;
+using BankContracts.ViewModels;
 
 namespace BankView
 {
@@ -28,13 +29,11 @@ namespace BankView
             {
                 var list = _logicC.Read(null);
                 if (list != null)
-                {
-                    string clientInfo = string.Empty;
-                    foreach (var client in list)
-                    {
-                        clientInfo = client.ClientFIO + " " + client.PassportData;
-                        checkedListBoxClients.Items.Add(clientInfo);
-                    }
+                {                    
+                    checkedListBoxClients.DataSource = list;
+                    checkedListBoxClients.DisplayMember = "ClientFIO";
+                    checkedListBoxClients.ValueMember = "Id";
+                    checkedListBoxClients.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -45,19 +44,24 @@ namespace BankView
 
         private void buttonWord_Click(object sender, EventArgs e)
         {
+            var selectedClients = new List<ClientViewModel>();
             foreach (var client in checkedListBoxClients.CheckedItems)
             {
-                
+                selectedClients.Add((ClientViewModel)client);
             }
             _logicR.GetClientCurrency(new ReportBindingModel
             {
-                //Clients = checkedListBoxClients.Items
+                Clients = selectedClients
             });
         }
 
         private void buttonExcel_Click(object sender, EventArgs e)
         {
-
+            var list2 = _logicR.GetClients(new ReportBindingModel
+            {
+                DateFrom = DateTime.MinValue,
+                DateTo = DateTime.MaxValue
+            });
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

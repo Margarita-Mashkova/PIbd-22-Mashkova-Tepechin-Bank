@@ -33,6 +33,10 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDepositName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDepositInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnClientDeposits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,6 +44,11 @@
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
+            this.ColumnDepositName,
+            this.ColumnDepositInterest,
+            this.ColumnClientDeposits});
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
@@ -86,6 +95,29 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "Id вклада";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Visible = false;
+            // 
+            // ColumnDepositName
+            // 
+            this.ColumnDepositName.HeaderText = "Наименование вклада";
+            this.ColumnDepositName.Name = "ColumnDepositName";
+            this.ColumnDepositName.Width = 200;
+            // 
+            // ColumnDepositInterest
+            // 
+            this.ColumnDepositInterest.HeaderText = "Процент по вкладу";
+            this.ColumnDepositInterest.Name = "ColumnDepositInterest";
+            // 
+            // ColumnClientDeposits
+            // 
+            this.ColumnClientDeposits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnClientDeposits.HeaderText = "Привязанные клиенты";
+            this.ColumnClientDeposits.Name = "ColumnClientDeposits";
+            // 
             // FormDeposits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -111,5 +143,9 @@
         private Button buttonDel;
         private Button buttonUpd;
         private Button buttonAdd;
+        private DataGridViewTextBoxColumn ColumnId;
+        private DataGridViewTextBoxColumn ColumnDepositName;
+        private DataGridViewTextBoxColumn ColumnDepositInterest;
+        private DataGridViewTextBoxColumn ColumnClientDeposits;
     }
 }
