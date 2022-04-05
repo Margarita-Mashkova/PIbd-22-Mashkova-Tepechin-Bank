@@ -17,6 +17,7 @@ namespace BankDatabaseImplement.Implements
         {
             using var context = new BankDatabase();
             return context.Replenishments
+                .Include(rec => rec.Deposit)
                 .Select(CreateModel)
                 .ToList();
         }
@@ -28,9 +29,10 @@ namespace BankDatabaseImplement.Implements
             }
             using var context = new BankDatabase();
             return context.Replenishments
-            .Where(rec => rec.Id == model.Id)
-            .Select(CreateModel)
-            .ToList();
+                .Include(rec => rec.Deposit)
+                .Where(rec => rec.Id == model.Id)
+                .Select(CreateModel)
+                .ToList();
         }
         public ReplenishmentViewModel GetElement(ReplenishmentBindingModel model)
         {
@@ -40,7 +42,8 @@ namespace BankDatabaseImplement.Implements
             }
             using var context = new BankDatabase();
             var replenishment = context.Replenishments
-            .FirstOrDefault(rec => rec.Id == model.Id);
+                .Include(rec => rec.Deposit)
+                .FirstOrDefault(rec => rec.Id == model.Id);
             return replenishment != null ? CreateModel(replenishment) : null;
         }
         public void Insert(ReplenishmentBindingModel model)
