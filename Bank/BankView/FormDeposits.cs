@@ -32,10 +32,16 @@ namespace BankView
                 var list = _logic.Read(null);
                 if (list != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Rows.Clear();
+                    foreach (var deposit in list)
+                    {
+                        string stringClients = string.Empty;
+                        foreach (var client in deposit.DepositClients)
+                        {
+                            stringClients += client.Key + ") " + client.Value + ", ";
+                        }
+                        dataGridView.Rows.Add(new object[] { deposit.Id, deposit.DepositName, deposit.DepositInterest, stringClients[0..^2] });
+                    }
                 }
             }
             catch (Exception ex)
