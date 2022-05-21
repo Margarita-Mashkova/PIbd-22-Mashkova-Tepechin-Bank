@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FlowerShopBusinessLogic.OfficePackage.HelperEnums;
+using BankBusinessLogic.OfficePackage.HelperEnums;
 
-namespace FlowerShopBusinessLogic.OfficePackage.HelperModels
+namespace BankBusinessLogic.OfficePackage.HelperModels
 {
     public class ExcelMergeParameters
     {

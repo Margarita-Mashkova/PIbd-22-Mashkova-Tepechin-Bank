@@ -1,4 +1,6 @@
-﻿using BankContracts.BindingModels;
+﻿using BankBusinessLogic.OfficePackage;
+using BankBusinessLogic.OfficePackage.HelperModels;
+using BankContracts.BindingModels;
 using BankContracts.BusinessLogicsContracts;
 using BankContracts.StoragesContracts;
 using BankContracts.ViewModels;
@@ -16,12 +18,22 @@ namespace BankBusinessLogic.BusinessLogics
         private readonly ILoanProgramStorage _loanProgramStorage;
         private readonly IClientStorage _clientStorage;
         private readonly ICurrencyStorage _currencyStorage;
-        public ReportLogic(IDepositStorage depositStorage, ILoanProgramStorage loanProgramStorage, IClientStorage clientStorage, ICurrencyStorage currencyStorage)
+        private readonly AbstractSaveToWord _saveToWord;
+        private readonly AbstractSaveToExcel _saveToExcel;
+        private readonly AbstractSaveToPdf _saveToPdf;
+
+
+        public ReportLogic(IDepositStorage depositStorage, ILoanProgramStorage loanProgramStorage,
+            IClientStorage clientStorage, ICurrencyStorage currencyStorage, AbstractSaveToWord saveToWord,
+            AbstractSaveToExcel saveToExcel, AbstractSaveToPdf saveToPdf)
         {
             _depositStorage = depositStorage;
             _loanProgramStorage = loanProgramStorage;
             _clientStorage = clientStorage;
             _currencyStorage = currencyStorage;
+            _saveToWord = saveToWord;
+            _saveToExcel = saveToExcel;
+            _saveToPdf = saveToPdf;
         }
 
         public List<ReportClientCurrencyViewModel> GetClientCurrency(ReportBindingModel model)
@@ -56,7 +68,8 @@ namespace BankBusinessLogic.BusinessLogics
             var clients = _clientStorage.GetFilteredList(new ClientBindingModel
             {
                 DateFrom = model.DateFrom,
-                DateTo = model.DateTo
+                DateTo = model.DateTo,
+                ClerkId = model.ClerkId
             });
             foreach (var client in clients)
             {
@@ -83,7 +96,8 @@ namespace BankBusinessLogic.BusinessLogics
             var currencies = _currencyStorage.GetFilteredList(new CurrencyBindingModel
             {
                 DateFrom = model.DateFrom,
-                DateTo = model.DateTo
+                DateTo = model.DateTo,
+                ManagerId = model.ManagerId
             });
             foreach (var currency in currencies)
             {
@@ -135,22 +149,65 @@ namespace BankBusinessLogic.BusinessLogics
 
         public void SaveClientCurrencyToExcelFile(ReportBindingModel model)
         {
-            throw new NotImplementedException();
+            _saveToExcel.CreateReportClerk(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Валюты по клиентам",
+                ClientCurrency = GetClientCurrency(model)
+            });
         }
 
         public void SaveClientCurrencyToWordFile(ReportBindingModel model)
         {
-            throw new NotImplementedException();
+            _saveToWord.CreateDocClerk(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Валюты по клиентам",
+                ClientCurrency = GetClientCurrency(model),
+            });
         }
 
         public void SaveLoanProgramDepositToExcelFile(ReportBindingModel model)
         {
-            throw new NotImplementedException();
+           
+            _saveToExcel.CreateReportManager(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Вклады по кредитным программам",
+                LoanProgramDeposit = GetLoanProgramDeposit(model)
+            });
         }
 
         public void SaveLoanProgramDepositToWordFile(ReportBindingModel model)
         {
-            throw new NotImplementedException();
+            _saveToWord.CreateDocManager(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Вклады по кредитным программам",
+                LoanProgramDeposit = GetLoanProgramDeposit(model),
+            });
+        }
+        public void SaveCurrenciesToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreateDocManager(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Сведения по валюте",
+                DateFrom = model.DateFrom.Value,
+                DateTo = model.DateTo.Value,
+                Currencies = GetCurrencies(model)
+            });
+        }
+        public void SaveClientsToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreateDocManager(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Сведения по валюте",
+                DateFrom = model.DateFrom.Value,
+                DateTo = model.DateTo.Value,
+                Currencies = GetCurrencies(model)
+            });
         }
     }
 }

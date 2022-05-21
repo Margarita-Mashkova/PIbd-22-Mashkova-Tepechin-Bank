@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankBusinessLogic.OfficePackage.HelperModels
 {
-    public class WordParagraph
+    public class PdfParagraph
     {
-        public List<(string, WordTextProperties)> Texts { get; set; }
-        public WordTextProperties TextProperties { get; set; }
+        public string Text { get; set; }
+        public string Style { get; set; }
     }
 }

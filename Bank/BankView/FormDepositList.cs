@@ -32,9 +32,9 @@ namespace BankView
                 List<LoanProgramViewModel> listLP = _logicLP.Read(null);
                 if (listLP != null)
                 {
+                    checkedListBox.DataSource = listLP;
                     checkedListBox.DisplayMember = "LoanProgramName";
                     checkedListBox.ValueMember = "Id";
-                    checkedListBox.DataSource = listLP;
                     checkedListBox.SelectedItem = null;
                 }
             }
@@ -52,29 +52,76 @@ namespace BankView
 
         private void buttonWord_Click(object sender, EventArgs e)
         {
-            /*TODO: проверка replogic
-            foreach(var item in )
-            List<LoanProgramViewModel> items = (LoanProgramViewModel)checkedListBox.CheckedItems;
-            var list = _logicR.GetLoanProgramDeposit(new ReportBindingModel
-            {
-                LoanPrograms = (List<LoanProgramViewModel>)checkedListBox.CheckedItems.Cast<LoanProgramViewModel>(),
-            });
-            */
+           
             var itemsLP = new List<LoanProgramViewModel>();
             foreach (var client in checkedListBox.CheckedItems)
             {
                 itemsLP.Add((LoanProgramViewModel)client);
             }
-            var list = _logicR.GetLoanProgramDeposit(new ReportBindingModel
+           
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                LoanPrograms = itemsLP
+                _logicR.SaveLoanProgramDepositToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName,
+                    LoanPrograms= itemsLP
             });
-            var list2 = _logicR.GetCurrencies(new ReportBindingModel
-            {
-                DateFrom = DateTime.MinValue,
-                DateTo = DateTime.MaxValue
-            });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            }
+            
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var itemsLP = new List<LoanProgramViewModel>();
+            foreach (var client in checkedListBox.CheckedItems)
+            {
+                itemsLP.Add((LoanProgramViewModel)client);
+            }
+            /*
+            using var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    _logicR.SaveLoanProgramDepositToExcelFile(new
+                    ReportBindingModel
+                    {
+                        FileName = dialog.FileName,
+                        LoanPrograms = itemsLP
+                    });
+                    MessageBox.Show("Выполнено", "Успех",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            */
+            using var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    _logicR.SaveCurrenciesToPdfFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName,
+                        DateFrom = DateTime.MinValue,
+                        DateTo = DateTime.MaxValue,
+                        ManagerId = Program.Manager.Id
+                    });
+                    MessageBox.Show("Выполнено", "Успех",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

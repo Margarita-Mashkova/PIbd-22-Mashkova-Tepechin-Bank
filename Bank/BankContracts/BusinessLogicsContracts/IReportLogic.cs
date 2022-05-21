@@ -37,5 +37,8 @@ namespace BankContracts.BusinessLogicsContracts
 
         // Получение списка валют за период
         List<ReportCurrenciesViewModel> GetCurrencies(ReportBindingModel model);
+
+        void SaveCurrenciesToPdfFile(ReportBindingModel model);
+        void SaveClientsToPdfFile(ReportBindingModel model);
     }
 }

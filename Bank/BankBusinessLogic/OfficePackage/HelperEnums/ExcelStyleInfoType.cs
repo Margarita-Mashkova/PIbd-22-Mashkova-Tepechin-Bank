@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowerShopBusinessLogic.OfficePackage.HelperEnums
+namespace BankBusinessLogic.OfficePackage.HelperEnums
 {
     public enum ExcelStyleInfoType
     {

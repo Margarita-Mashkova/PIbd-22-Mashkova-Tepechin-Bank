@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BankContracts.ViewModels;
 
-namespace FlowerShopBusinessLogic.OfficePackage.HelperModels
+namespace BankBusinessLogic.OfficePackage.HelperModels
 {
     public class WordInfo
     {

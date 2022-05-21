@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankBusinessLogic.OfficePackage.HelperEnums
 {
-    public enum WordJustificationType
+    public enum PdfParagraphAlignmentType
     {
         Center,
-        Both,
-        Right
+        Left
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BankBusinessLogic.BusinessLogics;
+using BankBusinessLogic.OfficePackage;
+using BankBusinessLogic.OfficePackage.Implements;
 using BankContracts.BusinessLogicsContracts;
 using BankContracts.StoragesContracts;
 using BankContracts.ViewModels;
@@ -61,9 +63,9 @@ namespace BankView
             currentContainer.RegisterType<IReplenishmentLogic, ReplenishmentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ITermLogic, TermLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
-            //currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
-            //currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
-            //currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
