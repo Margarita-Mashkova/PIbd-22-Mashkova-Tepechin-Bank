@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankView", "BankView\BankVi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankContracts", "BankContracts\BankContracts.csproj", "{DC5F9ED3-E7D1-4474-AA96-504E6CCEB729}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankBusinessLogic", "BankBusinessLogic\BankBusinessLogic.csproj", "{0E27C002-CB8F-477B-8D52-7AB5B2CFAB61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankBusinessLogic", "BankBusinessLogic\BankBusinessLogic.csproj", "{0E27C002-CB8F-477B-8D52-7AB5B2CFAB61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDatabaseImplement", "BankDatabaseImplement\BankDatabaseImplement.csproj", "{3B6E9A5C-1D43-4E07-B254-984586805A02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankDatabaseImplement", "BankDatabaseImplement\BankDatabaseImplement.csproj", "{3B6E9A5C-1D43-4E07-B254-984586805A02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankRestApi", "BankRestApi\BankRestApi.csproj", "{C969F0B9-3D89-43E7-9AF6-7AE8FF7C01B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankClerkApp", "BankClerkApp\BankClerkApp.csproj", "{40609A2E-2F31-48F1-B9C7-716CCCDEA24E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{3B6E9A5C-1D43-4E07-B254-984586805A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B6E9A5C-1D43-4E07-B254-984586805A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B6E9A5C-1D43-4E07-B254-984586805A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C969F0B9-3D89-43E7-9AF6-7AE8FF7C01B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C969F0B9-3D89-43E7-9AF6-7AE8FF7C01B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C969F0B9-3D89-43E7-9AF6-7AE8FF7C01B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C969F0B9-3D89-43E7-9AF6-7AE8FF7C01B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40609A2E-2F31-48F1-B9C7-716CCCDEA24E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40609A2E-2F31-48F1-B9C7-716CCCDEA24E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40609A2E-2F31-48F1-B9C7-716CCCDEA24E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40609A2E-2F31-48F1-B9C7-716CCCDEA24E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
