@@ -11,7 +11,6 @@ namespace BankContracts.ViewModels
     {
         public string ClientFIO { get; set; }
         public DateTime DateVisit { get; set; }
-        //public List<DepositViewModel> Deposits { get; set; }
         public List<(DepositViewModel, List<CurrencyViewModel>)> DepositCurrencies { get; set;}
     }
 }

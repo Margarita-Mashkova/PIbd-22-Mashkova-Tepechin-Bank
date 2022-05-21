@@ -45,8 +45,7 @@ namespace BankBusinessLogic.BusinessLogics
                 var record = new ReportClientCurrencyViewModel
                 {
                     ClientFIO = client.ClientFIO,
-                    Currencies = new List<string>(),
-                    LoanProgramName = string.Empty
+                    Currencies = new List<string>()
                 };
                 foreach (var loanProgramKVP in client.ClientLoanPrograms)
                 {
@@ -54,9 +53,15 @@ namespace BankBusinessLogic.BusinessLogics
                     foreach (var currency in lp.LoanProgramCurrencies)
                     {
                         record.Currencies.Add(currency.Value.Item1);
-                        record.LoanProgramName = lp.LoanProgramName;
                     }
                 }
+                var deposits = _depositStorage.GetFullList().Where(rec => rec.DepositClients.Keys.ToList().Contains(client.Id)).ToList();
+                foreach (var deposit in deposits)
+                {
+                    var currencies = _currencyStorage.GetFullList().Where(rec => rec.CurrencyDeposits.Keys.ToList().Contains(deposit.Id)).ToList();
+                    record.Currencies.AddRange(currencies.Select(cur => cur.CurrencyName));
+                }
+                record.Currencies = record.Currencies.Distinct().ToList();
                 list.Add(record);
             }
             return list;
