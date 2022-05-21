@@ -74,8 +74,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
                 row.Cells[i].Borders.Right.Width = borderWidth;
                 row.Cells[i].Borders.Top.Width = borderWidth;
                 row.Cells[i].Borders.Bottom.Width = borderWidth;
-                row.Cells[i].Format.Alignment =
-               GetParagraphAlignment(rowParameters.ParagraphAlignment);
+                row.Cells[i].Format.Alignment = GetParagraphAlignment(rowParameters.ParagraphAlignment);
                 row.Cells[i].VerticalAlignment = VerticalAlignment.Center;
             }
         }

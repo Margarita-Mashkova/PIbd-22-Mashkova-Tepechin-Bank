@@ -93,6 +93,7 @@
             this.отчётToolStripMenuItem.Name = "отчётToolStripMenuItem";
             this.отчётToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.отчётToolStripMenuItem.Text = "Отчёт";
+            this.отчётToolStripMenuItem.Click += new System.EventHandler(this.отчётToolStripMenuItem_Click);
             // 
             // FormMainClerk
             // 

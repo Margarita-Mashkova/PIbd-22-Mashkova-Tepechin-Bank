@@ -45,7 +45,7 @@ namespace BankBusinessLogic.BusinessLogics
                 var record = new ReportClientCurrencyViewModel
                 {
                     ClientFIO = client.ClientFIO,
-                    Currencies = new List<Tuple<string>>(),
+                    Currencies = new List<string>(),
                     LoanProgramName = string.Empty
                 };
                 foreach (var loanProgramKVP in client.ClientLoanPrograms)
@@ -53,7 +53,7 @@ namespace BankBusinessLogic.BusinessLogics
                     var lp = _loanProgramStorage.GetElement(new LoanProgramBindingModel { Id = loanProgramKVP.Key });
                     foreach (var currency in lp.LoanProgramCurrencies)
                     {
-                        record.Currencies.Add(new Tuple<string>(currency.Value.Item1));
+                        record.Currencies.Add(currency.Value.Item1);
                         record.LoanProgramName = lp.LoanProgramName;
                     }
                 }
@@ -200,13 +200,13 @@ namespace BankBusinessLogic.BusinessLogics
         }
         public void SaveClientsToPdfFile(ReportBindingModel model)
         {
-            _saveToPdf.CreateDocManager(new PdfInfo
+            _saveToPdf.CreateDocClerk(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Сведения по валюте",
+                Title = "Сведения по клиентам",
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
-                Currencies = GetCurrencies(model)
+                Clients = GetClients(model)
             });
         }
     }

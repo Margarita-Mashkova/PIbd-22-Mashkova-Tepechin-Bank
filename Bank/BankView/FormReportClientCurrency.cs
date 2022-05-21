@@ -49,19 +49,47 @@ namespace BankView
             {
                 selectedClients.Add((ClientViewModel)client);
             }
-            _logicR.GetClientCurrency(new ReportBindingModel
+            /*_logicR.GetClientCurrency(new ReportBindingModel
             {
                 Clients = selectedClients
-            });
+            });*/
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _logicR.SaveClientCurrencyToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName,
+                    Clients = selectedClients
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            }
         }
 
         private void buttonExcel_Click(object sender, EventArgs e)
         {
-            var list2 = _logicR.GetClients(new ReportBindingModel
+            var selectedClients = new List<ClientViewModel>();
+            foreach (var client in checkedListBoxClients.CheckedItems)
             {
-                DateFrom = DateTime.MinValue,
-                DateTo = DateTime.MaxValue
-            });
+                selectedClients.Add((ClientViewModel)client);
+            }
+            using var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    _logicR.SaveClientCurrencyToExcelFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName,
+                        Clients = selectedClients
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

@@ -84,20 +84,13 @@ namespace BankBusinessLogic.OfficePackage
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
-                foreach (var dep in cc.Currencies)
+                foreach (var currency in cc.Currencies)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
-                        ColumnName = "B",
+                        ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = dep.Item1,
-                        StyleInfo = ExcelStyleInfoType.TextWithBroder
-                    });
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        ColumnName = "C",
-                        RowIndex = rowIndex,
-                        Text = dep.Item1,
+                        Text = currency,
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     rowIndex++;

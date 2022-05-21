@@ -45,6 +45,61 @@ namespace BankBusinessLogic.OfficePackage
             }
             SavePdf(info);
         }
+
+        public void CreateDocClerk(PdfInfo info)
+        {
+            CreatePdf(info);
+            CreateParagraph(new PdfParagraph
+            {
+                Text = info.Title,
+                Style = "NormalTitle"
+            });
+            CreateParagraph(new PdfParagraph
+            {
+                Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }",
+                Style = "Normal"
+            });
+            CreateTable(new List<string> { "5cm", "3cm", "5cm", "4cm"});
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "ФИО", "Дата", "Вклады", "Валюты" },
+                Style = "NormalTitle",
+                ParagraphAlignment = PdfParagraphAlignmentType.Center
+            });
+            foreach (var client in info.Clients)
+            {
+                for(int i = 0; i < client.DepositCurrencies.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        CreateRow(new PdfRowParameters
+                        {
+
+                            Texts = new List<string> { client.ClientFIO,
+                                                client.DateVisit.ToShortDateString(),
+                                                client.DepositCurrencies[i].Item1.DepositName,
+                                                string.Join(", ", client.DepositCurrencies[i].Item2.Select(cur => cur.CurrencyName).ToList())},
+                            Style = "Normal",
+                            ParagraphAlignment = PdfParagraphAlignmentType.Left
+                        });
+                    }
+                    else
+                    {
+                        CreateRow(new PdfRowParameters
+                        {
+
+                            Texts = new List<string> { String.Empty, String.Empty,
+                                                client.DepositCurrencies[i].Item1.DepositName,
+                                                string.Join(", ", client.DepositCurrencies[i].Item2.Select(cur => cur.CurrencyName).ToList())},
+                            Style = "Normal",
+                            ParagraphAlignment = PdfParagraphAlignmentType.Left
+                        });
+                    }
+                }                             
+            }
+            SavePdf(info);
+        }
+
         /// <summary>/// Создание doc-файла
         /// </summary>
         /// <param name="info"></param>
@@ -73,3 +128,18 @@ namespace BankBusinessLogic.OfficePackage
         protected abstract void SavePdf(PdfInfo info);
     }
 }
+
+//string.Join(", ",client.DepositCurrencies.Select(cur => cur.Item2).ToList())
+/*foreach (var dep in client.DepositCurrencies)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+
+                        Texts = new List<string> { client.ClientFIO,
+                                                client.DateVisit.ToShortDateString(),
+                                                dep.Item1.DepositName,
+                                                string.Join(", ",dep.Item2.Select(cur => cur.CurrencyName).ToList())},
+                        Style = "Normal",
+                        ParagraphAlignment = PdfParagraphAlignmentType.Left
+                    });
+                }   */
