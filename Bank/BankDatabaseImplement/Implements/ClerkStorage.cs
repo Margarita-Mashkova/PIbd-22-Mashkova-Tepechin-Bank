@@ -8,7 +8,6 @@ namespace BankDatabaseImplement.Implements
 {
     public class ClerkStorage : IClerkStorage
     {
-        //TODO: надо ли include?
         public List<ClerkViewModel> GetFullList()
         {
             using var context = new BankDatabase();

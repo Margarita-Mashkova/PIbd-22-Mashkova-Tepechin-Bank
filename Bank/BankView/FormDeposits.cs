@@ -40,7 +40,7 @@ namespace BankView
                         {
                             stringClients += client.Key + ") " + client.Value + ", ";
                         }
-                        dataGridView.Rows.Add(new object[] { deposit.Id, deposit.DepositName, deposit.DepositInterest, stringClients[0..^2] });
+                        dataGridView.Rows.Add(new object[] { deposit.Id, deposit.DepositName, deposit.DepositInterest, stringClients });
                     }
                 }
             }
