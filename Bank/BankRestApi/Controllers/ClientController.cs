@@ -10,6 +10,7 @@ namespace BankRestApi.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientLogic _clientLogic;
+        
         public ClientController(IClientLogic clientLogic)
         {
             _clientLogic = clientLogic;
@@ -25,6 +26,6 @@ namespace BankRestApi.Controllers
         public void CreateOrUpdateClient(ClientBindingModel model) => _clientLogic.CreateOrUpdate(model);
 
         [HttpPost]
-        public void DeleteClient(ClientBindingModel model) => _clientLogic.Delete(model);
+        public void DeleteClient(ClientBindingModel model) => _clientLogic.Delete(model);        
     }
 }

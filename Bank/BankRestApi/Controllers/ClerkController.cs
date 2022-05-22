@@ -9,16 +9,22 @@ namespace BankRestApi.Controllers
     [ApiController]
     public class ClerkController : ControllerBase
     {
-        private readonly IClerkLogic _logic;
-        public ClerkController(IClerkLogic logic)
+        private readonly IClerkLogic _clerkLogic;
+        private readonly IDepositLogic _depositLogic;
+        private readonly IReplenishmentLogic _replenishmentLogic;
+        private readonly IClientLogic _clientLogic;
+        public ClerkController(IClerkLogic logic, IDepositLogic depositLogic, IReplenishmentLogic replenishmentLogic, IClientLogic clientLogic)
         {
-            _logic = logic;
+            _clerkLogic = logic;
+            _depositLogic = depositLogic;
+            _replenishmentLogic = replenishmentLogic;
+            _clientLogic = clientLogic;
         }
 
         [HttpGet]
         public ClerkViewModel Login(string login, string password)
         {
-            var list = _logic.Read(new ClerkBindingModel
+            var list = _clerkLogic.Read(new ClerkBindingModel
             {
                 Email = login,
                 Password = password
@@ -27,10 +33,19 @@ namespace BankRestApi.Controllers
         }
 
         [HttpPost]
-        public void Register(ClerkBindingModel model) => _logic.CreateOrUpdate(model);
+        public void Register(ClerkBindingModel model) => _clerkLogic.CreateOrUpdate(model);
 
         [HttpPost]
-        public void UpdateData(ClerkBindingModel model) => _logic.CreateOrUpdate(model);
+        public void UpdateData(ClerkBindingModel model) => _clerkLogic.CreateOrUpdate(model);
+
+        [HttpGet]
+        public List<DepositViewModel> GetClerkDepositList(int clerkId) => _depositLogic.Read(new DepositBindingModel { ClerkId = clerkId });
+
+        [HttpGet]
+        public List<ClientViewModel> GetClerkClientList(int clerkId) => _clientLogic.Read(new ClientBindingModel { ClerkId = clerkId });
+
+        [HttpGet]
+        public List<ReplenishmentViewModel> GetClerkReplenishmentList(int clerkId) => _replenishmentLogic.Read(new ReplenishmentBindingModel { ClerkId = clerkId });
     }
 }
 

@@ -30,7 +30,7 @@ namespace BankDatabaseImplement.Implements
             using var context = new BankDatabase();
             return context.Replenishments
                 .Include(rec => rec.Deposit)
-                .Where(rec => rec.Id == model.Id)
+                .Where(rec => (rec.Id == model.Id) || (model.ClerkId.HasValue && rec.ClerkId == model.ClerkId)) 
                 .Select(CreateModel)
                 .ToList();
         }
@@ -92,7 +92,8 @@ namespace BankDatabaseImplement.Implements
                 Id = replenishment.Id,
                 Amount = replenishment.Amount,
                 DateReplenishment = replenishment.DateReplenishment,
-                DepositId = replenishment.DepositId
+                DepositId = replenishment.DepositId,
+                DepositName = replenishment.Deposit.DepositName
             };
         }
     }

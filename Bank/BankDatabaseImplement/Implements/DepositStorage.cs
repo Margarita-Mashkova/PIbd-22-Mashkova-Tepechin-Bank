@@ -33,7 +33,7 @@ namespace BankDatabaseImplement.Implements
             return context.Deposits
             .Include(rec => rec.DepositClients)
             .ThenInclude(rec => rec.Client)
-            .Where(rec => rec.DepositName.Contains(model.DepositName))
+            .Where(rec => (rec.DepositName.Contains(model.DepositName)) || (model.ClerkId.HasValue && rec.ClerkId == model.ClerkId))
             .ToList()
             .Select(CreateModel)
             .ToList();

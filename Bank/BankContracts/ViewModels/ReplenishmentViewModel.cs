@@ -17,5 +17,6 @@ namespace BankContracts.ViewModels
         [DisplayName("Дата пополнения")]
         public DateTime DateReplenishment { get; set; }
         public int DepositId { get; set; }
+        public string DepositName { get; set; }
     }
 }

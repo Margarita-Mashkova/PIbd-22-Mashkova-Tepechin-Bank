@@ -10,11 +10,13 @@ namespace BankRestApi.Controllers
     public class DepositController : ControllerBase
     {
         private readonly IDepositLogic _depositLogic;
+
         public DepositController(IDepositLogic depositLogic)
         {
             _depositLogic = depositLogic;
         }
 
+       
         [HttpGet]
         public List<DepositViewModel> GetDepositList() => _depositLogic.Read(null)?.ToList();
 

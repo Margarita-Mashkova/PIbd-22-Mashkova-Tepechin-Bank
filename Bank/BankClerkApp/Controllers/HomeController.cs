@@ -108,12 +108,17 @@ namespace BankClerkApp.Controllers
 
         public IActionResult Client()
         {
-            return View(APIClerk.GetRequest<List<ClientViewModel>>("api/client/GetClientList"));
+            if (Program.Clerk == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClerk.GetRequest<List<ClientViewModel>>($"api/clerk/GetClerkClientList?clerkId={Program.Clerk.Id}"));
         }
 
         [HttpGet]
         public IActionResult ClientCreate()
         {
+            ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("");
             return View();
         }
 
@@ -181,7 +186,11 @@ namespace BankClerkApp.Controllers
 
         public IActionResult Deposit()
         {
-            return View(APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList"));
+            if (Program.Clerk == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClerk.GetRequest<List<DepositViewModel>>($"api/clerk/GetClerkDepositList?clerkId={Program.Clerk.Id}"));
         }
 
         [HttpGet]
@@ -241,7 +250,12 @@ namespace BankClerkApp.Controllers
 
         public IActionResult Replenishment()
         {
-            return View(APIClerk.GetRequest<List<ReplenishmentViewModel>>("api/replenishment/GetReplenishmentList"));
+            if (Program.Clerk == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+
+            return View(APIClerk.GetRequest<List<ReplenishmentViewModel>>($"api/clerk/GetClerkReplenishmentList?clerkId={Program.Clerk.Id}"));
         }
 
         [HttpGet]
