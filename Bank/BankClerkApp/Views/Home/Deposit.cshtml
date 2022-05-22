@@ -1,5 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using BankContracts.ViewModels
+
+@model List<DepositViewModel>
 @{
+    ViewData["Title"] = "Deposits";
 }
+
+<div class="text-center">
+    <h1 class="display-4">Вклады</h1>
+</div>
+
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+        <p>
+            <a asp-action="DepositCreate">Создать вклад</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Номер
+                    </th>
+                    <th>
+                        Наименование вклада
+                    </th>
+                    <th>
+                        Процентная ставка
+                    </th>
+                    <th>
+                        Изменение вклада
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DepositName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DepositInterest)
+                        </td>
+                        <td>
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="DepositUpdate"
+                            asp-route-depositId="@item.Id" asp-route-depositName="@item.DepositName" 
+                            asp-route-depositInterest="@item.DepositInterest">Изменить</a>
+
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="DepositDelete" asp-route-depositId="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

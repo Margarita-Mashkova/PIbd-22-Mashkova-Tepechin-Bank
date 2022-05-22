@@ -62,9 +62,11 @@
                             @Html.DisplayFor(modelItem => item.DateVisit)
                         </td>
                         <td>
-                            <a asp-action="ClientUpdate" asp-route-clientId="@item.Id" asp-route-clientFIO="@item.ClientFIO" 
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="ClientUpdate" asp-route-clientId="@item.Id" asp-route-clientFIO="@item.ClientFIO" 
                             asp-route-passport="@item.PassportData" asp-route-telephone="@item.TelephoneNumber" 
                             asp-route-dateVisit="@item.DateVisit">Изменить</a>
+
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="ClientDelete" asp-route-clientId="@item.Id">Удалить</a>
                         </td>
                     </tr>
                 }

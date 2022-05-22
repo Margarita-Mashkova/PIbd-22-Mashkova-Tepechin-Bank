@@ -112,6 +112,32 @@ namespace BankClerkApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult ClientCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void ClientCreate(string clientFIO, string passport, string telephone)
+        {
+            if (!string.IsNullOrEmpty(clientFIO) && !string.IsNullOrEmpty(passport) && !string.IsNullOrEmpty(telephone))
+            {
+                APIClerk.PostRequest("api/client/CreateOrUpdateClient", new ClientBindingModel
+                {
+                    ClientFIO = clientFIO,
+                    PassportData = passport,        
+                    TelephoneNumber = telephone,
+                    DateVisit = DateTime.Now,
+                    ClientLoanPrograms = new Dictionary<int, (string, int)>(),
+                    ClerkId = Program.Clerk.Id
+                });
+                Response.Redirect("Client");
+                return;
+            }
+            throw new Exception("Введите ФИО, паспортные данные и номер телефона");
+        }
+
+        [HttpGet]
         public IActionResult ClientUpdate(int clientId)
         {
             ViewBag.Client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
@@ -138,10 +164,141 @@ namespace BankClerkApp.Controllers
                     ClientLoanPrograms = client.ClientLoanPrograms,
                     ClerkId = Program.Clerk.Id
                 });
-                Response.Redirect("Index");
+                Response.Redirect("Client");
                 return;
             }
-            throw new Exception("Введите логин, пароль и ФИО");
+            throw new Exception("Введите ФИО, паспортные данные и номер телефона");
+        }
+
+        //TODO: Починить удаление
+        [HttpPost]
+        public void ClientDelete(int clientId)
+        {
+            var client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
+            APIClerk.PostRequest("api/cleint/DeleteClient", client);
+            Response.Redirect("Index");
+        }
+
+        public IActionResult Deposit()
+        {
+            return View(APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList"));
+        }
+
+        [HttpGet]
+        public IActionResult DepositCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void DepositCreate(string depositName, decimal depositInterest)
+        {
+            if (!string.IsNullOrEmpty(depositName) && depositInterest!=0)
+            {
+                APIClerk.PostRequest("api/deposit/CreateOrUpdateDeposit", new DepositBindingModel
+                {
+                    DepositName = depositName,
+                    DepositInterest = depositInterest,
+                    ClientDeposits = new Dictionary<int, string>(),
+                    ClerkId = Program.Clerk.Id
+                });
+                Response.Redirect("Deposit");
+                return;
+            }
+            throw new Exception("Введите наименование вклада и процентную ставку");
+        }
+
+        [HttpGet]
+        public IActionResult DepositUpdate(int depositId)
+        {
+            ViewBag.Deposit = APIClerk.GetRequest<DepositViewModel>($"api/deposit/GetDeposit?depositId={depositId}");
+            return View();
+        }
+
+        [HttpPost]
+        public void DepositUpdate(int depositId, string depositName, decimal depositInterest)
+        {
+            if (!string.IsNullOrEmpty(depositName) && depositInterest != 0)
+            {
+                var deposit = APIClerk.GetRequest<DepositViewModel>($"api/deposit/GetDeposit?depositId={depositId}");
+                if (deposit == null)
+                {
+                    return;
+                }
+                APIClerk.PostRequest("api/deposit/CreateOrUpdateDeposit", new DepositBindingModel
+                {
+                    Id = deposit.Id,
+                    DepositName = depositName,
+                    DepositInterest = depositInterest,
+                    ClientDeposits = deposit.DepositClients,
+                    ClerkId = Program.Clerk.Id
+                });
+                Response.Redirect("Deposit");
+                return;
+            }
+            throw new Exception("Введите наименование вклада и процентную ставку");
+        }
+
+        public IActionResult Replenishment()
+        {
+            return View(APIClerk.GetRequest<List<ReplenishmentViewModel>>("api/replenishment/GetReplenishmentList"));
+        }
+
+        [HttpGet]
+        public IActionResult ReplenishmentCreate()
+        {
+            ViewBag.Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
+            return View();
+        }
+
+        [HttpPost]
+        public void ReplenishmentCreate(int replenishmentAmount, int depositId)
+        {
+            if (replenishmentAmount!=0 && depositId!=0)
+            {
+                APIClerk.PostRequest("api/replenishment/CreateOrUpdateReplenishment", new ReplenishmentBindingModel
+                {
+                    Amount = replenishmentAmount,
+                    DateReplenishment = DateTime.Now,
+                    DepositId = depositId,
+                    ClerkId = Program.Clerk.Id
+                });
+                Response.Redirect("Replenishment");
+                return;
+            }
+            throw new Exception("Введите сумму пополнения и выберите вклад");
+        }
+
+        [HttpGet]
+        public IActionResult ReplenishmentUpdate(int replenishmentId)
+        {
+            ViewBag.Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
+            ViewBag.Replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
+            return View();
+        }
+
+        [HttpPost]
+        public void ReplenishmentUpdate(int replenishmentId, int replenishmentAmount, int depositId)
+        {
+            if (replenishmentAmount!=0 && replenishmentAmount != 0 && depositId!=0)
+            {
+                var replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
+                if (replenishment == null)
+                {
+                    return;
+                }
+                APIClerk.PostRequest("api/replenishment/CreateOrUpdateReplenishment", new ReplenishmentBindingModel
+                {
+                    Id = replenishment.Id,
+                    Amount = replenishmentAmount,
+                    DateReplenishment = DateTime.Now,
+                    DepositId = depositId,
+                    ClerkId = Program.Clerk.Id
+                });
+                Response.Redirect("Replenishment");
+                return;
+            }
+            throw new Exception("Введите сумму пополнения и выберите вклад");
         }
     }
 }

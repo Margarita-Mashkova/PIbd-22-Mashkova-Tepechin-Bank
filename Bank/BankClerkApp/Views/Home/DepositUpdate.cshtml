@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Update Deposit";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение вклада</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Наименование вклада:</div>
+        <div class="col-8"><input type="text" name="depositName" id="depositName" value="@ViewBag.Deposit.DepositName" size="35" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Процентная ставка:</div>
+        <div class="col-8"><input type="text" name="depositInterest" id="depositInterest" value="@ViewBag.Deposit.DepositInterest" /></div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Привязанные клиенты
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Deposit.DepositClients)
+            {
+                <tr>
+                    <td>
+                        @item.Value
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
