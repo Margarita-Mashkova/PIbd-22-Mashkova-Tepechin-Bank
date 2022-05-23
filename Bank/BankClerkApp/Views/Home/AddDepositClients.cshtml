@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Create ClientDeposit";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Привязка клиентов к вкладу</h1>
+</div>
+
+<form method="post">
+    <div class="row">
+        <div class="col-4">Вклад:</div>
+        <div class="col-8">
+            <select id="depositId" name="depositId" class="form-control" asp-items="@(new SelectList(@ViewBag.Deposits,"Id", "DepositName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Клиенты:</div>
+        <div class="col-8">
+            <select id="clientsId" name="clientsId" multiple="multiple" class="form-control" asp-items="@(new SelectList(@ViewBag.Clients,"Id", "ClientFIO"))"></select>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Привязать" class="btn btn-primary" />
+        </div>
+    </div>
+</form>

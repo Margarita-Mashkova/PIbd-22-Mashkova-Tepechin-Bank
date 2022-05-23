@@ -66,7 +66,7 @@ namespace BankView
                     DepositName = textBoxDepositName.Text,
                     ClerkId = Program.Clerk.Id,
                     DepositInterest = Convert.ToDecimal(textBoxDepositInterest.Text),
-                    ClientDeposits = clientDeposits
+                    DepositClients = clientDeposits
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

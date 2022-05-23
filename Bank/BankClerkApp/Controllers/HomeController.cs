@@ -218,7 +218,7 @@ namespace BankClerkApp.Controllers
                 {
                     DepositName = depositName,
                     DepositInterest = depositInterest,
-                    ClientDeposits = new Dictionary<int, string>(),
+                    DepositClients = new Dictionary<int, string>(),
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Deposit");
@@ -249,7 +249,7 @@ namespace BankClerkApp.Controllers
                     Id = deposit.Id,
                     DepositName = depositName,
                     DepositInterest = depositInterest,
-                    ClientDeposits = deposit.DepositClients,
+                    DepositClients = deposit.DepositClients,
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Deposit");
@@ -272,7 +272,6 @@ namespace BankClerkApp.Controllers
             {
                 return Redirect("~/Home/Enter");
             }
-
             return View(APIClerk.GetRequest<List<ReplenishmentViewModel>>($"api/clerk/GetClerkReplenishmentList?clerkId={Program.Clerk.Id}"));
         }
 
@@ -339,6 +338,28 @@ namespace BankClerkApp.Controllers
             var replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
             APIClerk.PostRequest("api/replenishment/DeleteReplenishment", replenishment);
             Response.Redirect("Replenishment");
+        }
+
+        [HttpGet]
+        public IActionResult AddDepositClients()
+        {
+            if (Program.Clerk == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            ViewBag.Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
+            ViewBag.Clients = APIClerk.GetRequest<List<ClientViewModel>>($"api/clerk/GetClerkClientList?clerkId={Program.Clerk.Id}");
+            return View();
+        }
+
+        [HttpPost]
+        public void AddDepositClients(int depositId, List<int> clientsId)
+        {
+            if(depositId!=0 && clientsId != null)
+            {
+
+            }
+            throw new Exception("Выберите вклад и клиентов");
         }
     }
 }
