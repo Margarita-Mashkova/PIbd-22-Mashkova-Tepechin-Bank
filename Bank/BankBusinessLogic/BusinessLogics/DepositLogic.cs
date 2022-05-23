@@ -10,7 +10,7 @@ using BankContracts.ViewModels;
 
 namespace BankBusinessLogic.BusinessLogics
 {
-    public class DepositLogic :IDepositLogic
+    public class DepositLogic : IDepositLogic
     {
         private readonly IDepositStorage _depositStorage;
         private readonly IClientStorage _clientStorage;
@@ -76,6 +76,7 @@ namespace BankBusinessLogic.BusinessLogics
             }
 
             deposit.DepositClients.Clear();
+
             foreach (var clientId in model.ClientsId)
             {
                 var client = _clientStorage.GetElement(new ClientBindingModel
@@ -87,12 +88,9 @@ namespace BankBusinessLogic.BusinessLogics
                 {
                     throw new Exception("Клиент не найден");
                 }
-                
-                //if (!deposit.DepositClients.ContainsKey(clientId))
-                //{
-                    deposit.DepositClients.Add(clientId, client.ClientFIO);
-                //}
-            }            
+
+                deposit.DepositClients.Add(clientId, client.ClientFIO);
+            }
             _depositStorage.Update(new DepositBindingModel
             {
                 Id = deposit.Id,

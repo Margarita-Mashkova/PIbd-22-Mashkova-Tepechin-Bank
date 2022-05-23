@@ -15,8 +15,7 @@ namespace BankRestApi.Controllers
         {
             _depositLogic = depositLogic;
         }
-
-       
+               
         [HttpGet]
         public List<DepositViewModel> GetDepositList() => _depositLogic.Read(null)?.ToList();
 
