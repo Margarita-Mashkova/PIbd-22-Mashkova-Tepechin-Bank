@@ -131,13 +131,6 @@ namespace BankDatabaseImplement.Implements
                 // удалили те, которых нет в модели
                 context.ClientLoanPrograms.RemoveRange(clientLoanPrograms.Where(rec => !model.ClientLoanPrograms.ContainsKey(rec.LoanProgramId)).ToList());
                 context.SaveChanges();
-                // обновили количество у существующих записей
-                foreach (var updateLoanProgram in clientLoanPrograms)
-                {
-                    updateLoanProgram.Count = model.ClientLoanPrograms[updateLoanProgram.LoanProgramId].Item2;
-                    model.ClientLoanPrograms.Remove(updateLoanProgram.LoanProgramId);
-                }
-                context.SaveChanges();
             }
             // добавили новые
             foreach (var clp in model.ClientLoanPrograms)
@@ -145,8 +138,7 @@ namespace BankDatabaseImplement.Implements
                 context.ClientLoanPrograms.Add(new ClientLoanProgram
                 {
                     ClientId = client.Id,
-                    LoanProgramId = clp.Key,
-                    Count = clp.Value.Item2
+                    LoanProgramId = clp.Key
                 });
                 context.SaveChanges();
             }
@@ -162,7 +154,7 @@ namespace BankDatabaseImplement.Implements
                 TelephoneNumber = client.TelephoneNumber,
                 DateVisit = client.DateVisit,
                 ClientLoanPrograms = client.ClientLoanPrograms
-                .ToDictionary(recCLP => recCLP.LoanProgramId, recCLP => (recCLP.LoanProgram?.LoanProgramName, recCLP.Count))
+                .ToDictionary(recCLP => recCLP.LoanProgramId, recCLP => recCLP.LoanProgram?.LoanProgramName)
             };
         }
     }

@@ -22,6 +22,6 @@ namespace BankContracts.ViewModels
 
         [DisplayName("Дата визита")]
         public DateTime DateVisit { get; set; }
-        public Dictionary<int, (string, int)> ClientLoanPrograms { get; set; }
+        public Dictionary<int, string> ClientLoanPrograms { get; set; }
     }
 }

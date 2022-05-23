@@ -118,14 +118,19 @@ namespace BankClerkApp.Controllers
         [HttpGet]
         public IActionResult ClientCreate()
         {
-            ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("");
+            ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("api/client/GetLoanProgramList");
             return View();
         }
 
         [HttpPost]
-        public void ClientCreate(string clientFIO, string passport, string telephone)
+        public void ClientCreate(string clientFIO, string passport, string telephone, List<int> loanProgramsId)
         {
-            if (!string.IsNullOrEmpty(clientFIO) && !string.IsNullOrEmpty(passport) && !string.IsNullOrEmpty(telephone))
+            List<LoanProgramViewModel> loanPrograms = new List<LoanProgramViewModel>();
+            foreach (var loanProgramId in loanProgramsId)
+            {
+                loanPrograms.Add(APIClerk.GetRequest<LoanProgramViewModel>($"api/client/GetLoanProgram?loanProgramId={loanProgramId}"));
+            }            
+            if (!string.IsNullOrEmpty(clientFIO) && !string.IsNullOrEmpty(passport) && !string.IsNullOrEmpty(telephone) && loanPrograms!=null)
             {
                 APIClerk.PostRequest("api/client/CreateOrUpdateClient", new ClientBindingModel
                 {
@@ -133,7 +138,7 @@ namespace BankClerkApp.Controllers
                     PassportData = passport,        
                     TelephoneNumber = telephone,
                     DateVisit = DateTime.Now,
-                    ClientLoanPrograms = new Dictionary<int, (string, int)>(),
+                    ClientLoanPrograms = loanPrograms.ToDictionary(x => x.Id, x => x.LoanProgramName),
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Client");
