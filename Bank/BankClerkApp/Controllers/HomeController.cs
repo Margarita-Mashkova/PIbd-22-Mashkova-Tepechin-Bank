@@ -212,7 +212,7 @@ namespace BankClerkApp.Controllers
         [HttpPost]
         public void DepositCreate(string depositName, decimal depositInterest)
         {
-            if (!string.IsNullOrEmpty(depositName) && depositInterest!=0)
+            if (!string.IsNullOrEmpty(depositName))
             {
                 APIClerk.PostRequest("api/deposit/CreateOrUpdateDeposit", new DepositBindingModel
                 {

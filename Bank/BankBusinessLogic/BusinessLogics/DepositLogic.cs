@@ -72,9 +72,10 @@ namespace BankBusinessLogic.BusinessLogics
 
             if (deposit == null)
             {
-                throw new Exception("Склад не найден");
+                throw new Exception("Вклад не найден");
             }
 
+            deposit.DepositClients.Clear();
             foreach (var clientId in model.ClientsId)
             {
                 var client = _clientStorage.GetElement(new ClientBindingModel
@@ -84,13 +85,13 @@ namespace BankBusinessLogic.BusinessLogics
 
                 if (client == null)
                 {
-                    throw new Exception("Компонент не найден");
+                    throw new Exception("Клиент не найден");
                 }
-
-                if (!deposit.DepositClients.ContainsKey(clientId))
-                {
+                
+                //if (!deposit.DepositClients.ContainsKey(clientId))
+                //{
                     deposit.DepositClients.Add(clientId, client.ClientFIO);
-                }
+                //}
             }            
             _depositStorage.Update(new DepositBindingModel
             {
