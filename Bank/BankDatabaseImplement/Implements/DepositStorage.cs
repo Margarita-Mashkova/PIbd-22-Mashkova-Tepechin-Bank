@@ -118,11 +118,11 @@ namespace BankDatabaseImplement.Implements
             {
                 var clientDeposits = context.ClientDeposits.Where(rec => rec.DepositId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.ClientDeposits.RemoveRange(clientDeposits.Where(rec => !model.DepositClients.ContainsKey(rec.ClientId)).ToList());
+                context.ClientDeposits.RemoveRange(clientDeposits.Where(rec => !model.ClientDeposits.ContainsKey(rec.ClientId)).ToList());
                 context.SaveChanges();
             }
             // добавили новые
-            foreach (var cd in model.DepositClients)
+            foreach (var cd in model.ClientDeposits)
             {
                 context.ClientDeposits.Add(new ClientDeposit
                 {

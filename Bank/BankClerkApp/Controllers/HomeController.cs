@@ -218,7 +218,7 @@ namespace BankClerkApp.Controllers
                 {
                     DepositName = depositName,
                     DepositInterest = depositInterest,
-                    DepositClients = new Dictionary<int, string>(),
+                    ClientDeposits = new Dictionary<int, string>(),
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Deposit");
@@ -249,7 +249,7 @@ namespace BankClerkApp.Controllers
                     Id = deposit.Id,
                     DepositName = depositName,
                     DepositInterest = depositInterest,
-                    DepositClients = deposit.DepositClients,
+                    ClientDeposits = deposit.DepositClients,
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Deposit");
