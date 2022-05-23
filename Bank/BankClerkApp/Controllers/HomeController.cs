@@ -357,7 +357,13 @@ namespace BankClerkApp.Controllers
         {
             if(depositId!=0 && clientsId != null)
             {
-
+                APIClerk.PostRequest("api/deposit/AddDepositClients", new AddClientsBindingModel
+                {
+                    DepositId = depositId,
+                    ClientsId = clientsId
+                });
+                Response.Redirect("Deposit");
+                return;
             }
             throw new Exception("Выберите вклад и клиентов");
         }

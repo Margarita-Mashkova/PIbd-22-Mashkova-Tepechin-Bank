@@ -28,5 +28,8 @@ namespace BankRestApi.Controllers
 
         [HttpPost]
         public void DeleteDeposit(DepositBindingModel model) => _depositLogic.Delete(model);
+
+        [HttpPost]
+        public void AddDepositClients(AddClientsBindingModel model) => _depositLogic.AddClients(model);
     }
 }

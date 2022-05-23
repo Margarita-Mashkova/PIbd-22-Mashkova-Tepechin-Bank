@@ -97,8 +97,7 @@ namespace BankBusinessLogic.BusinessLogics
                 Id = deposit.Id,
                 DepositName = deposit.DepositName,
                 DepositInterest = deposit.DepositInterest,
-                //TODO: может не работать!!!
-                //ClerkId = deposit.ClerkId,
+                ClerkId = deposit.ClerkId,
                 DepositClients = deposit.DepositClients
             });
         }

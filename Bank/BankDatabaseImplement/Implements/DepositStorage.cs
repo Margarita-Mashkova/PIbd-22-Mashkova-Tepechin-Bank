@@ -138,6 +138,7 @@ namespace BankDatabaseImplement.Implements
             return new DepositViewModel
             {
                 Id = deposit.Id,
+                ClerkId = deposit.ClerkId,
                 DepositName = deposit.DepositName,
                 DepositInterest = deposit.DepositInterest,
                 DepositClients = deposit.DepositClients
