@@ -127,9 +127,9 @@ namespace BankDatabaseImplement.Implements
             client.DateVisit = model.DateVisit;
             if (model.Id.HasValue)
             {
+                // получам текущие записи
                 var clientLoanPrograms = context.ClientLoanPrograms.Where(rec => rec.ClientId == model.Id.Value).ToList();
-                // удалили те, которых нет в модели
-                context.ClientLoanPrograms.RemoveRange(clientLoanPrograms.Where(rec => !model.ClientLoanPrograms.ContainsKey(rec.LoanProgramId)).ToList());
+                context.ClientLoanPrograms.RemoveRange(clientLoanPrograms);
                 context.SaveChanges();
             }
             // добавили новые

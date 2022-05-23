@@ -151,33 +151,39 @@ namespace BankClerkApp.Controllers
         public IActionResult ClientUpdate(int clientId)
         {
             ViewBag.Client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
+            ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("api/client/GetLoanProgramList");
             return View();
         }
 
         [HttpPost]
-        public void ClientUpdate(int clientId, string clientFIO, string passport, string telephone)
+        public void ClientUpdate(int clientId, string clientFIO, string passport, string telephone, List<int> loanProgramsId)
         {
-            if (!string.IsNullOrEmpty(clientFIO) && !string.IsNullOrEmpty(passport) && !string.IsNullOrEmpty(telephone))
+            if (!string.IsNullOrEmpty(clientFIO) && !string.IsNullOrEmpty(passport) && !string.IsNullOrEmpty(telephone) && loanProgramsId!=null)
             {
                 var client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
                 if (client == null)
                 {
                     return;
                 }
+                List<LoanProgramViewModel> loanPrograms = new List<LoanProgramViewModel>();
+                foreach (var loanProgramId in loanProgramsId)
+                {
+                    loanPrograms.Add(APIClerk.GetRequest<LoanProgramViewModel>($"api/client/GetLoanProgram?loanProgramId={loanProgramId}"));
+                }
                 APIClerk.PostRequest("api/client/CreateOrUpdateClient", new ClientBindingModel
                 {
-                    Id = client.Id,                    
+                    Id = client.Id,
                     ClientFIO = clientFIO,
                     PassportData = passport,
                     TelephoneNumber = telephone,
                     DateVisit = DateTime.Now,
-                    ClientLoanPrograms = client.ClientLoanPrograms,
+                    ClientLoanPrograms = loanPrograms.ToDictionary(x => x.Id, x => x.LoanProgramName),
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Client");
                 return;
             }
-            throw new Exception("Введите ФИО, паспортные данные и номер телефона");
+            throw new Exception("Введите ФИО, паспортные данные, номер телефона и выберите кредитную программу");
         }
 
         //TODO: Починить удаление
