@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "ClientsCurrencyReport";
+}
+<div class="text-center">
+    <h5 class="display-4" style="font-size: 30px;">Список валют по выбранным клиентам</h5>
+</div>
+
+<div class="text-center">
+    <h5 class="display-4" style="font-size: 24px; margin-bottom: 30px">Выберите клиентов для отчета:</h5>
+</div>
+
+<form method="post">
+<div class="row">
+        <div class="col-4" style="align-self:center" >Клиенты:</div>
+        <div class="col-8">
+            @foreach (var item in ViewBag.Clients)
+                {
+                    <input type="checkbox" id="clientsId" name="clientsId" multiple="multiple" value="@item.Id" /> @item.ClientFIO<Br>
+                }           
+        </div>
+        <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Word" class="btn btn-primary" asp-action="CreateReportClientCurrencyToWordFile" style="margin-top:20px; padding-right: 40px; padding-left: 40px"/>
+            <input type="submit" value="Excel" class="btn btn-primary" asp-action="CreateReportClientCurrencyToExcelFile" style="margin-top:20px; padding-right: 40px; padding-left: 40px;"/>
+        </div>
+    </div>
+</div>
+</form>

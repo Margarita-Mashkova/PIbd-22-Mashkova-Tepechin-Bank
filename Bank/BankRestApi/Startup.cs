@@ -1,4 +1,6 @@
 ﻿using BankBusinessLogic.BusinessLogics;
+using BankBusinessLogic.OfficePackage;
+using BankBusinessLogic.OfficePackage.Implements;
 using BankContracts.BusinessLogicsContracts;
 using BankContracts.StoragesContracts;
 using BankDatabaseImplement.Implements;
@@ -32,7 +34,11 @@ namespace BankRestApi
             services.AddTransient<IManagerLogic, ManagerLogic>();
             services.AddTransient<IReplenishmentLogic, ReplenishmentLogic>();
             services.AddTransient<ITermLogic, TermLogic>();
-            //services.AddTransient<IReportLogic, ReportLogic>();
+            services.AddTransient<IReportLogic, ReportLogic>();
+            services.AddTransient<AbstractSaveToWord, SaveToWord>();
+            services.AddTransient<AbstractSaveToExcel, SaveToExcel>();
+            services.AddTransient<AbstractSaveToPdf, SaveToPdf>();
+
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>

@@ -24,6 +24,10 @@
 	  <Resource Include="Views\Resources\bank.jpg" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\ReportClientCurrency\" />
+	</ItemGroup>
+
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties properties_4launchsettings_1json__JsonSchema="" />

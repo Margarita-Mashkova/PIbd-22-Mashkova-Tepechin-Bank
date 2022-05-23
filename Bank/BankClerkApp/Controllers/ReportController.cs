@@ -1,32 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BankContracts.BindingModels;
+using BankContracts.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BankClerkApp.Controllers
 {
     public class ReportController : Controller
     {
         private readonly ILogger<ReportController> _logger;
+        private readonly IWebHostEnvironment _environment;
 
-        public ReportController(ILogger<ReportController> logger)
+        public ReportController(ILogger<ReportController> logger, IWebHostEnvironment environment)
         {
             _logger = logger;
+            _environment = environment;
         }
 
-        public IActionResult ReportWord()
+        public IActionResult ReportWordExcel()
         {            
             if (Program.Clerk == null)
             {
                 return Redirect("~/Home/Enter");
             }
+            ViewBag.Clients = APIClerk.GetRequest<List<ClientViewModel>>($"api/clerk/GetClerkClientList?clerkId={Program.Clerk.Id}");
             return View();
         }
 
-        public IActionResult ReportExcel()
+        [HttpPost]
+        public IActionResult CreateReportClientCurrencyToWordFile(List<int> clientsId)
         {
-            if (Program.Clerk == null)
+            var model = new ReportBindingModel();
+            foreach (var clientId in clientsId)
             {
-                return Redirect("~/Home/Enter");
+                var client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
+                model.Clients.Add(client);
             }
-            return View();
+            model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientCurrencyDoc.doc";
+            APIClerk.PostRequest("api/report/CreateReportClientCurrencyToWordFile", model);
+            var fileName = "ReportClientCurrencyDoc.doc";
+            var filePath = _environment.WebRootPath + @"\ReportClientCurrency\" + fileName;
+            return PhysicalFile(filePath, "application/doc", fileName);
         }
 
         public IActionResult ReportPDF()
@@ -36,7 +48,6 @@ namespace BankClerkApp.Controllers
                 return Redirect("~/Home/Enter");
             }
             return View();
-        }
-
+        }        
     }
 }
