@@ -152,6 +152,16 @@ namespace BankClerkApp.Controllers
         {
             ViewBag.Client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
             ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("api/client/GetLoanProgramList");
+            var Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
+            var clientDeposits = new List<DepositViewModel>();
+            foreach (var dep in Deposits)
+            {
+                if (dep.DepositClients.ContainsKey(clientId))
+                {
+                    clientDeposits.Add(dep);
+                }
+            }
+            ViewBag.ClientDeposits = clientDeposits;
             return View();
         }
 

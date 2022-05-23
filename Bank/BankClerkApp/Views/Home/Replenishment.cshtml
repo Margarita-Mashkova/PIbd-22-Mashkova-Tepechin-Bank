@@ -19,7 +19,7 @@
         <p>
             <a class="btn btn-success" asp-action="ReplenishmentCreate">Создать пополнение</a>
         </p>
-        <table class="table">
+        <table id="listingTable" class="table">
             <thead>
                 <tr>
                     <th>
@@ -66,5 +66,7 @@
                 }
             </tbody>
         </table>
+        <button onclick="prevPage()" id="btn_prev" class="btn btn-primary">Предыдущая</button>
+        <button onclick="nextPage()" id="btn_next" class="btn btn-primary">Следующая</button>
     }
 </div>
