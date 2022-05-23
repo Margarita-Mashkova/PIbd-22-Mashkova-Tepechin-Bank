@@ -186,13 +186,12 @@ namespace BankClerkApp.Controllers
             throw new Exception("Введите ФИО, паспортные данные, номер телефона и выберите кредитную программу");
         }
 
-        //TODO: Починить удаление
-        [HttpPost]
+        [HttpGet]
         public void ClientDelete(int clientId)
         {
             var client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
-            APIClerk.PostRequest("api/cleint/DeleteClient", client);
-            Response.Redirect("Index");
+            APIClerk.PostRequest("api/client/DeleteClient", client);
+            Response.Redirect("Client");
         }
 
         public IActionResult Deposit()
@@ -219,7 +218,7 @@ namespace BankClerkApp.Controllers
                 {
                     DepositName = depositName,
                     DepositInterest = depositInterest,
-                    ClientDeposits = new Dictionary<int, string>(),
+                    DepositClients = new Dictionary<int, string>(),
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Deposit");
@@ -250,13 +249,21 @@ namespace BankClerkApp.Controllers
                     Id = deposit.Id,
                     DepositName = depositName,
                     DepositInterest = depositInterest,
-                    ClientDeposits = deposit.DepositClients,
+                    DepositClients = deposit.DepositClients,
                     ClerkId = Program.Clerk.Id
                 });
                 Response.Redirect("Deposit");
                 return;
             }
             throw new Exception("Введите наименование вклада и процентную ставку");
+        }
+
+        [HttpGet]
+        public void DepositDelete(int depositId)
+        {
+            var deposit = APIClerk.GetRequest<DepositViewModel>($"api/deposit/GetDeposit?depositId={depositId}");
+            APIClerk.PostRequest("api/deposit/DeleteDeposit", deposit);
+            Response.Redirect("Deposit");
         }
 
         public IActionResult Replenishment()
@@ -324,6 +331,14 @@ namespace BankClerkApp.Controllers
                 return;
             }
             throw new Exception("Введите сумму пополнения и выберите вклад");
+        }
+
+        [HttpGet]
+        public void ReplenishmentDelete(int replenishmentId)
+        {
+            var replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
+            APIClerk.PostRequest("api/replenishment/DeleteReplenishment", replenishment);
+            Response.Redirect("Replenishment");
         }
     }
 }
