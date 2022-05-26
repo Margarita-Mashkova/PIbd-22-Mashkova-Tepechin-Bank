@@ -29,10 +29,15 @@ namespace BankClerkApp.Controllers
             return View();
         }
 
+        public IActionResult ReportWordExcelSaved()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult CreateReportClientCurrencyToWordFile(List<int> clientsId)
         {
-            if (clientsId != null)
+            if (clientsId.Count != 0)
             {
                 var model = new ReportBindingModel
                 {
@@ -45,10 +50,7 @@ namespace BankClerkApp.Controllers
                 }
                 model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientCurrencyDoc.doc";
                 APIClerk.PostRequest("api/report/CreateReportClientCurrencyToWordFile", model);
-                var fileName = "ReportClientCurrencyDoc.doc";
-                var filePath = _environment.WebRootPath + @"\ReportClientCurrency\" + fileName;
-                return Redirect("ReportWordExcel");
-                //Response.Redirect(PhysicalFile(filePath, "application/doc", fileName));
+                return Redirect("ReportWordExcelSaved");
             }
             throw new Exception("Выберите хотя бы одного клиента");
         }
@@ -56,7 +58,7 @@ namespace BankClerkApp.Controllers
         [HttpPost]
         public IActionResult CreateReportClientCurrencyToExcelFile(List<int> clientsId)
         {
-            if (clientsId != null)
+            if (clientsId.Count != 0)
             {
                 var model = new ReportBindingModel
                 {
@@ -69,9 +71,7 @@ namespace BankClerkApp.Controllers
                 }
                 model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientCurrencyExcel.xls";
                 APIClerk.PostRequest("api/report/CreateReportClientCurrencyToExcelFile", model);
-                var fileName = "ReportClientCurrencyExcel.xls";
-                var filePath = _environment.WebRootPath + @"\ReportClientCurrency\" + fileName;
-                return PhysicalFile(filePath, "application/xls", fileName);
+                return Redirect("ReportWordExcelSaved");
             }
             throw new Exception("Выберите хотя бы одного клиента");
         }
@@ -109,7 +109,7 @@ namespace BankClerkApp.Controllers
                 Subject = "Отчет по клиентам. Банк \"Вы банкрот\"",
                 Text = "Отчет по клиентам с " + dateFrom.ToShortDateString() + " по " + dateTo.ToShortDateString() +
                 "\nРуководитель - " + Program.Clerk.ClerkFIO,
-                FileName = model.FileName,
+                FileName = model.FileName
             });
             return View();
         }
