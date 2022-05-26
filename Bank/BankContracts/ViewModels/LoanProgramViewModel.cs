@@ -19,6 +19,20 @@ namespace BankContracts.ViewModels
 
         [DisplayName("Валюты")]
         public Dictionary<int, (string, decimal)> LoanProgramCurrencies { get; set; }
+        public string PrettyCurrencies
+        {
+            get
+            {
+                string stringCurrencies = string.Empty;
+                if (LoanProgramCurrencies != null)
+                {
+                    stringCurrencies = string.Join("; ", LoanProgramCurrencies.Select(dep => dep.Value.Item1 + ": " + dep.Value.Item2));
+
+                }
+                return stringCurrencies;
+            }
+            set { }
+        }
 
     }
 }

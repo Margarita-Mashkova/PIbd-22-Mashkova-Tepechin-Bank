@@ -1,26 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BankBusinessLogic.BusinessLogics;
+﻿using BankBusinessLogic.BusinessLogics;
 using BankBusinessLogic.OfficePackage;
 using BankBusinessLogic.OfficePackage.Implements;
 using BankContracts.BusinessLogicsContracts;
 using BankContracts.StoragesContracts;
 using BankContracts.ViewModels;
 using BankDatabaseImplement.Implements;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using Unity;
 using Unity.Lifetime;
 
-namespace BankView
+namespace BankViewManager
 {
-    static class Program
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
     {
         private static IUnityContainer container = null;
-        public static ClerkViewModel Clerk;
         public static ManagerViewModel Manager;
-        
         public static IUnityContainer Container
         {
             get
@@ -32,16 +35,11 @@ namespace BankView
                 return container;
             }
         }
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        protected override void OnStartup(StartupEventArgs e)
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(Container.Resolve<FormManagerAuthorization>());
+            base.OnStartup(e);
+            AuthorizationWindow authorizationWindow = Container.Resolve<AuthorizationWindow>();
+            authorizationWindow.ShowDialog();
         }
         private static IUnityContainer BuildUnityContainer()
         {

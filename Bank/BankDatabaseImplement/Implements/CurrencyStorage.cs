@@ -59,9 +59,8 @@ namespace BankDatabaseImplement.Implements
             .Include(rec => rec.DepositCurrencies)
             .ThenInclude(rec => rec.Deposit)
             .Include(rec => rec.Manager)
-            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateAdding.Date == model.DateAdding.Date) ||
-            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateAdding.Date >= model.DateFrom.Value.Date && rec.DateAdding.Date <= model.DateTo.Value.Date) ||
-            (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId))
+            .Where(rec => (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateAdding.Date >= model.DateFrom.Value.Date && rec.DateAdding.Date <= model.DateTo.Value.Date && 
+            model.ManagerId.HasValue && rec.ManagerId == model.ManagerId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -124,25 +123,33 @@ namespace BankDatabaseImplement.Implements
         {
             currency.CurrencyName = model.CurrencyName;
             currency.RubExchangeRate = model.RubExchangeRate;
-            currency.ManagerId = (int)model.ManagerId;
+            currency.ManagerId = (int)model.ManagerId.GetValueOrDefault(currency.ManagerId);
             currency.DateAdding = model.DateAdding;
             if (model.Id.HasValue)
             {
-                var currencyDeposit = context.DepositCurrencies.Where(rec => rec.DepositId == model.Id.Value).ToList();
+                var currencyDeposit = context.DepositCurrencies.Where(rec => rec.CurrencyId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.DepositCurrencies.RemoveRange(currencyDeposit.Where(rec => !model.CurrencyDeposits.ContainsKey(rec.DepositId)).ToList());
+                context.DepositCurrencies.RemoveRange(currencyDeposit.Where(rec => !model.CurrencyDeposits.ContainsKey(rec.DepositId)));
                 context.SaveChanges();
             }
             // добавили новые
-            foreach (var cd in model.CurrencyDeposits)
+            if (model.CurrencyDeposits != null)
             {
-                context.DepositCurrencies.Add(new DepositCurrency
+                foreach (var cd in model.CurrencyDeposits)
                 {
-                    DepositId = cd.Key,
-                    CurrencyId = currency.Id,
-                });
-                context.SaveChanges();
+                    var depCur = context.DepositCurrencies.SingleOrDefault(rec => rec.DepositId == cd.Key && rec.CurrencyId == currency.Id);
+                    if (depCur == null)
+                    {
+                        context.DepositCurrencies.Add(new DepositCurrency
+                        {
+                            DepositId = cd.Key,
+                            CurrencyId = currency.Id,
+                        });
+                        context.SaveChanges();
+                    }
+                }
             }
+            
             return currency;
         }
         private static CurrencyViewModel CreateModel(Currency currency)

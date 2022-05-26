@@ -37,8 +37,8 @@ namespace BankBusinessLogic.OfficePackage
                     
                     Texts = new List<string> { currency.DateAdding.ToShortDateString(),
                                                 currency.CurrencyName,
-                                                string.Join(", ",currency.LoanPrograms.Select(lp => lp.LoanProgramName).ToList()),
-                                                string.Join(", ",currency.Deposits.Select(dep => dep.DepositName).ToList())},
+                                                currency.LoanPrograms,
+                                                currency.Deposits},
                     Style = "Normal",
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });

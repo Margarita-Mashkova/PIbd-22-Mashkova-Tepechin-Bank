@@ -20,6 +20,8 @@ namespace BankDatabaseImplement.Implements
             model.Id);
             if (element != null)
             {
+                context.LoanProgramCurrencies.RemoveRange(context.LoanProgramCurrencies.Where(rec => rec.LoanProgramId == element.Id));
+                context.SaveChanges();
                 context.LoanPrograms.Remove(element);
                 context.SaveChanges();
             }

@@ -11,7 +11,7 @@ namespace BankContracts.ViewModels
     {
         public string CurrencyName { get; set; }
         public DateTime DateAdding { get; set; }
-        public List<DepositViewModel> Deposits { get; set; }
-        public List<LoanProgramViewModel> LoanPrograms { get; set; }
+        public string Deposits { get; set; }
+        public string LoanPrograms { get; set; }
     }
 }

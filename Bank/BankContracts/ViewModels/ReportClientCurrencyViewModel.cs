@@ -11,6 +11,6 @@ namespace BankContracts.ViewModels
     {
         public string ClientFIO { get; set; }
         public string LoanProgramName { get; set; }
-        public List<Tuple<string>> Currencies { get; set; }
+        public List<string> Currencies { get; set; }
     }
 }

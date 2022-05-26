@@ -1,0 +1,30 @@
+﻿<Window x:Class="BankViewManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankViewManager"
+        mc:Ignorable="d"
+        Icon="Resources/bankLogo.png"
+        FontFamily="Rubik"
+        Title="Главная" Height="450" Width="800"
+        UseLayoutRounding="True">
+    <Grid>
+        <Image Width="300">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="300"  
+     UriSource="Resources\bankLogo.png" />
+            </Image.Source>
+        </Image>
+
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Center"  FontFamily="Rubik" FontWeight="UltraLight" Height="40" Width="800" FontSize="16" BorderBrush="LightBlue" BorderThickness="2" Background="White">
+            <MenuItem x:Name="menuItemCurrency" Header="Валюты" Height="39" Click="menuItemCurrency_Click" BorderThickness="1" BorderBrush="White" Background="Aqua"/>
+            <MenuItem x:Name="menuItemLoanProgram" Header="Кредитные программы" Click="menuItemLoanProgram_Click"  BorderThickness="1" BorderBrush="White" Background="Aqua" />
+            <MenuItem x:Name="menuItemTerm" Header="Сроки" Click="menuItemTerm_Click"  BorderThickness="1" BorderBrush="White" Background="Aqua"/>
+            <MenuItem x:Name="menuItemGetList" Header="Получение списка" Click="menuItemGetList_Click"  BorderThickness="1" BorderBrush="White" Background="Aqua"/>
+            <MenuItem x:Name="menuItemReport" Header="Отчёт" Click="menuItemReport_Click" BorderThickness="1" BorderBrush="White" Background="Aqua" />
+            <MenuItem x:Name="menuItemBindCurrency" Header="Привязать валюту" Click="menuItemBindCurrency_Click" BorderThickness="1" BorderBrush="White" Background="Aqua" />
+        </Menu>
+
+    </Grid>
+</Window>

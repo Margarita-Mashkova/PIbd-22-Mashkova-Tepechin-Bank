@@ -1,0 +1,19 @@
+﻿<Window x:Class="BankViewManager.ReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:BoldReports="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
+        mc:Ignorable="d"
+        Icon="Resources/bankLogo.png"
+        FontFamily="Rubik"
+        Title="Отчёт" Height="600" Width="800">
+    <Grid>
+        <BoldReports:ReportViewer Name ="ReportViewer" Margin="0,100,0,0"></BoldReports:ReportViewer>
+        <Label Content="С" HorizontalAlignment="Left" Margin="77,37,0,0" VerticalAlignment="Top"/>
+        <Label Content="по" HorizontalAlignment="Left" Margin="285,37,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePickerStart" HorizontalAlignment="Left" Margin="100,38,0,0" VerticalAlignment="Top" Width="180"/>
+        <DatePicker x:Name="datePickerEnd" HorizontalAlignment="Left" Margin="314,38,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="buttonMake" Content="Показать" HorizontalAlignment="Left" Margin="530,37,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="buttonMake_Click"/>
+        <Button x:Name="buttonSendMail" Content="На почту" HorizontalAlignment="Left" Margin="635,38,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="buttonSendMail_Click"/>
+    </Grid>
+</Window>

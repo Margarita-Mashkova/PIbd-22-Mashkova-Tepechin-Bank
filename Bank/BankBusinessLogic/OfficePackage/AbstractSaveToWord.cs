@@ -78,7 +78,7 @@ namespace BankBusinessLogic.OfficePackage
                 {
                     CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<(string, WordTextProperties)> { (cur.Item1, new WordTextProperties { Size = "24", Bold = true })},
+                        Texts = new List<(string, WordTextProperties)> { (cur, new WordTextProperties { Size = "24", Bold = true })},
                         TextProperties = new WordTextProperties
                         {
                             Size = "24",

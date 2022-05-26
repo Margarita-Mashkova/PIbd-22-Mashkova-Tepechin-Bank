@@ -27,12 +27,10 @@ namespace BankView
 
         private void buttonLink_Click(object sender, EventArgs e)
         {
-            /*TODO: Сделать привязку
+            
             CurrencyViewModel view = _logicC.Read(new CurrencyBindingModel { Id = ((CurrencyBindingModel)comboBoxCurrency.SelectedItem).Id })?[0];
             currencyDeposits = view.CurrencyDeposits;
-            checkedListBoxDeposits.CheckedItems
-            currencyDeposits.Add();
-            
+            currencyDeposits.Add(listBox.)
             _logicC.CreateOrUpdate(new CurrencyBindingModel
             {
                 Id = view.Id,
@@ -42,7 +40,7 @@ namespace BankView
                 CurrencyDeposits = checkedListBoxDeposits.CheckedItems.Cast()
                 
             });
-            */
+            
             if (comboBoxCurrency.SelectedValue == null)
             {
                 MessageBox.Show("Выберите валюту", "Ошибка", MessageBoxButtons.OK,

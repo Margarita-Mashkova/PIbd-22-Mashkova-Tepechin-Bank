@@ -21,5 +21,19 @@ namespace BankContracts.ViewModels
         public DateTime DateAdding { get; set; }
         [DisplayName("Вклады")]
         public Dictionary<int, (string, decimal)> CurrencyDeposits { get; set; }
+        public string PrettyDeposits { 
+            get
+            {
+                string stringDeposits = string.Empty;
+                if (CurrencyDeposits != null)
+                {
+                    stringDeposits = string.Join("; ", CurrencyDeposits.Select(dep => dep.Value.Item1 + ": " + dep.Value.Item2));
+                    
+                }
+                return stringDeposits;
+            }
+            set { }
+        }
+        
     }
 }

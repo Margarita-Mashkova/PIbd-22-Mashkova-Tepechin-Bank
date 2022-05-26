@@ -45,18 +45,23 @@ namespace BankBusinessLogic.BusinessLogics
                 var record = new ReportClientCurrencyViewModel
                 {
                     ClientFIO = client.ClientFIO,
-                    Currencies = new List<Tuple<string>>(),
-                    LoanProgramName = string.Empty
+                    Currencies = new List<string>()
                 };
                 foreach (var loanProgramKVP in client.ClientLoanPrograms)
                 {
                     var lp = _loanProgramStorage.GetElement(new LoanProgramBindingModel { Id = loanProgramKVP.Key });
                     foreach (var currency in lp.LoanProgramCurrencies)
                     {
-                        record.Currencies.Add(new Tuple<string>(currency.Value.Item1));
-                        record.LoanProgramName = lp.LoanProgramName;
+                        record.Currencies.Add(currency.Value.Item1);
                     }
                 }
+                var deposits = _depositStorage.GetFullList().Where(rec => rec.DepositClients.Keys.ToList().Contains(client.Id)).ToList();
+                foreach (var deposit in deposits)
+                {
+                    var currencies = _currencyStorage.GetFullList().Where(rec => rec.CurrencyDeposits.Keys.ToList().Contains(deposit.Id)).ToList();
+                    record.Currencies.AddRange(currencies.Select(cur => cur.CurrencyName));
+                }
+                record.Currencies = record.Currencies.Distinct().ToList();
                 list.Add(record);
             }
             return list;
@@ -92,6 +97,7 @@ namespace BankBusinessLogic.BusinessLogics
 
         public List<ReportCurrenciesViewModel> GetCurrencies(ReportBindingModel model)
         {
+
             var list = new List<ReportCurrenciesViewModel>();
             var currencies = _currencyStorage.GetFilteredList(new CurrencyBindingModel
             {
@@ -101,20 +107,22 @@ namespace BankBusinessLogic.BusinessLogics
             });
             foreach (var currency in currencies)
             {
+                var DepositList = new List<DepositViewModel>();
                 var record = new ReportCurrenciesViewModel
                 {
                     CurrencyName = currency.CurrencyName,
                     DateAdding = currency.DateAdding,
-                    Deposits = new List<DepositViewModel>(),
-                    LoanPrograms = new List<LoanProgramViewModel>()
+                    Deposits = string.Empty,
+                    LoanPrograms = string.Empty,
                 };
                 foreach (var depositKVP in currency.CurrencyDeposits)
                 {
                     var deposit = _depositStorage.GetElement(new DepositBindingModel { Id = depositKVP.Key });
-                    record.Deposits.Add(deposit);
+                    DepositList.Add(deposit);
                 }
-                record.LoanPrograms = _loanProgramStorage.GetFullList()
-                    .Where(rec => rec.LoanProgramCurrencies.Keys.ToList().Contains(currency.Id)).ToList();
+                record.Deposits = string.Join(", ", DepositList.Select(dep=>dep.DepositName));
+                record.LoanPrograms = string.Join(", ",_loanProgramStorage.GetFullList()
+                    .Where(rec => rec.LoanProgramCurrencies.Keys.ToList().Contains(currency.Id)).ToList().Select(lp => lp.LoanProgramName).ToList());
                 list.Add(record);
             }
 

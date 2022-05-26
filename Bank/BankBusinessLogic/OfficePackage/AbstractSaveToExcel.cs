@@ -90,14 +90,14 @@ namespace BankBusinessLogic.OfficePackage
                     {
                         ColumnName = "B",
                         RowIndex = rowIndex,
-                        Text = dep.Item1,
+                        Text = dep,
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = dep.Item1,
+                        Text = dep,
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     rowIndex++;
