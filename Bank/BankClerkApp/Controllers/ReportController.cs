@@ -1,4 +1,5 @@
-﻿using BankContracts.BindingModels;
+﻿using BankBusinessLogic.Mail;
+using BankContracts.BindingModels;
 using BankContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
@@ -9,11 +10,13 @@ namespace BankClerkApp.Controllers
     {
         private readonly ILogger<ReportController> _logger;
         private readonly IWebHostEnvironment _environment;
+        private readonly MailKitWorker _mailKitWorker;
 
-        public ReportController(ILogger<ReportController> logger, IWebHostEnvironment environment)
+        public ReportController(ILogger<ReportController> logger, IWebHostEnvironment environment, MailKitWorker mailKitWorker)
         {
             _logger = logger;
             _environment = environment;
+            _mailKitWorker = mailKitWorker;
         }
 
         public IActionResult ReportWordExcel()
@@ -91,8 +94,23 @@ namespace BankClerkApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendReportOnMail()
+        public IActionResult SendReportOnMail(DateTime dateFrom, DateTime dateTo)
         {
+            var model = new ReportBindingModel
+            {
+                DateFrom = dateFrom,
+                DateTo = dateTo
+            };
+            model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientsPdf.pdf";
+            APIClerk.PostRequest("api/report/CreateReportClientsToPdfFile", model);
+            _mailKitWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = Program.Clerk.Email,
+                Subject = "Отчет по клиентам. Банк \"Вы банкрот\"",
+                Text = "Отчет по клиентам с " + dateFrom.ToShortDateString() + " по " + dateTo.ToShortDateString() +
+                "\nРуководитель - " + Program.Clerk.ClerkFIO,
+                FileName = model.FileName,
+            });
             return View();
         }
     }

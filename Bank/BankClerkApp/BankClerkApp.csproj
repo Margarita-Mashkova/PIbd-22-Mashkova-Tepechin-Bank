@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BankBusinessLogic\BankBusinessLogic.csproj" />
     <ProjectReference Include="..\BankContracts\BankContracts.csproj" />
   </ItemGroup>
 

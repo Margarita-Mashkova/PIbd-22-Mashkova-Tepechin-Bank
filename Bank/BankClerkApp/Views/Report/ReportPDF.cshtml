@@ -15,7 +15,7 @@
         </p>
         <p>
             <input type="submit" asp-route-dateFrom="dateFrom" asp-route-dateTo="dateTo" asp-action="ReportGetClientsPDF" value="Вывести на форму"/>
-            <button type="submit" asp-route-dateFrom="dateFrom" asp-route-dateTo="dateTo" asp-action="SendReportOnMail">Отправить на почту</button>            
+            <input type="submit" asp-route-dateFrom="dateFrom" asp-route-dateTo="dateTo" asp-action="SendReportOnMail" value="Отправить на почту" />            
         </p>
         @if(ViewBag.Report != null){
             string period = ViewBag.Period;
@@ -62,7 +62,7 @@
                                     currencies += cur.CurrencyName + ", ";
                             }                            
                         <td>
-                            @currencies
+                            @currencies[0..^2]
                         </td>
                     </tr>
                     }
