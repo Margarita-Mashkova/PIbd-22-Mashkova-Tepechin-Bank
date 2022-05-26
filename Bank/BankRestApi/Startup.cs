@@ -39,7 +39,6 @@ namespace BankRestApi
             services.AddTransient<AbstractSaveToExcel, SaveToExcel>();
             services.AddTransient<AbstractSaveToPdf, SaveToPdf>();
 
-
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {

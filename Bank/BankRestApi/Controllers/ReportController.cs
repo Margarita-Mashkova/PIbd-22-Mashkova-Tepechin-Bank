@@ -28,16 +28,5 @@ namespace BankRestApi.Controllers
 
         [HttpGet]
         public List<ReportClientsViewModel> GetClientsReport(string dateFrom, string dateTo) => _reportLogic.GetClients(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
-
-        [HttpGet]
-        public ReportBindingModel GetClientsForReport(int ClerkId)
-        {
-            return new ReportBindingModel
-            {
-                ClerkId = ClerkId,
-                Clients = _clientLogic.Read(new ClientBindingModel { ClerkId = ClerkId })
-            };
-        }
-
     }
 }
