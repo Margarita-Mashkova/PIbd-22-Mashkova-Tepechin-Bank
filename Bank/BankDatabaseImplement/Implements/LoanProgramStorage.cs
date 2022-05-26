@@ -61,7 +61,7 @@ namespace BankDatabaseImplement.Implements
             .ThenInclude(rec => rec.Client)
             .Include(rec => rec.LoanProgramCurrencies)
             .ThenInclude(rec => rec.Currency)
-            .Where(rec => rec.LoanProgramName.Contains(model.LoanProgramName))
+            .Where(rec => (rec.LoanProgramName.Contains(model.LoanProgramName)) || (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId))
             .ToList()
             .Select(CreateModel)
             .ToList();

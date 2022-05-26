@@ -59,8 +59,8 @@ namespace BankDatabaseImplement.Implements
             .Include(rec => rec.DepositCurrencies)
             .ThenInclude(rec => rec.Deposit)
             .Include(rec => rec.Manager)
-            .Where(rec => (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateAdding.Date >= model.DateFrom.Value.Date && rec.DateAdding.Date <= model.DateTo.Value.Date && 
-            model.ManagerId.HasValue && rec.ManagerId == model.ManagerId))
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.ManagerId == model.ManagerId) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateAdding.Date >= model.DateFrom.Value.Date && rec.DateAdding.Date <= model.DateTo.Value.Date && (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId)))
             .ToList()
             .Select(CreateModel)
             .ToList();

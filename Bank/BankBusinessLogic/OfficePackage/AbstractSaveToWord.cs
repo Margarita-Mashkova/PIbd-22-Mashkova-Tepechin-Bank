@@ -38,8 +38,8 @@ namespace BankBusinessLogic.OfficePackage
                 {
                     CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<(string, WordTextProperties)> { (dep.Item1, new WordTextProperties { Size = "24", Bold = true }),
-                                                                         (dep.Item2.ToString(), new WordTextProperties { Size = "24", Bold = true })},
+                        Texts = new List<(string, WordTextProperties)> { (dep.Item1, new WordTextProperties { Size = "24", Bold = false }),
+                                                                         (": "+dep.Item2.ToString(), new WordTextProperties { Size = "24", Bold = false })},
                         TextProperties = new WordTextProperties
                         {
                             Size = "24",

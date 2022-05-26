@@ -11,8 +11,9 @@
     <Grid>
         <Label Content="Отправить на" HorizontalAlignment="Left" Margin="127,48,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Margin="228,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="buttonSend" Content="Отправить отчёт" HorizontalAlignment="Left" Margin="127,120,0,0" VerticalAlignment="Top" Width="115" Height="25" Click="buttonSend_Click"/>
-        <Button x:Name="buttonCancel" Content="Назад" HorizontalAlignment="Left" Margin="341,120,0,0" VerticalAlignment="Top" Width="115" Height="25" Click="buttonCancel_Click"/>
+        <Button x:Name="buttonSend" Content="Отправить на указанную почту" HorizontalAlignment="Left" Margin="55,120,0,0" VerticalAlignment="Top" Width="187" Height="25" Click="buttonSend_Click"/>
+        <Button x:Name="buttonCancel" Content="Назад" HorizontalAlignment="Left" Margin="412,120,0,0" VerticalAlignment="Top" Width="115" Height="25" Click="buttonCancel_Click"/>
+        <Button x:Name="buttonSendToMe" Content="Отправить себе" HorizontalAlignment="Left" Margin="269,120,0,0" VerticalAlignment="Top" Width="115" Height="25" Click="buttonSendToMe_Click"/>
 
     </Grid>
 </Window>
