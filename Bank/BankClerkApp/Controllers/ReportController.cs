@@ -29,11 +29,6 @@ namespace BankClerkApp.Controllers
             return View();
         }
 
-        public IActionResult ReportWordExcelSaved()
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult CreateReportClientCurrencyToWordFile(List<int> clientsId)
         {
@@ -50,7 +45,9 @@ namespace BankClerkApp.Controllers
                 }
                 model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientCurrencyDoc.doc";
                 APIClerk.PostRequest("api/report/CreateReportClientCurrencyToWordFile", model);
-                return Redirect("ReportWordExcelSaved");
+                var fileName = "ReportClientCurrencyDoc.doc";
+                var filePath = _environment.WebRootPath + @"\ReportClientCurrency\" + fileName;
+                return PhysicalFile(filePath, "application/doc", fileName);
             }
             throw new Exception("Выберите хотя бы одного клиента");
         }
@@ -62,8 +59,7 @@ namespace BankClerkApp.Controllers
             {
                 var model = new ReportBindingModel
                 {
-                    Clients = new List<ClientViewModel>(),
-                    LoanPrograms = new List<LoanProgramViewModel>()
+                    Clients = new List<ClientViewModel>()
                 };
                 foreach (var clientId in clientsId)
                 {
@@ -71,7 +67,9 @@ namespace BankClerkApp.Controllers
                 }
                 model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientCurrencyExcel.xls";
                 APIClerk.PostRequest("api/report/CreateReportClientCurrencyToExcelFile", model);
-                return Redirect("ReportWordExcelSaved");
+                var fileName = "ReportClientCurrencyExcel.xls";
+                var filePath = _environment.WebRootPath + @"\ReportClientCurrency\" + fileName;
+                return PhysicalFile(filePath, "application/xls", fileName);
             }
             throw new Exception("Выберите хотя бы одного клиента");
         }
