@@ -111,7 +111,7 @@ namespace BankClerkApp.Controllers
                 "\nРуководитель - " + Program.Clerk.ClerkFIO,
                 FileName = model.FileName,
             });
-            return View("ReportPdf");
+            return View();
         }
     }
 }
