@@ -1,6 +1,7 @@
 ﻿using BankContracts.BindingModels;
 using BankContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace BankClerkApp.Controllers
 {
@@ -16,7 +17,7 @@ namespace BankClerkApp.Controllers
         }
 
         public IActionResult ReportWordExcel()
-        {            
+        {
             if (Program.Clerk == null)
             {
                 return Redirect("~/Home/Enter");
@@ -43,7 +44,8 @@ namespace BankClerkApp.Controllers
                 APIClerk.PostRequest("api/report/CreateReportClientCurrencyToWordFile", model);
                 var fileName = "ReportClientCurrencyDoc.doc";
                 var filePath = _environment.WebRootPath + @"\ReportClientCurrency\" + fileName;
-                return PhysicalFile(filePath, "application/doc", fileName);
+                return Redirect("ReportWordExcel");
+                //Response.Redirect(PhysicalFile(filePath, "application/doc", fileName));
             }
             throw new Exception("Выберите хотя бы одного клиента");
         }
@@ -78,6 +80,20 @@ namespace BankClerkApp.Controllers
                 return Redirect("~/Home/Enter");
             }
             return View();
-        }        
+        }
+
+        [HttpPost]
+        public IActionResult ReportGetClientsPDF(DateTime dateFrom, DateTime dateTo)
+        {
+            ViewBag.Period = "C " + dateFrom.ToLongDateString() + " по " + dateTo.ToLongDateString();
+            ViewBag.Report = APIClerk.GetRequest<List<ReportClientsViewModel>>($"api/report/GetClientsReport?dateFrom={dateFrom.ToLongDateString()}&dateTo={dateTo.ToLongDateString()}");
+            return View("ReportPdf");
+        }
+
+        [HttpPost]
+        public IActionResult SendReportOnMail()
+        {
+            return View();
+        }
     }
 }

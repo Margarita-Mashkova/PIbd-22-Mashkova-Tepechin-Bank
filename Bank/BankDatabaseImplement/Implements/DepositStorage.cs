@@ -101,6 +101,8 @@ namespace BankDatabaseImplement.Implements
             Deposit element = context.Deposits.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
+                var depositClients = context.ClientDeposits.Where(rec => rec.DepositId == element.Id).ToList();
+                context.ClientDeposits.RemoveRange(depositClients);
                 context.Deposits.Remove(element);
                 context.SaveChanges();
             }
@@ -129,7 +131,7 @@ namespace BankDatabaseImplement.Implements
                     ClientId = cd.Key,
                 });
                 context.SaveChanges();
-            }
+            }            
             return deposit;
         }
         private static DepositViewModel CreateModel(Deposit deposit)

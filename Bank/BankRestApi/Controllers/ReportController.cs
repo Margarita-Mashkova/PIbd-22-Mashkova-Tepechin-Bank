@@ -1,5 +1,6 @@
 ﻿using BankContracts.BindingModels;
 using BankContracts.BusinessLogicsContracts;
+using BankContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankRestApi.Controllers
@@ -24,6 +25,9 @@ namespace BankRestApi.Controllers
 
         [HttpPost]
         public void CreateReportClientsToPdfFile(ReportBindingModel model) => _reportLogic.SaveClientsToPdfFile(model);
+
+        [HttpGet]
+        public List<ReportClientsViewModel> GetClientsReport(string dateFrom, string dateTo) => _reportLogic.GetClients(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
 
         [HttpGet]
         public ReportBindingModel GetClientsForReport(int ClerkId)
