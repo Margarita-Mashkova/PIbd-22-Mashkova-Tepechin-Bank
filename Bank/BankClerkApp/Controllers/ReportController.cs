@@ -36,8 +36,7 @@ namespace BankClerkApp.Controllers
             {
                 var model = new ReportBindingModel
                 {
-                    Clients = new List<ClientViewModel>(),
-                    LoanPrograms = new List<LoanProgramViewModel>()
+                    Clients = new List<ClientViewModel>()
                 };
                 foreach (var clientId in clientsId)
                 {

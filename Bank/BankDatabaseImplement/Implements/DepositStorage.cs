@@ -103,6 +103,8 @@ namespace BankDatabaseImplement.Implements
             {
                 var depositClients = context.ClientDeposits.Where(rec => rec.DepositId == element.Id).ToList();
                 context.ClientDeposits.RemoveRange(depositClients);
+                var depositReplenisments = context.Replenishments.Where(rec => rec.DepositId == element.Id).ToList();
+                context.Replenishments.RemoveRange(depositReplenisments);
                 context.Deposits.Remove(element);
                 context.SaveChanges();
             }
