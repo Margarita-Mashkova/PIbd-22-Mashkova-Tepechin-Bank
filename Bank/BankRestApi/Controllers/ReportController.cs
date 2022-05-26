@@ -10,11 +10,9 @@ namespace BankRestApi.Controllers
     public class ReportController : ControllerBase
     {
         private readonly IReportLogic _reportLogic;
-        private readonly IClientLogic _clientLogic;
-        public ReportController(IReportLogic reportLogic, IClientLogic clientLogic)
+        public ReportController(IReportLogic reportLogic)
         {
             _reportLogic = reportLogic;
-            _clientLogic = clientLogic;
         }
 
         [HttpPost]
