@@ -208,13 +208,13 @@ namespace BankBusinessLogic.BusinessLogics
         }
         public void SaveClientsToPdfFile(ReportBindingModel model)
         {
-            _saveToPdf.CreateDocManager(new PdfInfo
+            _saveToPdf.CreateDocClerk(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Сведения по валюте",
+                Title = "Сведения по клиентам",
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
-                Currencies = GetCurrencies(model)
+                Clients = GetClients(model)
             });
         }
     }

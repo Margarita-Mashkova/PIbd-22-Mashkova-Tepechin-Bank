@@ -114,9 +114,6 @@ namespace BankDatabaseImplement.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
                     b.Property<int>("LoanProgramId")
                         .HasColumnType("int");
 

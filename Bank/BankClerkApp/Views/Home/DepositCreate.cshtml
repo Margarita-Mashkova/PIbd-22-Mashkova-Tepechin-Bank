@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Create Deposit";
+}
+<div class="text-center">
+    <h2 class="display-4">Создание вклада</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Наименование вклада:</div>
+        <div class="col-8"><input type="text" name="depositName" id="depositName" size="35" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Процентная ставка:</div>
+        <div class="col-8"><input type="text" name="depositInterest" id="depositInterest" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Создать" class="btn btn-primary" />
+            <a type="button" asp-action="Deposit" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>

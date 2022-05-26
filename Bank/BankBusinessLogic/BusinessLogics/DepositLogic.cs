@@ -10,12 +10,14 @@ using BankContracts.ViewModels;
 
 namespace BankBusinessLogic.BusinessLogics
 {
-    public class DepositLogic :IDepositLogic
+    public class DepositLogic : IDepositLogic
     {
         private readonly IDepositStorage _depositStorage;
-        public DepositLogic(IDepositStorage depositStorage)
+        private readonly IClientStorage _clientStorage;
+        public DepositLogic(IDepositStorage depositStorage, IClientStorage clientStorage)
         {
             _depositStorage = depositStorage;
+            _clientStorage = clientStorage;
         }
         public List<DepositViewModel> Read(DepositBindingModel model)
         {
@@ -59,6 +61,44 @@ namespace BankBusinessLogic.BusinessLogics
                 throw new Exception("Удаляемый элемент не найден");
             }
             _depositStorage.Delete(model);
+        }
+
+        public void AddClients(AddClientsBindingModel model)
+        {
+            var deposit = _depositStorage.GetElement(new DepositBindingModel
+            {
+                Id = model.DepositId
+            });
+
+            if (deposit == null)
+            {
+                throw new Exception("Вклад не найден");
+            }
+
+            deposit.DepositClients.Clear();
+
+            foreach (var clientId in model.ClientsId)
+            {
+                var client = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = clientId
+                });
+
+                if (client == null)
+                {
+                    throw new Exception("Клиент не найден");
+                }
+
+                deposit.DepositClients.Add(clientId, client.ClientFIO);
+            }
+            _depositStorage.Update(new DepositBindingModel
+            {
+                Id = deposit.Id,
+                DepositName = deposit.DepositName,
+                DepositInterest = deposit.DepositInterest,
+                ClerkId = deposit.ClerkId,
+                DepositClients = deposit.DepositClients
+            });
         }
     }
 }

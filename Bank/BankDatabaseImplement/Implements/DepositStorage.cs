@@ -33,7 +33,7 @@ namespace BankDatabaseImplement.Implements
             return context.Deposits
             .Include(rec => rec.DepositClients)
             .ThenInclude(rec => rec.Client)
-            .Where(rec => rec.DepositName.Contains(model.DepositName))
+            .Where(rec => (rec.DepositName.Contains(model.DepositName)) || (model.ClerkId.HasValue && rec.ClerkId == model.ClerkId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -101,6 +101,8 @@ namespace BankDatabaseImplement.Implements
             Deposit element = context.Deposits.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
+                var depositClients = context.ClientDeposits.Where(rec => rec.DepositId == element.Id).ToList();
+                context.ClientDeposits.RemoveRange(depositClients);
                 context.Deposits.Remove(element);
                 context.SaveChanges();
             }
@@ -117,12 +119,11 @@ namespace BankDatabaseImplement.Implements
             if (model.Id.HasValue)
             {
                 var clientDeposits = context.ClientDeposits.Where(rec => rec.DepositId == model.Id.Value).ToList();
-                // удалили те, которых нет в модели
-                context.ClientDeposits.RemoveRange(clientDeposits.Where(rec => !model.ClientDeposits.ContainsKey(rec.ClientId)).ToList());
+                context.ClientDeposits.RemoveRange(clientDeposits);
                 context.SaveChanges();
             }
             // добавили новые
-            foreach (var cd in model.ClientDeposits)
+            foreach (var cd in model.DepositClients)
             {
                 context.ClientDeposits.Add(new ClientDeposit
                 {
@@ -130,7 +131,7 @@ namespace BankDatabaseImplement.Implements
                     ClientId = cd.Key,
                 });
                 context.SaveChanges();
-            }
+            }            
             return deposit;
         }
         private static DepositViewModel CreateModel(Deposit deposit)
@@ -138,6 +139,7 @@ namespace BankDatabaseImplement.Implements
             return new DepositViewModel
             {
                 Id = deposit.Id,
+                ClerkId = deposit.ClerkId,
                 DepositName = deposit.DepositName,
                 DepositInterest = deposit.DepositInterest,
                 DepositClients = deposit.DepositClients

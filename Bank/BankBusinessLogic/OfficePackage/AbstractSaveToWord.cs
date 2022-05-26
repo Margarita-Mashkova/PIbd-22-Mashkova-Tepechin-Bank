@@ -78,11 +78,11 @@ namespace BankBusinessLogic.OfficePackage
                 {
                     CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<(string, WordTextProperties)> { (cur, new WordTextProperties { Size = "24", Bold = true })},
+                        Texts = new List<(string, WordTextProperties)> { (cur, new WordTextProperties { Size = "24", Bold = false })},
                         TextProperties = new WordTextProperties
                         {
                             Size = "24",
-                            JustificationType = WordJustificationType.Right
+                            JustificationType = WordJustificationType.Both
                         }
                     });
                 }

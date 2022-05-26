@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Create Client";
+}
+<div class="text-center">
+    <h2 class="display-4">Создание клиента</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">ФИО клиента:</div>
+        <div class="col-8"><input type="text" name="clientFIO" id="clientFIO" size="35" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Паспортные данные:</div>
+        <div class="col-8"><input type="text" name="passport" id="passport" /></div>
+    </div>
+     <div class="row">
+        <div class="col-4">Телефон:</div>
+        <div class="col-8"><input type="text" name="telephone" id="telephone"/></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Кредитные программы:</div>
+        <div class="col-8">
+            <select id="loanProgramsId" name="loanProgramsId" multiple="multiple" class="form-control" asp-items="@(new SelectList(@ViewBag.LoanPrograms,"Id", "LoanProgramName"))"></select>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Создать" class="btn btn-primary" />
+            <a type="button" asp-action="Client" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>

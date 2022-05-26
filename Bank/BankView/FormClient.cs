@@ -19,7 +19,7 @@ namespace BankView
         public int Id { set { id = value; } }
         private readonly IClientLogic _logic;
         private int? id;
-        private Dictionary<int, (string, int)> clientLoanPrograms;
+        private Dictionary<int, string> clientLoanPrograms;
         public FormClient(IClientLogic logic)
         {
             InitializeComponent();
@@ -48,7 +48,7 @@ namespace BankView
             }
             else
             {
-                clientLoanPrograms = new Dictionary<int, (string, int)>();
+                clientLoanPrograms = new Dictionary<int, string>();
             }
         }
         private void LoadData()
@@ -60,7 +60,7 @@ namespace BankView
                     dataGridView.Rows.Clear();
                     foreach (var clp in clientLoanPrograms)
                     {
-                        dataGridView.Rows.Add(new object[] { clp.Key, clp.Value.Item1, clp.Value.Item2 });
+                        dataGridView.Rows.Add(new object[] { clp.Key, clp.Value });
                     }
                 }
             }
@@ -76,11 +76,11 @@ namespace BankView
             {
                 if (clientLoanPrograms.ContainsKey(form.Id))
                 {
-                    clientLoanPrograms[form.Id] = (form.LoanProgramName, form.Count);
+                    clientLoanPrograms[form.Id] = (form.LoanProgramName);
                 }
                 else
                 {
-                    clientLoanPrograms.Add(form.Id, (form.LoanProgramName, form.Count));
+                    clientLoanPrograms.Add(form.Id, form.LoanProgramName);
                 }
                 LoadData();
             }
@@ -92,10 +92,9 @@ namespace BankView
                 var form = Program.Container.Resolve<FormClientLoanProgram>();
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
-                form.Count = clientLoanPrograms[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    clientLoanPrograms[form.Id] = (form.LoanProgramName, form.Count);
+                    clientLoanPrograms[form.Id] = (form.LoanProgramName);
                     LoadData();
                 }
             }

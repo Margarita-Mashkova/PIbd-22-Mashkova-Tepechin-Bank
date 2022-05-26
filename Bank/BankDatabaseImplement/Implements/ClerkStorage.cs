@@ -26,7 +26,7 @@ namespace BankDatabaseImplement.Implements
             .Include(rec => rec.Replenishments)
             .Include(rec => rec.Deposits)
             .Include(rec => rec.Clients)
-            .Where(rec => rec.Email == model.Email)
+            .Where(rec => rec.Email == model.Email && rec.Password == model.Password)
             .Select(CreateModel)
             .ToList();
         }

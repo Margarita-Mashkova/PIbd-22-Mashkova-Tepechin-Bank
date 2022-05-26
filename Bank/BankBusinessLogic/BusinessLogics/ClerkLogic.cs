@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BankContracts.BindingModels;
 using BankContracts.BusinessLogicsContracts;
@@ -13,6 +14,9 @@ namespace BankBusinessLogic.BusinessLogics
     public class ClerkLogic : IClerkLogic
     {
         private readonly IClerkStorage _clerkStorage;
+        private readonly int _emailMaxLength = 50;
+        private readonly int _passwordMaxLength = 30;
+        private readonly int _passwordMinLength = 10;
         public ClerkLogic(IClerkStorage clerkStorage)
         {
             _clerkStorage = clerkStorage;
@@ -38,6 +42,15 @@ namespace BankBusinessLogic.BusinessLogics
             if (element != null && element.Id != model.Id)
             {
                 throw new Exception("Уже есть клерк с таким логином");
+            }
+            if (model.Email.Length > _emailMaxLength || !Regex.IsMatch(model.Email, @"([a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+)"))
+            {
+                throw new Exception($"В качестве логина должна быть указана почта и иметь длинну не более {_emailMaxLength} символов");
+            }
+            if (model.Password.Length > _passwordMaxLength || model.Password.Length < _passwordMinLength 
+                || !Regex.IsMatch(model.Password, @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
+            {
+                throw new Exception($"Пароль длиной от {_passwordMinLength} до { _passwordMaxLength } должен состоять из цифр, букв и небуквенных символов");
             }
             if (model.Id.HasValue)
             {

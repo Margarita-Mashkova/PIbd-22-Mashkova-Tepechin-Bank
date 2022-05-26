@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "ClientsCurrencyReport";
+}
+
+<div class="text-center">
+    <h5 class="display-4" style="font-size: 30px;">Отчёт по клиентам</h5>
+</div>
+
+<form method="post">
+        <p>
+            <label for="date">С </label>
+            <input type="date" id="dateFrom" name="dateFrom"/>
+            <label for="date">По </label>
+            <input type="date" id="dateTo" name="dateTo"/>
+        </p>
+        <p>
+            <input type="submit" asp-route-dateFrom="dateFrom" asp-route-dateTo="dateTo" asp-action="ReportGetClientsPDF" value="Вывести на форму"/>
+            <button type="submit" asp-route-dateFrom="dateFrom" asp-route-dateTo="dateTo" asp-action="SendReportOnMail">Отправить на почту</button>            
+        </p>
+        @if(ViewBag.Report != null){
+            string period = ViewBag.Period;
+            <div style="text-align:center">
+            <label style="font-weight:bold">@period</label>
+            </div>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ФИО
+                </th>
+                <th>
+                    Дата визита
+                </th>
+                <th>
+                    Вклады
+                </th>
+                <th>
+                    Валюты
+                </th>
+            </tr>
+        </thead>
+        <tbody>            
+            @foreach (var item in ViewBag.Report)
+            {
+                @for (int i = 0; i < item.DepositCurrencies.Count; i++)
+                {
+                    if(i == 0)
+                    {
+                        <tr>
+                        <td>
+                            @item.ClientFIO
+                        </td>
+                        <td>
+                            @item.DateVisit
+                        </td>
+                        <td>
+                            @item.DepositCurrencies[i].Item1.DepositName
+                        </td>
+                            @{string currencies = "";}
+                            @foreach(var cur in @item.DepositCurrencies[i].Item2)
+                            {
+                                    currencies += cur.CurrencyName + ", ";
+                            }                            
+                        <td>
+                            @currencies
+                        </td>
+                    </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @item.DepositCurrencies[i].Item1.DepositName
+                        </td>
+                            @{string currencies = "";}
+                            @foreach(var cur in @item.DepositCurrencies[i].Item2)
+                            {
+                                currencies += cur.CurrencyName + ", ";
+                            }
+                        <td>
+                            @currencies
+                        </td>
+                    </tr>
+                    }
+                }                    
+            }         
+        </tbody>
+    </table>
+    }      
+</form>
