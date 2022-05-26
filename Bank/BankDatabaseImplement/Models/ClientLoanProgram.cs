@@ -12,9 +12,6 @@ namespace BankDatabaseImplement.Models
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int LoanProgramId { get; set; }
-
-        [Required]
-        public int Count { get; set; }
         public virtual Client Client { get; set; }
         public virtual LoanProgram LoanProgram { get; set; }
     }

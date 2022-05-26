@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Update Replenishment";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение пополнения</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Сумма пополнения:</div>
+        <div class="col-8"><input type="text" name="replenishmentAmount" id="replenishmentAmount" value="@ViewBag.Replenishment.Amount" /></div>
+    </div>
+     <div class="row">
+        <div class="col-4">Вклад:</div>
+        <div class="col-8">
+            <select id="depositId" name="depositId" class="form-control" asp-items="@(new SelectList(@ViewBag.Deposits,"Id", "DepositName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
+            <a type="button" asp-action="Replenishment" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>

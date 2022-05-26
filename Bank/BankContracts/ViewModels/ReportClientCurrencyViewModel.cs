@@ -10,7 +10,6 @@ namespace BankContracts.ViewModels
     public class ReportClientCurrencyViewModel
     {
         public string ClientFIO { get; set; }
-        public string LoanProgramName { get; set; }
         public List<string> Currencies { get; set; }
     }
 }

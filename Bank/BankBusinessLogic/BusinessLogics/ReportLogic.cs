@@ -139,7 +139,6 @@ namespace BankBusinessLogic.BusinessLogics
                 {
                     LoanProgramName = loanProgram.LoanProgramName,
                     Deposits = new List<Tuple<string, decimal>>(),
-                    CurrencyName = string.Empty
                 };
                 foreach (var currencyKVP in loanProgram.LoanProgramCurrencies)
                 {
@@ -147,7 +146,6 @@ namespace BankBusinessLogic.BusinessLogics
                     foreach (var deposit in currency.CurrencyDeposits)
                     {
                         record.Deposits.Add(new Tuple<string, decimal>(deposit.Value.Item1, deposit.Value.Item2));
-                        record.CurrencyName = currency.CurrencyName;
                     }
                 }
                 list.Add(record);
@@ -208,13 +206,13 @@ namespace BankBusinessLogic.BusinessLogics
         }
         public void SaveClientsToPdfFile(ReportBindingModel model)
         {
-            _saveToPdf.CreateDocManager(new PdfInfo
+            _saveToPdf.CreateDocClerk(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Сведения по валюте",
+                Title = "Сведения по клиентам",
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
-                Currencies = GetCurrencies(model)
+                Clients = GetClients(model)
             });
         }
     }

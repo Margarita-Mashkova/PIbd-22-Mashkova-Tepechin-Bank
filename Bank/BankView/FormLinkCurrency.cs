@@ -30,14 +30,12 @@ namespace BankView
             
             CurrencyViewModel view = _logicC.Read(new CurrencyBindingModel { Id = ((CurrencyBindingModel)comboBoxCurrency.SelectedItem).Id })?[0];
             currencyDeposits = view.CurrencyDeposits;
-            currencyDeposits.Add(listBox.)
             _logicC.CreateOrUpdate(new CurrencyBindingModel
             {
                 Id = view.Id,
                 CurrencyName = view.CurrencyName,
                 DateAdding = view.DateAdding,
 
-                CurrencyDeposits = checkedListBoxDeposits.CheckedItems.Cast()
                 
             });
             

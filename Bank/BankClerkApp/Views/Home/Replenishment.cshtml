@@ -1,0 +1,72 @@
+﻿@using BankContracts.ViewModels
+
+@model List<ReplenishmentViewModel>
+@{
+    ViewData["Title"] = "Replenishments";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Пополнения</h1>
+</div>
+
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+        <p>
+            <a class="btn btn-success" asp-action="ReplenishmentCreate">Создать пополнение</a>
+        </p>
+        <table id="listingTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Номер
+                    </th>
+                    <th>
+                        Сумма пополнения
+                    </th>
+                    <th>
+                        Дата пополнения
+                    </th>
+                    <th>
+                        Вклад
+                    </th>
+                    <th>
+                        Изменение пополнения
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateReplenishment)
+                        </td>
+                         <td>
+                            @Html.DisplayFor(modelItem => item.DepositName)
+                        </td>
+                        <td>
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="ReplenishmentUpdate"
+                            asp-route-replenishmentId="@item.Id" asp-route-replenishmentAmount="@item.Amount" 
+                            asp-route-depositId="@item.DepositId">Изменить</a>
+
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="ReplenishmentDelete" asp-route-replenishmentId="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button onclick="prevPage()" id="btn_prev" class="btn btn-primary">Предыдущая</button>
+        <button onclick="nextPage()" id="btn_next" class="btn btn-primary">Следующая</button>
+    }
+</div>

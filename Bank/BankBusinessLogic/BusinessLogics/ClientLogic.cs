@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BankContracts.BindingModels;
 using BankContracts.BusinessLogicsContracts;
@@ -12,7 +13,7 @@ namespace BankBusinessLogic.BusinessLogics
 {
     public class ClientLogic : IClientLogic
     {
-        private readonly IClientStorage _clientStorage;
+        private readonly IClientStorage _clientStorage;       
         public ClientLogic(IClientStorage clientStorage)
         {
             _clientStorage = clientStorage;
@@ -38,6 +39,18 @@ namespace BankBusinessLogic.BusinessLogics
             if (element != null && element.Id != model.Id)
             {
                 throw new Exception("Уже есть клиент с такими паспортными данными");
+            }
+            if (!Regex.IsMatch(model.ClientFIO, @"([А-ЯЁ][а-яё]+[\-\s]?){3,}"))
+            {
+                throw new Exception("ФИО указано в неверном формате");
+            }
+            if (!Regex.IsMatch(model.TelephoneNumber, @"^((\+7|7|8)+([0-9]){10})$"))
+            {
+                throw new Exception("Введён неверный формат номера телефона");
+            }
+            if (!Regex.IsMatch(model.PassportData, @"\d{4}\s\d{6}"))
+            {
+                throw new Exception("Введён неверный формат паспортных данных");
             }
             if (model.Id.HasValue)
             {

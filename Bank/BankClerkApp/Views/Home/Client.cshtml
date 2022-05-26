@@ -1,0 +1,78 @@
+﻿@using BankContracts.ViewModels
+
+@model List<ClientViewModel>
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Клиенты</h1>
+</div>
+
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+        <p>
+            <a class="btn btn-success" asp-action="ClientCreate">Добавить клиента</a>
+        </p>
+        <table id="listingTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Номер
+                    </th>
+                    <th>
+                        ФИО клиента
+                    </th>
+                    <th>
+                        Паспортные данные
+                    </th>
+                    <th>
+                        Контактный телефон
+                    </th>
+                    <th>
+                        Дата визита
+                    </th>
+                    <th>
+                        Изменение клиента
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientFIO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PassportData)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TelephoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateVisit)
+                        </td>
+                        <td>
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="ClientUpdate" asp-route-clientId="@item.Id" asp-route-clientFIO="@item.ClientFIO" 
+                            asp-route-passport="@item.PassportData" asp-route-telephone="@item.TelephoneNumber" 
+                            asp-route-dateVisit="@item.DateVisit">Изменить</a>
+
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="ClientDelete" asp-route-clientId="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>              
+        </table>
+        <button onclick="prevPage()" id="btn_prev" class="btn btn-primary">Предыдущая</button>
+        <button onclick="nextPage()" id="btn_next" class="btn btn-primary">Следующая</button>
+    }
+</div>

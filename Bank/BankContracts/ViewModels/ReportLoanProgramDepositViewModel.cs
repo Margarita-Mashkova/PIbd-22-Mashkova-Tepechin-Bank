@@ -10,7 +10,6 @@ namespace BankContracts.ViewModels
     public class ReportLoanProgramDepositViewModel
     {
         public string LoanProgramName { get; set; }
-        public string CurrencyName{ get; set; }
         public List<Tuple<string, decimal>> Deposits { get; set; }
     }
 }
