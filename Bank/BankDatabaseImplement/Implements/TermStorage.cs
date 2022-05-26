@@ -52,7 +52,7 @@ namespace BankDatabaseImplement.Implements
             return context.Terms
             .Include(rec => rec.LoanProgram)
             .Include(rec => rec.Manager)
-            .Where(rec => rec.Id == model.Id)
+            .Where(rec => (rec.Id == model.Id) || (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId))
             .ToList()
             .Select(CreateModel)
             .ToList();

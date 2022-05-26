@@ -86,5 +86,42 @@ namespace BankViewManager
             DialogResult = false;
             Close();
         }
+
+        private void buttonSendToMe_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _reportLogic.SaveCurrenciesToPdfFile(new ReportBindingModel()
+                {
+                    DateFrom = DateFrom,
+                    DateTo = DateTo,
+                    FileName = "валюты.pdf",
+                    ManagerId = App.Manager.Id
+                });
+                var appSettings = ConfigurationManager.AppSettings;
+                _mailKitWorker.MailConfig(new MailConfigBindingModel
+                {
+                    SmtpClientHost = appSettings["SmtpClientHost"],
+                    SmtpClientPort = Convert.ToInt32(appSettings["SmtpClientPort"]),
+                    PopHost = appSettings["PopHost"],
+                    PopPort = Convert.ToInt32(appSettings["PopPort"]),
+                    MailLogin = appSettings["MailLogin"],
+                    MailPassword = appSettings["MailPassword"]
+                });
+                _mailKitWorker.MailSendAsync(new MailSendInfoBindingModel
+                {
+                    MailAddress = App.Manager.Email,
+                    Subject = "Отчет по валютам. Банк \"Вы банкрот\"",
+                    Text = "Отчет по валютам с " + DateFrom.ToShortDateString() + " по " + DateTo.ToShortDateString() +
+                    "\nРуководитель - " + App.Manager.ManagerFIO,
+                    FileName = "валюты.pdf",
+                });
+                MessageBox.Show("Письмо успешно отправлено");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
     }
 }

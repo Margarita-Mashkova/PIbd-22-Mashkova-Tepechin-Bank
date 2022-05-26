@@ -77,7 +77,7 @@ namespace BankViewManager
         {
             try
             {
-                var list = _logic.Read(null);
+                var list = _logic.Read(new CurrencyBindingModel { ManagerId=App.Manager.Id});
                 if (list != null)
                 {
                     dataGrid.ItemsSource = list;
