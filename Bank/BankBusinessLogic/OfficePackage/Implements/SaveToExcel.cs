@@ -5,11 +5,6 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankBusinessLogic.OfficePackage.Implements
 {
@@ -31,8 +26,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
             fontUsual.Append(new FontSize() { Val = 12D });
             fontUsual.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Theme
-           = 1U
+                Theme = 1U
             });
             fontUsual.Append(new FontName() { Val = "Times New Roman" });
             fontUsual.Append(new FontFamilyNumbering() { Val = 2 });
@@ -42,8 +36,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
             fontTitle.Append(new FontSize() { Val = 14D });
             fontTitle.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Theme
-           = 1U
+                Theme = 1U
             });
             fontTitle.Append(new FontName() { Val = "Times New Roman" });
             fontTitle.Append(new FontFamilyNumbering() { Val = 2 });
@@ -113,8 +106,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
             var cellFormatFontAndBorder = new CellFormat()
             {
                 NumberFormatId = 0U,
-                FontId
-           = 0U,
+                FontId = 0U,
                 FillId = 0U,
                 BorderId = 1U,
                 FormatId = 0U,
@@ -130,11 +122,9 @@ namespace BankBusinessLogic.OfficePackage.Implements
                 FormatId = 0U,
                 Alignment = new Alignment()
                 {
-                    Vertical =
-           VerticalAlignmentValues.Center,
+                    Vertical = VerticalAlignmentValues.Center,
                     WrapText = true,
-                    Horizontal =
-           HorizontalAlignmentValues.Center
+                    Horizontal = HorizontalAlignmentValues.Center
                 },
                 ApplyFont = true
             };
@@ -146,16 +136,14 @@ namespace BankBusinessLogic.OfficePackage.Implements
             {
                 Name = "Normal",
                 FormatId = 0U,
-                BuiltinId
-           = 0U
+                BuiltinId = 0U
             });
             var differentialFormats = new
            DocumentFormat.OpenXml.Office2013.Excel.DifferentialFormats()
             { Count = 0U }; var tableStyles = new TableStyles()
             {
                 Count = 0U,
-                DefaultTableStyle =
- "TableStyleMedium2",
+                DefaultTableStyle = "TableStyleMedium2",
                 DefaultPivotStyle = "PivotStyleLight16"
             };
             var stylesheetExtensionList = new StylesheetExtensionList();
@@ -163,23 +151,19 @@ namespace BankBusinessLogic.OfficePackage.Implements
             {
                 Uri = "{EB79DEF2-80B8-43e5 - 95BD - 54CBDDF9020C}"
             };
-            stylesheetExtension1.AddNamespaceDeclaration("x14",
-           "http://schemas.microsoft.com/office/spreadsheetml/2009/9/main");
+            stylesheetExtension1.AddNamespaceDeclaration("x14", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/main");
             stylesheetExtension1.Append(new SlicerStyles()
             {
-                DefaultSlicerStyle =
-           "SlicerStyleLight1"
+                DefaultSlicerStyle = "SlicerStyleLight1"
             });
             var stylesheetExtension2 = new StylesheetExtension()
             {
                 Uri = "{9260A510-F301-46a8 - 8635 - F512D64BE5F5}"
             };
-            stylesheetExtension2.AddNamespaceDeclaration("x15",
-           "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
+            stylesheetExtension2.AddNamespaceDeclaration("x15", "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
             stylesheetExtension2.Append(new TimelineStyles()
             {
-                DefaultTimelineStyle =
-           "TimeSlicerStyleLight1"
+                DefaultTimelineStyle = "TimeSlicerStyleLight1"
             });
             stylesheetExtensionList.Append(stylesheetExtension1);
             stylesheetExtensionList.Append(stylesheetExtension2);
@@ -217,10 +201,9 @@ namespace BankBusinessLogic.OfficePackage.Implements
             workbookpart.Workbook = new Workbook();
             CreateStyles(workbookpart);
             // Получаем/создаем хранилище текстов для книги
-            _shareStringPart =
-           _spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Any()
+            _shareStringPart = _spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Any()
             ? _spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
- : _spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
+            : _spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             // Создаем SharedStringTable, если его нет
             if (_shareStringPart.SharedStringTable == null)
             {
@@ -230,8 +213,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
             var worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
             worksheetPart.Worksheet = new Worksheet(new SheetData());
             // Добавляем лист в книгу
-            var sheets = _spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new
-           Sheets());
+            var sheets = _spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
             var sheet = new Sheet()
             {
                 Id = _spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
@@ -246,11 +228,9 @@ namespace BankBusinessLogic.OfficePackage.Implements
             var sheetData = _worksheet.GetFirstChild<SheetData>();
             // Ищем строку, либо добавляем ее
             Row row;
-            if (sheetData.Elements<Row>().Where(r => r.RowIndex ==
-           excelParams.RowIndex).Any())
+            if (sheetData.Elements<Row>().Where(r => r.RowIndex == excelParams.RowIndex).Any())
             {
-                row = sheetData.Elements<Row>().Where(r => r.RowIndex ==
-               excelParams.RowIndex).First();
+                row = sheetData.Elements<Row>().Where(r => r.RowIndex == excelParams.RowIndex).First();
             }
             else
             {
@@ -259,11 +239,9 @@ namespace BankBusinessLogic.OfficePackage.Implements
             }
             // Ищем нужную ячейку
             Cell cell;
-            if (row.Elements<Cell>().Where(c => c.CellReference.Value ==
-           excelParams.CellReference).Any())
+            if (row.Elements<Cell>().Where(c => c.CellReference.Value == excelParams.CellReference).Any())
             {
-                cell = row.Elements<Cell>().Where(c => c.CellReference.Value ==
-               excelParams.CellReference).First();
+                cell = row.Elements<Cell>().Where(c => c.CellReference.Value == excelParams.CellReference).First();
             }
             else
             {
@@ -272,8 +250,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
                 Cell refCell = null;
                 foreach (Cell rowCell in row.Elements<Cell>())
                 {
-                    if (string.Compare(rowCell.CellReference.Value,
-                   excelParams.CellReference, true) > 0)
+                    if (string.Compare(rowCell.CellReference.Value, excelParams.CellReference, true) > 0)
                     {
                         refCell = rowCell; break;
                     }
@@ -283,12 +260,9 @@ namespace BankBusinessLogic.OfficePackage.Implements
                 cell = newCell;
             }
             // вставляем новый текст
-            _shareStringPart.SharedStringTable.AppendChild(new SharedStringItem(new
-           Text(excelParams.Text)));
+            _shareStringPart.SharedStringTable.AppendChild(new SharedStringItem(new Text(excelParams.Text)));
             _shareStringPart.SharedStringTable.Save();
-            cell.CellValue = new
-           CellValue((_shareStringPart.SharedStringTable.Elements<SharedStringItem>().Count() -
-           1).ToString());
+            cell.CellValue = new CellValue((_shareStringPart.SharedStringTable.Elements<SharedStringItem>().Count() - 1).ToString());
             cell.DataType = new EnumValue<CellValues>(CellValues.SharedString);
             cell.StyleIndex = GetStyleValue(excelParams.StyleInfo);
         }

@@ -2,7 +2,6 @@
 using BankContracts.BindingModels;
 using BankContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
 
 namespace BankClerkApp.Controllers
 {

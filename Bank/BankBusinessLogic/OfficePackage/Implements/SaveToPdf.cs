@@ -3,11 +3,6 @@ using BankBusinessLogic.OfficePackage.HelperModels;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankBusinessLogic.OfficePackage.Implements
 {
@@ -16,8 +11,7 @@ namespace BankBusinessLogic.OfficePackage.Implements
         private Document _document;
         private Section _section;
         private Table _table;
-        private static ParagraphAlignment GetParagraphAlignment(PdfParagraphAlignmentType
-       type)
+        private static ParagraphAlignment GetParagraphAlignment(PdfParagraphAlignmentType type)
         {
             return type switch
             {

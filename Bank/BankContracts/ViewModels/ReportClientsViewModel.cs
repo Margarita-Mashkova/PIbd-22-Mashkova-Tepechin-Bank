@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BankContracts.ViewModels
 {
     //Модель для получения отчёта по клиентам (роль Работник)
