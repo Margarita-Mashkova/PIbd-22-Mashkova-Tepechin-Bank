@@ -128,18 +128,3 @@ namespace BankBusinessLogic.OfficePackage
         protected abstract void SavePdf(PdfInfo info);
     }
 }
-
-//string.Join(", ",client.DepositCurrencies.Select(cur => cur.Item2).ToList())
-/*foreach (var dep in client.DepositCurrencies)
-                {
-                    CreateRow(new PdfRowParameters
-                    {
-
-                        Texts = new List<string> { client.ClientFIO,
-                                                client.DateVisit.ToShortDateString(),
-                                                dep.Item1.DepositName,
-                                                string.Join(", ",dep.Item2.Select(cur => cur.CurrencyName).ToList())},
-                        Style = "Normal",
-                        ParagraphAlignment = PdfParagraphAlignmentType.Left
-                    });
-                }   */
